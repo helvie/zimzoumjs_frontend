@@ -1,10 +1,20 @@
+
+.organismName {
+  margin:0;
+}
+
+.text {
+  padding:0px;
+  margin:0px;
+  font-size:18px;
+  margin-top: 5px;
+}
+
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 4rem 0;
+  height: 100vh;
+  width:100vw;
 }
 
 .title {
@@ -19,4 +29,60 @@
 
 .title a:hover, .title a:focus, .title a:active {
   text-decoration: underline;
+}
+
+.headerImg {
+  width: 100%;
+  /* max-height:30%; */
+}
+
+.organismNameImgContainer {
+  display:flex;
+  height:35%;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+  margin-top:0px;
+  /* flex-wrap: wrap; */
+}
+
+
+
+
+.organismNameContainer {
+  height:100%;
+  /* width:60%; */
+  display:flex;  
+  padding-top:30px;
+  padding-bottom:30px;
+  margin-right:40px;
+  margin-left:40px;
+}
+
+.organismNameSubContainer {
+
+
+  /* width:80%; */
+  display:flex;
+  flex-direction:column;
+  justify-content:space-evenly;
+  align-items: center;
+}
+
+
+
+.organismImg {
+  max-height:80%;
+  margin-right:40px;
+  margin-left:40px;
+  display:flex;
+
+}
+
+.organismPresentation {
+  padding : 35px;
+  width:100%;
+  height:35%;
+  background-color: #92D050;
+  font-size: 16px;
 }
