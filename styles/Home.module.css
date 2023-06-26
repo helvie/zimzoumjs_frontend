@@ -1,3 +1,108 @@
+/*     */
+/* @layer components { */
+
+
+
+  .orgContent {
+    @apply 
+    flex 
+    flex-col 
+    h-screen 
+    w-screen 
+    justify-between
+    bg-lime-500;
+  }
+  .orgDescription {
+    @apply 
+    flex 
+    flex-col
+    justify-evenly
+    items-center      
+    p-12 max-sm:p-8
+    leading-7 
+    bg-lime-500;
+  }
+
+  .orgNameAndDataContainer {
+    @apply 
+    flex 
+    flex-col  
+    items-center 
+    justify-center 
+    md:flex-row
+    max-md:mb-4
+    bg-white;
+    min-height:33%;
+
+  }
+
+  .orgImg {
+    @apply
+    max-h-64
+    2xl:pr-7
+    my-4
+    max-sm:max-w-xs
+    mr-12
+    max-sm:mr-0
+  }
+
+  .orgData {
+    @apply 
+    flex 
+    flex-col
+    justify-center 
+    items-center  
+    max-2xl:pl-7  
+    max-md:ml-0 
+    max-md:pl-0    
+    max-md:pb-4  
+
+  }
+
+  .orgDataText {
+    @apply
+    text-base 
+  }
+
+  .orgDataTitle {
+    @apply
+    max-2xl:text-2xl   
+    max-md:text-xl
+    max-sm:text-lg
+    font-bold 
+    mb-4
+
+  }
+
+  
+  .orgDataAddress {
+    @apply
+    font-bold max-sm:font-normal
+    mb-1
+  
+  }
+  .orgActivitiesContainer {
+    @apply
+    flex 
+    flex-wrap
+  }
+  
+  .orgActivityContainer {
+    @apply
+    w-3/6  
+  }
+
+  .orgFirstScreen {
+    @apply
+    flex-col
+  }
+
+  .orgMap {
+    @apply
+    bg-blue-500
+  }
+
+
 .main {
   display: flex;
   flex-direction: column;
