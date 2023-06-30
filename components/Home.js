@@ -2,16 +2,292 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import React from 'react';
 import { useEffect, useState } from 'react';
-import OrgActivityTitle from './OrganismActivityTitle';
+import OrgActivity from './OrganismActivity';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faStar, faVideo } from '@fortawesome/free-solid-svg-icons';
 import { shuffleArray } from '../utils/shuffleArray';
+import dynamic from 'next/dynamic';
+import Header from './Header';
+import { useDispatch } from 'react-redux';
+import { updateScreenHeight } from '../reducers/screen';
+import { updateScreenWidth } from '../reducers/screen';
+import { useSelector } from 'react-redux';
+
+const Map = dynamic(() => import('./Map'), { ssr: false });
 
 function Home() {
+
+  const screenHeight = useSelector((state) => state.screen.screenHeight);
+  const screenWidth = useSelector((state) => state.screen.screenWidth);
+
+
+  const dispatch = useDispatch();
+  let colorsArray = [];
+  let color = "#000000"
 
   const divElements = [
     {
       activity: "Anglais",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+      detail: [
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi1",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi2",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi3",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi4",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi5",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi6",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi7",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi8",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi9",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi10",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi11",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi12",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi13",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi14",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi15",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi16",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi17",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mercredi18",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+
+      ]
+    },
+    {
+      activity: "Anglais",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
       detail: [
         {
           miniAge: "5",
@@ -30,7 +306,77 @@ function Home() {
         {
           miniAge: "5",
           maxiAge: "10",
-          day: "Mercredi",
+          day: "Jeudi",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Vendredi",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Samedi",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Dimanche",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Lundi",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mardi",
           startTime: "10h",
           endTime: "11h",
           grade: "Tous niveaux",
@@ -58,7 +404,77 @@ function Home() {
         {
           miniAge: "5",
           maxiAge: "10",
-          day: "Mercredi",
+          day: "Jeudi",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Vendredi",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Samedi",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Dimanche",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Lundi",
+          startTime: "10h",
+          endTime: "11h",
+          grade: "Tous niveaux",
+          availability: true,
+          availabilityDate: "2023-02-15",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
+          valid: true,
+          visible: true,
+          animator: "Gérard Doudou"
+        },
+        {
+          miniAge: "5",
+          maxiAge: "10",
+          day: "Mardi",
           startTime: "10h",
           endTime: "11h",
           grade: "Tous niveaux",
@@ -86,7 +502,7 @@ function Home() {
         {
           miniAge: "5",
           maxiAge: "10",
-          day: "Mercredi",
+          day: "Jeudi",
           startTime: "10h",
           endTime: "11h",
           grade: "Tous niveaux",
@@ -100,7 +516,7 @@ function Home() {
         {
           miniAge: "5",
           maxiAge: "10",
-          day: "Mercredi",
+          day: "Vendredi",
           startTime: "10h",
           endTime: "11h",
           grade: "Tous niveaux",
@@ -114,147 +530,7 @@ function Home() {
         {
           miniAge: "5",
           maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
+          day: "Samedi",
           startTime: "10h",
           endTime: "11h",
           grade: "Tous niveaux",
@@ -270,264 +546,7 @@ function Home() {
     },
     {
       activity: "Anglais",
-      detail: [
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-        {
-          miniAge: "5",
-          maxiAge: "10",
-          day: "Mercredi",
-          startTime: "10h",
-          endTime: "11h",
-          grade: "Tous niveaux",
-          availability: true,
-          availabilityDate: "2023-02-15",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
-          valid: true,
-          visible: true,
-          animator: "Gérard Doudou"
-        },
-
-      ]
-    },
-    {
-      activity: "Anglais",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, tortor non rutrum gravida, tellus ex faucibus ipsum, ut elementum quam erat sed lorem. Morbi quis eros at diam ultrices tristique eget id lorem. Etiam eu pretium neque. Quisque ut dolor ex. Nullam vitae pharetra nibh. Aliquam sed dictum nibh. Donec risus tellus, euismod eget varius semper, dictum in erat. Nam ut accumsan mauris. Nunc tincidunt gravida mauris eget blandit. Donec ultricies efficitur sagittis. ",
       detail: [
         {
           miniAge: "5",
@@ -4148,8 +4167,9 @@ function Home() {
 
 
   ]
-  const [windowWith, setWindowWith] = useState(0);
-  const [windowHeight, setWindowHeight] = useState(0);
+  // const [windowWith, setWindowWith] = useState(0);
+  // const [windowHeight, setWindowHeight] = useState(0);
+  const [allColors, setAllColors] = useState([]);
 
   function handleChange() {
     console.log("essai")
@@ -4158,13 +4178,23 @@ function Home() {
 
 
   useEffect(() => {
+    const initialFontsColors = ["#c52532", "#ff6600", "#4f6228", "#ac2e82", "#ac5208", "#008080"]
+    const numberOfColorsArray = Math.ceil(divElements.length / initialFontsColors.length)
+    for (let i = 0; i < numberOfColorsArray; i++) {
+      colorsArray = colorsArray.concat(shuffleArray(initialFontsColors))
+    }
+    setAllColors(colorsArray)
+    console.log(colorsArray)
+
+
+
     // Exécuter du code ici après le montage du composant
-    setWindowWith(window.innerWidth);
-    setWindowHeight(window.innerHeight);
+    dispatch(updateScreenWidth(window.innerWidth));
+    dispatch(updateScreenHeight(window.innerHeight));
 
     const handleResize = () => {
-      setWindowWith(window.innerWidth);
-      setWindowHeight(window.innerHeight);
+      dispatch(updateScreenWidth(window.innerWidth));
+      dispatch(updateScreenHeight(window.innerHeight));
     }
 
     // Attacher un gestionnaire d'événement à la fenêtre pour capturer le redimensionnement
@@ -4178,35 +4208,26 @@ function Home() {
 
 
 
-  let headerImg =
-    windowWith > 1026 ? "images/visuelZimzoum.jpg" :
-    windowWith > 600 ? "images/visuelZimzoumMoyen.jpg" :
-        "images/visuelZimzoumPetit.jpg"
+
   let backgroundColor = "#ffffff";
-  let color = "#000000"
-  let allColors = [];
-  let thirdScreen = windowHeight / 3;
-  const initialFontsColors = ["#c52532", "#ff6600", "#e4f6228", "#ac2e82", "#ac5208", "#008080"]
-  const numberOfColorsArray = Math.ceil(divElements.length/initialFontsColors.length)
-
-  for(let i=0; i<numberOfColorsArray; i++){
-    allColors = allColors.concat(shuffleArray(initialFontsColors))
-  }
-  console.log(allColors)
+  let backgroundArrowColor = "#ffffff";
+  let thirdScreen = screenHeight / 3;
 
 
-  console.log(numberOfColorsArray)
-  console.log("initial array "+shuffleArray(initialFontsColors))
+
 
 
 
   const orgActivities = divElements.map((data, i) => {
-    backgroundColor = i === 0 ? "#ffffff" : (i % 2 !== 0 ? (backgroundColor === "#ffffff" ? "#ddd9c3" : "#ffffff") : backgroundColor);
+    if (screenWidth > 768) { backgroundColor = i === 0 ? "#ffffff" : (i % 2 !== 0 ? (backgroundColor === "#ffffff" ? "#F2F2F2" : "#ffffff") : backgroundColor); }
+    else { backgroundColor = backgroundColor === "#ffffff" ? "#F2F2F2" : "#ffffff" }
+    backgroundArrowColor = backgroundColor === "#ffffff" ? "#E8E8E8" : "#ddd9c3"
     color = allColors[i]
-    data.style = { backgroundColor: backgroundColor, color: color, minHeight: thirdScreen, width: "50%" };
+
+    data.style = { backgroundColor: backgroundColor, color: color, minHeight: thirdScreen };
 
     // if (i >= 0 && i < 5) {
-      return <OrgActivityTitle key={i} style={data.style} activity={data.activity} detail={data.detail} />;
+    return <OrgActivity key={i} style={data.style} backgroundArrowColor={backgroundArrowColor} color={color} activity={data.activity} description={data.description} detail={data.detail} />;
     // }
   });
 
@@ -4215,18 +4236,23 @@ function Home() {
   return (
     <main className={styles.orgContent}>
       <div className={styles.orgFirstScreen}>
-        <img className="w-full xl:visible" src={headerImg} alt="Header Image" />
+        <Header />
 
-        <div className={styles.orgNameAndDataContainer} style={{ minHeight: thirdScreen }}>
-          <img className={styles.orgImg} src="images/organismImg.jpg" alt="Organism Image" />
-          <div className={styles.orgData}>
-
+        <div className={styles.orgData} style={{ minHeight: thirdScreen }}>
+          {/* <img className={styles.orgImg} src="images/organismImg.jpg" alt="Organism Image" /> */}
+          {/* <div className={styles.orgData}> */}
+          <div className={styles.orgLeftData}>
             <h1 className={styles.orgDataTitle}>Maison des jeunes de Patoilis</h1>
             <p className={styles.orgDataAddress}>10 rue de Paris – 95200 Villebelle</p>
+          </div>
+          <div className={styles.orgRightData}>
+
             <p className={styles.orgDataText}>contact@mjcpatoilis.com - 01.56.25.26.89</p>
             <p className={styles.orgDataText}>www.mjcpatoilis.com</p>
             <p className={styles.orgDataText}>Présidente : Madame Bateau</p>
           </div>
+
+          {/* </div> */}
         </div>
 
 
@@ -4235,7 +4261,13 @@ function Home() {
           <p>La MJC est un lieu vibrant et dynamique où les jeunes et les membres de la communauté peuvent se rassembler, s'exprimer et participer à une variété d'activités enrichissantes. Notre objectif est de promouvoir l'épanouissement personnel, le développement des talents et l'engagement social à travers un large éventail de programmes culturels, artistiques, sportifs et éducatifs.</p>
           <p>Que vous soyez passionné par les arts, la musique, le sport ou la découverte de nouvelles compétences, la MJC offre des possibilités pour tous les goûts et toutes les tranches d'âge. Nos ateliers créatifs encouragent l'expression artistique et permettent aux participants de développer leur sensibilité esthétique. De la peinture à la danse, de la photographie au théâtre, vous trouverez certainement une activité qui correspond à vos intérêts.</p>
         </div>
-        <div className={styles.orgMap} style={{ minHeight: thirdScreen }}>
+        <div className={styles.orgMapAndImg}>
+          <div className={styles.orgMap}>
+            <Map />
+          </div>
+          <div className={styles.orgImgContainer}>
+            <img className={styles.orgImg2} src="images/imgMJC.jpg" alt="Organism Image" />
+          </div>
         </div>
       </div>
       <div className={styles.orgActivitiesContainer}>
