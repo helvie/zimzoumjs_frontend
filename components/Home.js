@@ -4221,7 +4221,7 @@ function Home() {
   const orgActivities = divElements.map((data, i) => {
     if (screenWidth > 768) { backgroundColor = i === 0 ? "#ffffff" : (i % 2 !== 0 ? (backgroundColor === "#ffffff" ? "#F2F2F2" : "#ffffff") : backgroundColor); }
     else { backgroundColor = backgroundColor === "#ffffff" ? "#F2F2F2" : "#ffffff" }
-    backgroundArrowColor = backgroundColor === "#ffffff" ? "#E8E8E8" : "#ddd9c3"
+    backgroundArrowColor = backgroundColor === "#ffffff" ? "#E8E8E8" : "#dddddd"
     color = allColors[i]
 
     data.style = { backgroundColor: backgroundColor, color: color, minHeight: thirdScreen };

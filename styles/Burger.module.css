@@ -1,0 +1,224 @@
+.menuIconContainer {
+    position: fixed;
+    top: 20px;
+    width: 70px;
+    margin-top: -2.5em;
+    z-index: 1;
+}
+
+.menuIcon {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 5px 5px 105px rgba(0,0,0,.4);
+    cursor: pointer;
+    top: 0px;
+    left: 5px;
+    background: #fff;
+    transition: all 1s;
+    margin-top: 30px;
+}
+
+.menuIcon a {
+    font-size : 20px;
+    color : #651d4c;
+}
+
+.menuIconContainer1 {
+    right: 80px;
+}
+
+.menuIconContainer2 {
+    right: 150px;
+}
+
+.menuIconContainer3 {
+    right: 220px;
+}
+
+
+.menuCircle {
+    position: fixed;
+    right: 10px;
+    top: 20px;
+    width: 70px;
+    margin-top: -2.5em;
+    z-index: 1;
+
+}
+
+.owlMenu {
+    width: 280px;
+    /*height: 360px;*/
+    background: #ac2e82;
+    transform: translateX(100%);
+    transition: 1s;
+    /* ajouté par rapport à base */
+    margin-top : 5px;
+}
+
+.owlMenu ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0;
+    background: #ac2e82;
+
+}
+.active {
+    transform: translateX(-50%);
+}
+
+
+.gerard {
+    /*height: 360px;*/
+    transform: translateX(150%);
+    transition: 1s;
+}
+
+.bob {
+    transform: translateX(10px);
+}
+
+
+/* li {
+    list-style: none;
+}
+li:hover {
+
+    background: white;
+} */
+
+.owlMenu a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    width: 100%;
+    height: 100%;
+    padding: 10px 20px;
+}
+.owlMenu a:hover {
+    color:  #113441;
+}
+.hamburger {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 5px 5px 105px rgba(0,0,0,.4);
+    cursor: pointer;
+    top: 0px;
+    left: 5px;
+    background: #fff;
+    transition: all 1s;
+    margin-top: 30px;
+}
+.hamburger span {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-45%);
+    background: #651d4c;
+    transition: .5s;
+    /*   box-shadow: 2px 2px 40px rgba(0,0,0,.5); */
+}
+.hamburger span::before {
+    position: absolute;
+    top: -8px;
+    content: '';
+    display: block;
+    width: 20px;
+    height: 3px;
+    background: #651d4c;
+    transition: .2s;
+}
+.hamburger span::after {
+    position: absolute;
+    top: 8px;
+    content: '';
+    display: block;
+    width: 20px;
+    height: 3px;
+    background: #651d4c;
+    transition: .2s;
+}
+.hamburger-active span {
+    transform: rotate(180deg);
+    left: 40%;
+}
+.hamburger-active span::before {
+    transform: rotate(45deg);
+    width: 10px;
+    transform-origin: right top;
+    top: 0;
+    right: 0;
+}
+.hamburger-active span::after {
+    transform: rotate(-45deg);
+    width: 10px;
+    transform-origin: right bottom;
+    top: 0;
+    right: 0;
+}
+
+.formBlock .btn {
+    border-radius: 8px;
+}
+
+.logoSite {
+    width:200px;
+    margin-top:30px;
+    margin-left:30px;
+    margin-bottom:30px;
+}
+
+#lateralSearchMenu select {
+    background-color:#345634;
+    height:40px;
+    border : none;
+    color : white;
+    -webkit-appearance: none;
+}
+
+select#search_menu_organismPublic  {
+    background-color:#1d5487;
+    color : white;
+    -webkit-appearance: none;
+}
+
+/*#lateralSearchMenu label {*/
+/*color : black;*/
+/*font-weight:normal;*/
+/*}*/
+
+
+
+#lateralSearchMenu2 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 20px;
+
+}
+
+.logoText p{
+    font-size:30px;
+}
+
+.logoText {
+    margin-top : 20px;
+    margin-bottom : 20px;
+}

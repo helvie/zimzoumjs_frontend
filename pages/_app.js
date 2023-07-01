@@ -10,7 +10,10 @@ const store = configureStore({
   reducer: { screen },
 })
 
+
 function App({ Component, pageProps }) {
+
+  
   return (
     <Provider store={store}>
       <Head>
