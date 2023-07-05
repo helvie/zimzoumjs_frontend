@@ -1,0 +1,104 @@
+.orgContent {
+    @apply 
+    flex 
+    flex-col 
+    /* h-screen  */
+    w-screen 
+    justify-between
+    items-center
+    bg-lime-200
+  }
+
+  
+
+.registerSection {
+    @apply
+    flex
+    flex-col
+}
+
+.formBackground {
+    @apply
+    w-2/3
+    bg-white
+    p-8
+}
+
+.formContainer {
+    @apply
+    flex
+    w-full
+    flex-col
+    items-center
+    justify-center
+    pt-10
+    pb-10
+
+}
+.inputRegistrationContainer {
+    @apply
+    flex 
+    items-center 
+    border-b 
+    border-lime-800 
+    py-2
+    mb-8
+}
+
+.inputRegistration {
+    @apply
+    appearance-none 
+    bg-transparent 
+    border-none 
+    w-full 
+    text-gray-700 
+    mr-3 
+    py-1 
+    px-2 
+    leading-tight 
+    focus:outline-none
+}
+
+.placeholderOption {
+    color:#999999;
+}
+
+.formTitle {
+    @apply
+    mb-8
+    text-center
+}
+
+.swith span {
+    color:red
+}
+
+.uploadBtn {
+    border:#cccccc 1px solid;
+    padding:4px;
+    border-radius:5px;
+}
+
+.uploadLabel {
+    color:#a0a7b2;
+    margin-left:8px;
+    margin-bottom:8px;
+}
+
+.uploadInput { 
+    margin-bottom:30px;
+}
+
+.validButton {
+    @apply
+    flex-shrink-0 
+    bg-amber-800 
+    hover:bg-amber-900 
+    border-amber-800 
+    hover:border-amber-900 
+    text-sm border-4 
+    text-white 
+    py-1 
+    px-2 
+    rounded
+}

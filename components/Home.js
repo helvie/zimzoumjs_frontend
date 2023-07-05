@@ -1,17 +1,13 @@
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import React from 'react';
 import { useEffect, useState } from 'react';
 import OrgActivity from './OrganismActivity';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faStar, faVideo } from '@fortawesome/free-solid-svg-icons';
 import { shuffleArray } from '../utils/shuffleArray';
 import dynamic from 'next/dynamic';
 import Header from './Header';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateScreenHeight } from '../reducers/screen';
 import { updateScreenWidth } from '../reducers/screen';
-import { useSelector } from 'react-redux';
 
 const Map = dynamic(() => import('./Map'), { ssr: false });
 
@@ -4235,7 +4231,7 @@ function Home() {
 
   return (
     <main className={styles.orgContent}>
-      <div className={styles.orgFirstScreen}>
+      {/* <div className={styles.orgFirstScreen}> */}
         <Header />
 
         <div className={styles.orgData} style={{ minHeight: thirdScreen }}>
@@ -4268,7 +4264,7 @@ function Home() {
           <div className={styles.orgImgContainer}>
             <img className={styles.orgImg2} src="images/imgMJC.jpg" alt="Organism Image" />
           </div>
-        </div>
+        {/* </div> */}
       </div>
       <div className={styles.orgActivitiesContainer}>
         {orgActivities}

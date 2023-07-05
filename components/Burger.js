@@ -27,13 +27,13 @@ function Burger() {
       <div className={`${stylesBurger.owlMenu} ${menuActive ? stylesBurger.active : ''}`}>
         <ul>
           <li>
-            <a onClick={() => handlePageClick('/organismCreation')}>Page 1</a>
+            <a onClick={() => handlePageClick('/registrationUser')}>Page 1</a>
           </li>
           <li>
-            <a onClick={() => handlePageClick('/page2')}>Page 2</a>
+            <a onClick={() => handlePageClick('/registrationPrivateDataOrg')}>Page 2</a>
           </li>
           <li>
-            <a onClick={() => handlePageClick('/page3')}>Page 3</a>
+            <a onClick={() => handlePageClick('/registrationPublicDataOrg')}>Page 3</a>
           </li>
           <li>
             <a onClick={() => handlePageClick('/page4')}>Page 4</a>
