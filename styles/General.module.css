@@ -1,0 +1,13 @@
+
+.orgContent {
+  @apply 
+  flex 
+  flex-col 
+  h-screen  
+  h-min
+
+  w-screen 
+  justify-between
+  bg-lime-200;
+}
+

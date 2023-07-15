@@ -7,23 +7,27 @@ import { updateOrganismData, updateImage, updateDoc } from '../reducers/organism
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Header from './Header';
+import stylesGeneral from '../styles/General.module.css';
 
 //----------------------------------------------------------------------------------------
 
 function RegistrationPublicDataOrg() {
 
   const orgData = useSelector((state) => state.organismData)
+  const userToken = useSelector((state) => state.user.token)
+  console.log(userToken)
+
   const [organismSort, setOrganismSort] = useState('');
-  const [orgName, setOrgName] = useState('gerard');
+  const [orgName, setOrgName] = useState('');
   const [location, setlocation] = useState({});
-  const [emailPublic, setEmailPublic] = useState('test@test.fr');
-  const [phonePublic, setPhonePublic] = useState(2158585858);
-  const [website, setWebsite] = useState('site.fr');
+  const [emailPublic, setEmailPublic] = useState('');
+  const [phonePublic, setPhonePublic] = useState('');
+  const [website, setWebsite] = useState('');
   const [doc, setDoc] = useState('');
   const [photo, setPhoto] = useState('');
-  const [imageURL, setImageURL] = useState('');
   const [docURL, setDocURL] = useState('');
-  const [description, setDescription] = useState('oiuiouoi oiuou uouoi');
+  const [photoURL, setPhotoURL] = useState('');
+  const [description, setDescription] = useState('');
   const [orgVisible, setOrgVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
@@ -35,75 +39,6 @@ function RegistrationPublicDataOrg() {
 
   const router = useRouter();
 
-// Effectue la mise à jour du reducer chaque fois que 'imageURL' change
-// 
-  //----------------------------------------------------------------------------------------
-
-
-  const saveOrganism = async () => {
-    try {
-      if (photo) {
-        await uploadPhoto(); // Attendre que l'upload de la photo soit terminé
-      }
-      if (doc) {
-        await uploadDoc(); // Attendre que l'upload du document soit terminé
-      }
-      await registrationData(); // Attendre que l'enregistrement des données soit terminé
-      // Actions suivantes ici
-    } catch (error) {
-      console.error('Une erreur s\'est produite :', error);
-      // Gérer l'erreur
-    }
-  };
-
-  const uploadPhoto = () => {
-    console.log("rentré dans uploadphoto");
-    return new Promise((resolve, reject) => {
-      const formData = new FormData();
-      formData.append('photo', photo);
-  
-      fetch('http://localhost:3000/registration/upload', {
-        method: 'POST',
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setImageURL(data.imageUrl);
-          dispatch(updateImage(data.imageUrl));
-          console.log("uploadphoto ok");
-          resolve(); // Résoud la promesse lorsque le téléchargement est terminé
-        })
-        .catch((error) => {
-          console.error('Error uploading image:', error);
-          reject(error); // Rejette la promesse en cas d'erreur
-        });
-    });
-  };
-  
-  const uploadDoc = () => {
-    console.log("rentré dans uploaddoc");
-    return new Promise((resolve, reject) => {
-      const formData = new FormData();
-      formData.append('doc', doc); // Remplace 'pdf' par le nom de ton champ de fichier dans le formulaire
-  
-      fetch('http://localhost:3000/registration/uploadPdf', {
-        method: 'POST',
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          dispatch(updateDoc(data.pdfUrl));
-          console.log("pdfurl "+data.pdfUrl);
-          console.log("data "+data)
-          resolve(); // Résoud la promesse lorsque le téléchargement est terminé
-        })
-        .catch((error) => {
-          console.error('Error uploading PDF:', error);
-          reject(error); // Rejette la promesse en cas d'erreur
-        });
-    });
-  };
-  //----------------------------------------------------------------------------------------
 
   const handleSearchTerm = (text) => {
     if (text.length > 2) {
@@ -176,7 +111,7 @@ function RegistrationPublicDataOrg() {
       validationErrors.orgName = "Veuillez remplir le champ 'Nom de l'organisme'";
     } else if (orgName.length < 2) {
       validationErrors.orgName = "Le nom de l'organisme doit contenir au moins 2 caractères";
-    } else if (!/^[a-zA-Z0-9]+$/.test(orgName)) {
+    } else if (!/^[a-zA-Z0-9\sÀ-ÿ]+$/.test(orgName)) {
       validationErrors.orgName = "Le nom de l'organisme ne doit contenir que des lettres ou des chiffres";
     }
 
@@ -236,7 +171,7 @@ function RegistrationPublicDataOrg() {
       return;
     }
 
-    saveOrganism();
+    registrationData();
 
     // // Toutes les vérifications ont réussi, procéder à l'étape d'inscription
     // uploadPDF();
@@ -260,11 +195,51 @@ function RegistrationPublicDataOrg() {
 
   //----------------------------------------------------------------------------------------
 
-  // Fonction pour envoyer le fichier au backend
+  // const registrationData = () => {
+  //   return new Promise((resolve, reject) => {
+  //     const dataOfOrganism = {
+  //       organismSort: organismSort,
+  //       orgName: orgName,
+  //       location: location,
+  //       emailPublic: emailPublic,
+  //       phonePublic: phonePublic,
+  //       website: website,
+  //       description: description,
+  //       orgVisible: orgVisible,
+  //       respCivility: orgData.respCivility,
+  //       respName: orgData.respName,
+  //       respNameDisplay: orgData.respNameDisplay,
+  //       phonePrivate: orgData.phonePrivate,
+  //       emailPrivate: orgData.emailPrivate,
+  //       image: photoURL,
+  //       doc: docURL
+  //     };
+  
+  //     const formData = new FormData();
+  //     formData.append('photo', photo);
+  //     formData.append('doc', doc);
+  //     formData.append('orgData', JSON.stringify(dataOfOrganism));
+  //     formData.append('token', userToken);
+  
+  //     fetch('http://localhost:3000/registration/organismRegistration', {
+  //       method: 'POST',
+  //       body: formData
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         console.log("registrationData successful");
+  //         resolve();
+  //       })
+  //       .catch((error) => {
+  //         console.error('Erreur enregistrement fiche', error);
+  //         reject(error);
+  //       });
+  //   });
+  // };
+  //----------------------------------------------------------------------------------------
   const registrationData = () => {
-    console.log("rentré dans registrationdata");
     return new Promise((resolve, reject) => {
-      const publicOrgData = {
+      const dataOfOrganism = {
         organismSort: organismSort,
         orgName: orgName,
         location: location,
@@ -273,34 +248,38 @@ function RegistrationPublicDataOrg() {
         website: website,
         description: description,
         orgVisible: orgVisible,
-      }
+        respCivility: orgData.respCivility,
+        respName: orgData.respName,
+        respNameDisplay: orgData.respNameDisplay,
+        phonePrivate: orgData.phonePrivate,
+        emailPrivate: orgData.emailPrivate,
+        image: '',
+        doc: ''
+      };
   
-      dispatch(updateOrganismData(publicOrgData));
-  
-      console.log(orgData);
+      const formData = new FormData();
+      formData.append('photo', photo);
+      formData.append('doc', doc);
+      formData.append('orgData', JSON.stringify(dataOfOrganism));
+      formData.append('token', userToken);
   
       fetch('http://localhost:3000/registration/organismRegistration', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ orgData })
+        body: formData
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("registrationdata ok");
-          resolve(); // Résoud la promesse lorsque l'enregistrement est terminé
+          console.log('Registration successful:', data);
+          resolve();
         })
         .catch((error) => {
-          console.error('Erreur enregistrement fiche', error);
-          reject(error); // Rejette la promesse en cas d'erreur
+          console.error('Registration failed:', error);
+          reject(error);
         });
     });
   };
-  //----------------------------------------------------------------------------------------
-
   return (
-    <main className={stylesRegistration.orgContent}>
+    <main className={stylesGeneral.orgContent}>
       {/* <div className={styles.orgFirstScreen}> */}
 
       <Header />
@@ -375,7 +354,7 @@ function RegistrationPublicDataOrg() {
               }
               label="Organisme visible après création"
 
-              style={{ color: orgVisible ? '#000000' : '#a0a7b2' }} />
+              style={{ color: orgVisible ? '#000000' : '#a0a7b2', marginBottom: '50px' }}              />
 
 
             <div className={stylesRegistration.inputRegistrationContainer}>
@@ -418,7 +397,7 @@ function RegistrationPublicDataOrg() {
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
-              <input
+              <textarea
                 className={stylesRegistration.inputRegistration}
                 type="text"
                 placeholder="Description"

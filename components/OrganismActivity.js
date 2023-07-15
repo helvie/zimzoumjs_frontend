@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight, faCaretRight, faCaretLeft, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import OrgActivityDetail from './OrganismActivityDetail';
+import stylesGeneral from '../styles/General.module.css';
 
 function OrgActivity(props) {
   // console.log("props "+props.detail.length)

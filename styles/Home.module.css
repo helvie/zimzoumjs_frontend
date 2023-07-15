@@ -1,14 +1,17 @@
   
-
-  .orgContent {
-    @apply 
-    flex 
-    flex-col 
-    h-screen 
-    w-screen 
-    justify-between
-    bg-lime-200;
+  .subtitle {
+    @apply
+    text-xl 
+    font-bold 
+    mb-2
   }
+
+  .text {
+    @apply
+    text-gray-600
+  }
+
+
   .orgDescription {
     @apply 
     flex 
@@ -207,5 +210,27 @@
     flex: 0 0 40%;
     max-width: 40%;
   }
+
+.organismsContainer {
+  @apply
+  flex 
+  flex-col 
+  items-center
+  gap-4 
+  bg-gray-100 
+  p-4 
+  rounded-lg
+}
+
+.organismContainer {
+  @apply
+  bg-white 
+  p-4 
+  rounded-lg 
+  shadow-md
+  w-2/3
+  mt-4
+  mb-4
+}
 
  

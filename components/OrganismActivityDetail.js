@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faStar, faVideo } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faHeart, faStar, faVideo } from '@fortawesome/free-solid-svg-icons';
+// import stylesGeneral from '../styles/General.module.css';
 
 function OrgActivityDetail(props) {
     // console.log(props)

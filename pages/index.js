@@ -1,7 +1,7 @@
-import Home from '../components/Home';
+import OrganismsList from '../components/OrganismsList';
 
 function Index() {
-  return <Home />;
+  return <OrganismsList />;
 }
 
 export default Index;

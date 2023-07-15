@@ -7,13 +7,15 @@ import { updateOrganismData } from '../reducers/organism';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Header from './Header';
+import stylesGeneral from '../styles/General.module.css';
 
 function RegistrationPrivateDataOrg() {
-  const [respCivility, setRespCivility] = useState('mme');
-  const [respName, setRespName] = useState('dubon');
-  const [respNameDisplay, setRespNameDisplay] = useState(1);
-  const [phonePrivate, setPhonePrivate] = useState(2123333311);
-  const [emailPrivate, setEmailPrivate] = useState('essai@essai.fr');
+  const [respRole, setRespRole] = useState('');
+  const [respCivility, setRespCivility] = useState('');
+  const [respName, setRespName] = useState('');
+  const [respNameDisplay, setRespNameDisplay] = useState(0);
+  const [phonePrivate, setPhonePrivate] = useState('');
+  const [emailPrivate, setEmailPrivate] = useState('');
   const [errors, setErrors] = useState({}); // State pour les erreurs
 
   const orgData = useSelector((state) => state.organismData)
@@ -33,9 +35,17 @@ function RegistrationPrivateDataOrg() {
     if (!respName) {
       validationErrors.respName = "Veuillez remplir le champ 'Nom du responsable'";
     } else if (respName.length < 2) {
-      validationErrors.respName = "Le nom de l'organisme doit contenir au moins 2 caractères";
-    } else if (!/^[a-zA-Z]+$/.test(respName)) {
-      validationErrors.respName = "Le nom de l'organisme ne doit contenir que des lettres";
+      validationErrors.respName = "Le nom du responsable doit contenir au moins 2 caractères";
+    } else if (!/^[a-zA-Z\sÀ-ÿ]+$/.test(respName)) {
+      validationErrors.respName = "Le nom du responsable ne doit contenir que des lettres";
+    }
+
+    if (!respRole) {
+      validationErrors.respRole = "Veuillez remplir le champ 'Rôle du responsable'";
+    } else if (respName.length < 2) {
+      validationErrors.respRole = "Le rôle du responsable doit contenir au moins 2 caractères";
+    } else if (!/^[a-zA-Z\sÀ-ÿ]+$/.test(respName)) {
+      validationErrors.respRole = "Le rôle du responsable ne doit contenir que des lettres";
     }
 
     if (!phonePrivate) {
@@ -68,6 +78,7 @@ function RegistrationPrivateDataOrg() {
   };
 
   const resetForm = () => {
+    setRespRole('');
     setRespName('');
     setPhonePrivate('');
     setEmailPrivate('');
@@ -92,7 +103,7 @@ function RegistrationPrivateDataOrg() {
   }
 
   return (
-    <main className={stylesRegistration.orgContent}>
+    <main className={stylesGeneral.orgContent}>
       {/* <div className={styles.orgFirstScreen}> */}
 
       <Header />
@@ -102,7 +113,7 @@ function RegistrationPrivateDataOrg() {
 
         <div className={stylesRegistration.formBackground}>
 
-          <h1 className={stylesRegistration.formTitle}>Données de l'organisme (privées)</h1>
+          <h1 className={stylesRegistration.formTitle}></h1>
 
           <form className="w-full">
             <div className={stylesRegistration.inputRegistrationContainer}>
@@ -131,12 +142,32 @@ function RegistrationPrivateDataOrg() {
               {errors.respName && <p className={stylesRegistration.error}>{errors.respName}</p>}
             </div>
 
+            <div className={stylesRegistration.inputRegistrationContainer}>
+              <input
+                className={stylesRegistration.inputRegistration}
+                type="text"
+                placeholder="Role du responsable"
+                aria-label="respRole"
+                id="respRole"
+                onChange={(e) => setRespRole(e.target.value)}
+                value={respName}
+              />
+              {errors.respName && <p className={stylesRegistration.error}>{errors.respName}</p>}
+            </div>
+
             <FormControlLabel
-              control={<Switch checked={respNameDisplay}
-                onChange={(e) => setRespNameDisplay(e.target.checked)}
-              />}
+              className={stylesRegistration.switch}
+              control={
+                <Switch
+                  checked={respNameDisplay}
+                  onChange={(e) => setRespNameDisplay(e.target.checked)}
+                  color="default"
+                />
+              }
               label="Affichage du nom du responsable"
-            />
+              style={{ color: respNameDisplay ? '#000000' : '#a0a7b2', marginBottom: '20px' }}      
+ 
+              />
 
             <div className={stylesRegistration.inputRegistrationContainer}>
               <input
@@ -165,7 +196,7 @@ function RegistrationPrivateDataOrg() {
             </div>
 
             <button
-              className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+              className={stylesRegistration.validButton}
               type="button"
               onClick={handleValidPrivateData}
               disabled={Object.keys(errors).length > 0} // Désactiver le bouton si des erreurs sont présentes

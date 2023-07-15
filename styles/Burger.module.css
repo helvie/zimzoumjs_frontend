@@ -53,9 +53,11 @@
 }
 
 .owlMenu {
-    width: 280px;
+    width: 360px;
     /*height: 360px;*/
-    background: #ac2e82;
+    background: #663200;
+
+    /* background: #d7371d; */
     transform: translateX(100%);
     transition: 1s;
     /* ajouté par rapport à base */
@@ -67,7 +69,8 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 0;
-    background: #ac2e82;
+    /* background: #d7371d; */
+    background: #663200;
 
 }
 .active {
@@ -104,7 +107,8 @@ li:hover {
     padding: 10px 20px;
 }
 .owlMenu a:hover {
-    color:  #113441;
+    color:  #99dcb3;
+    cursor:pointer;
 }
 .hamburger {
     position: relative;
