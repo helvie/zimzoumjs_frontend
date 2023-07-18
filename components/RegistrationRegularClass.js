@@ -10,7 +10,7 @@ import Header from './Header';
 import stylesGeneral from '../styles/General.module.css';
 import SelectAge from './SelectAge';
 import RegularClassDetailForm from './RegularClassDetailForm';
-
+import moment from 'moment';
 //----------------------------------------------------------------------------------------
 
 function RegistrationRegularClass() {
@@ -38,47 +38,64 @@ function RegistrationRegularClass() {
   const handleEnfantDataChange = (enfantId, fieldName, fieldValue) => {
     setEnfants((prevState) =>
       prevState.map((enfant) =>
-        enfant.id === enfantId ? { ...enfant, data: { ...enfant.data, [fieldName]: fieldValue } } : enfant
+        enfant.id === enfantId ? { ...enfant, data: { ...enfant.data, [fieldName]: fieldValue, availabilityDate: currentDate } } : enfant
       )
     );
     setErrors((prevErrors) => ({ ...prevErrors, [enfantId]: {} }));
   };
 
-//-------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------
+  const token = useSelector((state) => state.user.token);
+
+  const currentDate = moment().format('YYYY-MM-DD');
+
+
+  //-------------------------------------------------------------------------------------------------
+  //----------------------------------------------------------------------------------------------
 
   const registrationData = () => {
+
+
     return new Promise((resolve, reject) => {
+
       const dataActivity = {
-        category: category,
-        activity: activity,
-        startAge: startAge,
-        endAge: endAge,
-        description: description,
-        enfants:enfants,
-        visible: visible,
+
         token: token,
+
+        regularClass: {
+          category: category,
+          startAge: startAge,
+          endAge: endAge,
+          activity: activity,
+          description: description,
+          visible: visible,
+          valid: 1
+        },
+
+        regularClassesDetails: enfants
       };
+
+
+      fetch('http://localhost:3000/registration/activityRegistration', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ dataActivity })
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Registration successful:', data);
+          resolve();
+        })
+        .catch((error) => {
+          console.error('Registration failed:', error);
+          reject(error);
+        });
 
       console.log(dataActivity)
 
-      // fetch('http://localhost:3000/registration/activityRegistration', {
-      //   method: 'POST',
-      //   body: formData
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     console.log('Registration successful:', data);
-      //     resolve();
-      //   })
-      //   .catch((error) => {
-      //     console.error('Registration failed:', error);
-      //     reject(error);
-      //   });
     });
   };
 
-//----------------------------------------------------------------------------------------------
+  //----------------------------------------------------------------------------------------------
 
   const handleFormSubmit = (e) => {
     e.preventDefault(); // Empêche le rechargement de la page
@@ -104,40 +121,40 @@ function RegistrationRegularClass() {
 
       //     const validationErrors = {};
 
-    if (startAge >= endAge) {
-      validationErrors.ageRange = "L'âge minimum doit être inférieur à l'âge maximum";
-    }
+      if (startAge >= endAge) {
+        validationErrors.ageRange = "L'âge minimum doit être inférieur à l'âge maximum";
+      }
 
-    const validateText = (description) => {
-      const invalidCharsRegex = /[&\\+*=#%~\|[\]{}]/;
-      return !invalidCharsRegex.test(description);
-    };
+      const validateText = (description) => {
+        const invalidCharsRegex = /[&\\+*=#%~\|[\]{}]/;
+        return !invalidCharsRegex.test(description);
+      };
 
-    if (!description) {
-      validationErrors.description = "Veuillez remplir le champ 'Description'";
-    } else if (!validateText(description)) {
-      validationErrors.description = "La description ne peut pas contenir les caractères spéciaux '& \\ + * = # % ~ | [ ] { }'";
-    }
+      if (!description) {
+        validationErrors.description = "Veuillez remplir le champ 'Description'";
+      } else if (!validateText(description)) {
+        validationErrors.description = "La description ne peut pas contenir les caractères spéciaux '& \\ + * = # % ~ | [ ] { }'";
+      }
 
-    if (!activity) {
-      validationErrors.activity = "Veuillez remplir le champ 'Activity'";
-    } else if (!validateText(activity)) {
-      validationErrors.description = "La description ne peut pas contenir les caractères spéciaux '& \\ + * = # % ~ | [ ] { }'";
-    }
+      if (!activity) {
+        validationErrors.activity = "Veuillez remplir le champ 'Activity'";
+      } else if (!validateText(activity)) {
+        validationErrors.description = "La description ne peut pas contenir les caractères spéciaux '& \\ + * = # % ~ | [ ] { }'";
+      }
 
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      ...validationErrors,
-    }));
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        ...validationErrors,
+      }));
 
-        registrationData();
 
-    // if (Object.keys(validationErrors).length > 0) {
-    //   setErrors(validationErrors);
-    //   return;
-    // }
+      // if (Object.keys(validationErrors).length > 0) {
+      //   setErrors(validationErrors);
+      //   return;
+      // }
     });
 
+      registrationData();
 
 
     //-----------------------------------------------------------------------------------------------
