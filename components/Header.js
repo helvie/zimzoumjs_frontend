@@ -41,9 +41,11 @@ const Header = () => {
   // const thirdScreen = screenHeight / 3;
 
   let headerImg =
-    screenWidth > 1026 ? "/images/visuelZimzoum.jpg" :
-      screenWidth > 600 ? "/images/visuelZimzoumMoyen.jpg" :
-        "/images/visuelZimzoumPetit.jpg"
+    // screenWidth > 1026 ? 
+    "/images/visuelSite.png" 
+    // :
+    //   screenWidth > 600 ? "/images/visuelZimzoumMoyen.jpg" :
+    //     "/images/visuelZimzoumPetit.jpg"
   return (
     <div>
       <img className="w-full xl:visible" src={headerImg} alt="Header Image" />

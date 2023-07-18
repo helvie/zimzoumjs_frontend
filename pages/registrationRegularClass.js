@@ -1,11 +1,11 @@
-import RegularClassDetailForm from '../components/RegularClassDetailForm';
+import RegistrationRegularClass from '../components/RegistrationRegularClass';
 
 
 function RegistrationRegularClassPage() {
 
     return (
 
-        <div><RegularClassDetailForm/></div>
+        <div><RegistrationRegularClass/></div>
     )
   }
   

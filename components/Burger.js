@@ -45,7 +45,11 @@ function Burger() {
             <li>
               <a onClick={() => handlePageClick('/logout')}>Logout</a>
 
-            </li>
+            </li>,
+                        <li>
+                        <a onClick={() => handlePageClick('/registrationRegularClass')}>Enregistrement activité</a>
+          
+                      </li>
           ) : (
             <li>
               <a onClick={() => handlePageClick('/connectionUser')}>Login</a>
