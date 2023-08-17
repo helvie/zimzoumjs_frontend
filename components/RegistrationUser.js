@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import stylesRegistration from '../styles/Registration.module.css';
 import stylesGeneral from '../styles/General.module.css';
 import { useDispatch } from 'react-redux';
-import { updateToken } from '../reducers/user';
+import { login } from '../reducers/user';
 import { useRouter } from 'next/router';
 
 import Header from './Header';
@@ -43,7 +43,6 @@ function RegistrationUserForm() {
     }
 
     // Toutes les vérifications ont réussi, procéder à l'étape d'inscription
-    console.log(signUpEmail + " " + signUpPassword);
     registrationUser();
     resetForm();
   };
@@ -93,8 +92,7 @@ function RegistrationUserForm() {
           // updateOnRegistration(regUsername)
 
           // window.location.assign('/')
-          console.log(data.token)
-          dispatch(updateToken(data.token))
+          dispatch(login(data.token))
           router.push('/')
           return true
         }
@@ -118,10 +116,12 @@ function RegistrationUserForm() {
           <h1 className={stylesRegistration.formTitle}>Enregistrement d'un utilisateur</h1>
           <form className="w-full">
             <div className={stylesRegistration.inputRegistrationContainer}>
+              <p className={stylesRegistration.orgInputTitle}>Email de connexion</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Votre email"
+                placeholder="mjc@mail.fr"
                 aria-label="signupEmail"
                 id="signupEmail"
                 // onBlur={handleEmailBlur}
@@ -132,10 +132,12 @@ function RegistrationUserForm() {
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+              <p className={stylesRegistration.orgInputTitle}>Mot de passe</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="password" // Définir le type sur "password"
-                placeholder="Mot de passe"
+                placeholder="***"
                 aria-label="Mot de passe"
                 id="signUpPassword"
                 // onBlur={handlePasswordBlur}
@@ -147,10 +149,12 @@ function RegistrationUserForm() {
 
             {/* Ajouter le champ de confirmation du mot de passe */}
             <div className={stylesRegistration.inputRegistrationContainer}>
+              <p className={stylesRegistration.orgInputTitle}>Répétition du mot de passe</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="password"
-                placeholder="Confirmation mot de passe"
+                placeholder="***"
                 aria-label="Confirmation mot de passe"
                 id="confirmPassword"
                 // onBlur={handleConfirmPasswordBlur}

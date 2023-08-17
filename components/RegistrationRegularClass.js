@@ -11,6 +11,7 @@ import stylesGeneral from '../styles/General.module.css';
 import SelectAge from './SelectAge';
 import RegularClassDetailForm from './RegularClassDetailForm';
 import moment from 'moment';
+
 //----------------------------------------------------------------------------------------
 
 function RegistrationRegularClass() {
@@ -25,6 +26,8 @@ function RegistrationRegularClass() {
   const [enfants, setEnfants] = useState([]);
   const [errors, setErrors] = useState({});
 
+  const user = useSelector((state) => state.user.token);
+
   const handleAddEnfant = () => {
     setEnfants([...enfants, { id: enfants.length + 1, data: {} }]);
     setErrors({});
@@ -38,7 +41,8 @@ function RegistrationRegularClass() {
   const handleEnfantDataChange = (enfantId, fieldName, fieldValue) => {
     setEnfants((prevState) =>
       prevState.map((enfant) =>
-        enfant.id === enfantId ? { ...enfant, data: { ...enfant.data, [fieldName]: fieldValue, availabilityDate: currentDate } } : enfant
+        enfant.id === enfantId ? 
+        { ...enfant, data: { ...enfant.data, [fieldName]: fieldValue, availabilityDate: currentDate } } : enfant
       )
     );
     setErrors((prevErrors) => ({ ...prevErrors, [enfantId]: {} }));
@@ -48,11 +52,13 @@ function RegistrationRegularClass() {
 
   const currentDate = moment().format('YYYY-MM-DD');
 
+  console.log("userName : "+user)
 
   //-------------------------------------------------------------------------------------------------
   //----------------------------------------------------------------------------------------------
 
   const registrationData = () => {
+
 
 
     return new Promise((resolve, reject) => {
@@ -122,7 +128,7 @@ function RegistrationRegularClass() {
       //     const validationErrors = {};
 
       if (startAge >= endAge) {
-        validationErrors.ageRange = "L'âge minimum doit être inférieur à l'âge maximum";
+        validationErrors.ageRange = `L'âge minimum ${enfant.id} doit être inférieur à l'âge maximum`;
       }
 
       const validateText = (description) => {
@@ -241,12 +247,12 @@ function RegistrationRegularClass() {
               <div className={`${stylesRegistration.formActivityElement1} ${stylesRegistration.formActivityElement}`}>
                 <div className={stylesRegistration.formActivitySubelement}>
                   {/* <div className={stylesRegistration.inputRegistrationContainer2}> */}
-                  <p className={stylesRegistration.inputTitle}>Age minimum</p>
+                  <p className={stylesRegistration.inputTitle}>Age maximum</p>
                   <div className={stylesRegistration.inputSelectContainer}>
                     <SelectAge
                       value={endAge}
                       onChange={(value) => setEndAge(value)}
-                      maxValue={98}
+                      maxValue={99}
                     />
                   </div>
                   {/* </div> */}
@@ -342,13 +348,13 @@ function RegistrationRegularClass() {
 
           </form>
 
-          <hr />
+          {/* <hr />
           <h2>Données de tous les enfants :</h2>
           <ul>
             {enfants.map((enfant) => (
               <li key={enfant.id}>{JSON.stringify(enfant.data)}</li>
             ))}
-          </ul>
+          </ul> */}
 
         </div>
       </div>

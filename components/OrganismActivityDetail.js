@@ -4,12 +4,23 @@ import styles from '../styles/Home.module.css'
 // import stylesGeneral from '../styles/General.module.css';
 
 function OrgActivityDetail(props) {
-    // console.log(props)
+  console.log("les props : "+props.detail.startHours)
+  const {
+    startHours,
+    startMinutes,
+    endHours,
+    endMinutes,
+    detailStartAge,
+    detailEndAge
+  } = props.detail;
+
+  const formatTime = (value) => {
+    return !value ? "00" : value < 10 ? `0${value}` : value;
+  };
+
         return (
             <div className={styles.orgActivityText}>
-              <p>{props.day} de {props.startTime} à {props.endTime} - de {props.miniAge} à {props.maxiAge} ans</p>
-              {/* <p>{props.activity}{props.age}{props.day}{props.hours}</p> */}
-
+              <p>{props.day} de {formatTime(startHours)}:{formatTime(startMinutes)} à {formatTime(endHours)}:{formatTime(endMinutes)}  - de {detailStartAge} à {detailEndAge} ans</p>
             </div>
           );
 

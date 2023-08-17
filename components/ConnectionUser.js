@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import stylesRegistration from '../styles/Registration.module.css';
 import stylesGeneral from '../styles/General.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateToken } from '../reducers/user';
+import { login } from '../reducers/user';
 
 import Header from './Header';
 
@@ -66,12 +66,10 @@ function ConnectionUserForm() {
           // updateOnRegistration(regUsername)
 
           // window.location.assign('/')
-          console.log(data.token)
-          dispatch(updateToken(data.token))
+          dispatch(login(data.token))
           return true
         }
         else {
-          console.log(data.result)
 
           return false
         }
@@ -87,15 +85,16 @@ function ConnectionUserForm() {
       <div className={stylesRegistration.formContainer}>
 
 
-        <div className={stylesRegistration.formBackground}>
+        <div className={stylesGeneral.loginFormBackground}>
 
           <h1 className={stylesRegistration.formTitle}>Connection d'un utilisateur</h1>
           <form className="w-full">
             <div className={stylesRegistration.inputRegistrationContainer}>
+            <p className={stylesRegistration.orgInputTitle}>Email de connexion</p>
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Votre email"
+                placeholder="contact@mjc.fr"
                 aria-label="signinEmail"
                 id="signinEmail"
                 // onBlur={handleEmailBlur}
@@ -106,10 +105,12 @@ function ConnectionUserForm() {
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+            <p className={stylesRegistration.orgInputTitle}>Mot de passe</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Password"
+                placeholder="***"
                 aria-label="Full name"
                 id="signinPassword"
                 // onBlur={handlePasswordBlur}

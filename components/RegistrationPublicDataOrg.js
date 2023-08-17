@@ -15,7 +15,6 @@ function RegistrationPublicDataOrg() {
 
   const orgData = useSelector((state) => state.organismData)
   const userToken = useSelector((state) => state.user.token)
-  console.log(userToken)
 
   const [organismSort, setOrganismSort] = useState('');
   const [orgName, setOrgName] = useState('');
@@ -227,7 +226,6 @@ function RegistrationPublicDataOrg() {
   //     })
   //       .then((response) => response.json())
   //       .then((data) => {
-  //         console.log("registrationData successful");
   //         resolve();
   //       })
   //       .catch((error) => {
@@ -269,7 +267,6 @@ function RegistrationPublicDataOrg() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log('Registration successful:', data);
           resolve();
         })
         .catch((error) => {
@@ -287,17 +284,19 @@ function RegistrationPublicDataOrg() {
       <div className={stylesRegistration.formContainer}>
 
 
-        <div className={stylesRegistration.formBackground}>
+        <div className={stylesRegistration.orgFormBackground}>
 
-          <h1 className={stylesRegistration.formTitle}>Données de l'organisme (publiques)</h1>
+          <h1 className={stylesRegistration.formTitle}>L'organisme</h1>
 
           <form className="w-full">
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+            <p className={stylesRegistration.orgInputTitle}>Nom de l'organisme</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Nom de l'organisme"
+                placeholder="La maison des jeunes"
                 aria-label="orgName"
                 id="orgName"
                 onChange={(e) => setOrgName(e.target.value)}
@@ -307,19 +306,23 @@ function RegistrationPublicDataOrg() {
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+            <p className={stylesRegistration.orgInputTitle}>Type d'organisme</p>
+
               <select
                 className={stylesRegistration.inputRegistration + ' ' + stylesRegistration.placeholderOption}
                 id="organismSort"
                 value={organismSort}
                 onChange={(e) => setOrganismSort(e.target.value)}
               >
-                <option value="">Type d'organisme</option>
+                <option value="">-</option>
                 <option value="Association">Association</option>
                 <option value="Mairie">Service de la Mairie</option>
               </select>
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+            <p className={stylesRegistration.orgInputTitle}>Adresse</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
@@ -344,7 +347,7 @@ function RegistrationPublicDataOrg() {
             </div>
 
             <FormControlLabel
-              className={stylesRegistration.switch}
+              className={stylesRegistration.orgSwitch}
               control={
                 <Switch
                   checked={orgVisible}
@@ -358,10 +361,12 @@ function RegistrationPublicDataOrg() {
 
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+            <p className={stylesRegistration.orgInputTitle}>Téléphone</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Téléphone de l'organisme"
+                placeholder="0123232323"
                 aria-label="phonePublic"
                 id="phonePublic"
                 onChange={(e) => setPhonePublic(e.target.value)}
@@ -371,10 +376,12 @@ function RegistrationPublicDataOrg() {
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+            <p className={stylesRegistration.orgInputTitle}>Adresse mail</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Email de l'organisme"
+                placeholder="contact@mjc.fr"
                 aria-label="emailPublic"
                 id="emailPublic"
                 onChange={(e) => setEmailPublic(e.target.value)}
@@ -384,10 +391,12 @@ function RegistrationPublicDataOrg() {
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+            <p className={stylesRegistration.orgInputTitle}>Site internet</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Site internet"
+                placeholder="www.mjc.fr"
                 aria-label="website"
                 id="website"
                 onChange={(e) => setWebsite(e.target.value)}
@@ -397,10 +406,12 @@ function RegistrationPublicDataOrg() {
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+            <p className={stylesRegistration.orgInputTitle}>Descriptif de l'organisme</p>
+
               <textarea
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Description"
+                placeholder="Association de sport..."
                 aria-label="description"
                 id="description"
                 onChange={(e) => setDescription(e.target.value)}

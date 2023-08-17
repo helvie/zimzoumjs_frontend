@@ -87,3 +87,9 @@
   transform: rotate(45deg);
   top: -14px;
 }
+
+.headerContainer {
+  border-bottom-width:3px;
+  border-bottom-color:black;
+
+}

@@ -29,9 +29,19 @@ h1 {
   text-gray-700
 }
 
+h3 {
+ font-size:1.6rem;
+}
+
 input {
   @apply
   w-full
+}
+
+.siteName {
+  width:10px;
+  height:10px;
+  background-color:red;
 }
 
 /* .MuiFormControlLabel-root {
@@ -40,6 +50,8 @@ input {
   self-align:center
 } */
 
-
+input:focus {
+  outline: none; /* Désactiver l'outline au focus */
+}
 
 

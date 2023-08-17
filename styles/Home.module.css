@@ -18,9 +18,11 @@
     flex-col
     justify-evenly
     items-center      
-    p-12 max-sm:p-8
-    leading-7 
-    bg-white;
+    pl-8
+    pr-8
+    pb-8    
+    leading-7;
+    background-color:#efc22b;
   }
 
   /* .orgNameAndDataContainer {
@@ -41,27 +43,32 @@
     @apply 
     flex 
     flex-row
-    justify-center 
-    items-center  
-    max-2xl:pl-7  
+    justify-evenly 
+    items-center 
+    p-8;
+    background-color:#efc22b;
+    /* max-2xl:pl-7  
     max-md:ml-0 
     max-md:pl-0    
-    max-md:pb-4
-    bg-white
+    max-md:pb-4 */
+    /* bg-yellow-400 */
   }
 
 
   .orgLeftData {
-    @apply
-    p-12
-    m-12
+    /* @apply */
+    /* p-12
+    m-12 */
   }
   
   .orgRightData {
     @apply
+    flex
+    flex-col
+    items-center
     /* bg-lime-500 */
-    p-12
-    m-12
+    /* p-12
+    m-12 */
   }
   /* .orgData > div {
     @apply
@@ -72,6 +79,7 @@
     @apply
     text-base 
     text-yellow-900
+    
   }
 
   .orgDataTitle {
@@ -81,14 +89,16 @@
     max-sm:text-lg
     font-bold 
     mb-4
+    text-black
 
   }
 
   
   .orgDataAddress {
     @apply
-    font-bold max-sm:font-normal
+    font-bold
     mb-1
+    text-white
   
   }
   .orgActivitiesContainer {
@@ -104,6 +114,13 @@
     flex
     flex-row 
     justify-between
+    text-black;
+    min-height:300px;
+    border-top-width:4px;
+    border-right-width:4px;
+    border-color:black;
+    border-style:solid;
+    
   }
 
   .orgActivityTitleText {
@@ -111,8 +128,9 @@
     flex
     justify-center
     items-center
-    w-5/6
+    w-full
     text-2xl
+    cursor-pointer;
   }
 
   .arrowsContainer {
@@ -145,26 +163,27 @@
     flex
     justify-center
     items-center
-    bg-white
-    w-10
+    /* bg-white */
+    /* w-10 */
     h-10
     mr-4
-    mt-4
+    /* mt-4 */
     rounded-xl
     
   }
 
   .orgActivityDetailTitle {
-    @apply
-    text-xl
+    /* @apply
+    text-xl */
   }
 
   .orgActivityDetailContainer {
     @apply
-    pl-8
-    pt-8
-    w-5/6
-
+    p-8
+    w-full
+    flex
+    flex-col
+    justify-between
   }
 
   .orgActivityText {
@@ -175,7 +194,8 @@
 
   .arrow {
     @apply
-    text-2xl
+    text-3xl
+    cursor-pointer
   }
 
   .orgActivityDescription {
@@ -183,6 +203,10 @@
     text-black
     leading-8
     p-8
+    w-full
+    flex
+    flex-col
+    justify-between;
 
   }
 
@@ -196,20 +220,122 @@
     max-height:100%
   }
 
+
+  .orgRightData {
+    @apply
+    flex
+    flex-col
+    items-start
+    /* bg-lime-500 */
+    /* p-12
+    m-12 */
+  }
+
+  .orgLeftData {
+    @apply
+    flex
+    flex-col
+    items-start
+    /* bg-lime-500 */
+    /* p-12
+    m-12 */
+  }
+
+  .leftActivity {
+    border-right:black solid 4px;
+    color:rec;
+  }
+
+  @media (min-width: 767px) {
+
   .orgMapAndImg {
     display: flex;
     flex-direction: row;
     width: 100%;
+    /* border-width:4px;
+    border-color:black; */
   }
   
   .orgMap {
-    flex: 1;
+    @apply
+    flex-1 
+    border-t-4 
+    border-r-4
+    border-black
   }
   
   .orgImgContainer {
     flex: 0 0 40%;
     max-width: 40%;
+    border-top:black 4px solid;
+
   }
+
+}
+
+  @media (max-width: 767px) {
+
+  .orgMapAndImg {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* border-width:4px;
+    border-color:black; */
+  }
+  
+  .orgMap {
+    /* flex: 1; */
+    /* border-right-width:4px;
+    border-color:black; */
+    /* flex:1; */
+    @apply
+    border-t-4 
+    border-r-transparent
+    border-black;
+
+    width:100%;
+    height:300px;
+  }
+  
+  .orgImgContainer {
+    /* flex: 0 0 40%; */
+    width: 100%;
+    border-top:black 4px solid;
+    
+  }
+
+  
+  .orgData {
+    @apply 
+    flex 
+    flex-col
+    items-center
+  }
+
+  .orgRightData {
+    @apply
+    flex
+    flex-col
+    items-center
+    /* bg-lime-500 */
+    /* p-12
+    m-12 */
+  }
+
+  .orgLeftData {
+    @apply
+    flex
+    flex-col
+    items-center
+    /* bg-lime-500 */
+    /* p-12
+    m-12 */
+  }
+
+  .leftActivity {
+    border-right:none;
+  }
+}
 
 .organismsContainer {
   @apply
@@ -217,20 +343,36 @@
   flex-col 
   items-center
   gap-4 
-  bg-gray-100 
+  bg-white 
   p-4 
   rounded-lg
 }
 
 .organismContainer {
   @apply
-  bg-white 
+  /* bg-white  */
   p-4 
-  rounded-lg 
+  rounded-3xl
   shadow-md
-  w-2/3
+  w-4/5
+  mt-4
+  mb-4
+  border-black
+  border-4
+}
+
+.nbOfPages {
+  @apply
+  text-right;
+}
+
+.activityFooter {
+  @apply
+  flex
+  flex-row
+  justify-end
+  items-center
   mt-4
   mb-4
 }
-
  

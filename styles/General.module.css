@@ -13,3 +13,10 @@
 
 }
 
+.loginFormBackground {
+  @apply 
+  w-4/5 
+  bg-white 
+  p-12
+}
+

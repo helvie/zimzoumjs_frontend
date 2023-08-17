@@ -96,8 +96,6 @@ function RegistrationPrivateDataOrg() {
     }
 
     dispatch(updateOrganismData(privateOrgData))
-    // console.log(respCivility + ' ' + respName + ' ' + emailPrivate + ' ' + phonePrivate +" "+ respNameDisplay);
-    console.log(orgData)
     router.push('/registrationPublicDataOrg');
 
   }
@@ -110,30 +108,36 @@ function RegistrationPrivateDataOrg() {
 
       <div className={stylesRegistration.formContainer}>
 
-
-        <div className={stylesRegistration.formBackground}>
+        <div className={stylesRegistration.orgFormBackground}>
+          <h1 className={stylesRegistration.formTitle}>Le (la) responsable de l'organisme</h1>
 
           <h1 className={stylesRegistration.formTitle}></h1>
 
           <form className="w-full">
             <div className={stylesRegistration.inputRegistrationContainer}>
+
+              <p className={stylesRegistration.orgInputTitle}>Civilité</p>
+
               <select
                 className={stylesRegistration.inputRegistration + ' ' + stylesRegistration.placeholderOption}
                 id="respCivility"
                 value={respCivility}
                 onChange={(e) => setRespCivility(e.target.value)}
               >
-                <option value="">Civilité</option>
+                <option value="">-</option>
                 <option value="Madame">Madame</option>
                 <option value="Monsieur">Monsieur</option>
               </select>
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+
+              <p className={stylesRegistration.orgInputTitle}>Nom</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Nom du responsable"
+                placeholder="Martin"
                 aria-label="respName"
                 id="respName"
                 onChange={(e) => setRespName(e.target.value)}
@@ -143,37 +147,41 @@ function RegistrationPrivateDataOrg() {
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+
+              <p className={stylesRegistration.orgInputTitle}>Rôle</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Role du responsable"
+                placeholder="directeur, président, ..."
                 aria-label="respRole"
                 id="respRole"
                 onChange={(e) => setRespRole(e.target.value)}
-                value={respName}
+                value={respRole}
               />
               {errors.respName && <p className={stylesRegistration.error}>{errors.respName}</p>}
             </div>
+            <div className={stylesRegistration.orgSwitch}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={respNameDisplay}
+                    onChange={(e) => setRespNameDisplay(e.target.checked)}
+                    color="default"
+                  />
+                }
+                label={respNameDisplay ? "Nom affiché pour les internautes" : "Nom masqué pour les internautes"}
+                style={{ color: respNameDisplay ? '#000000' : '#a0a7b2', marginBottom: '20px' }}
 
-            <FormControlLabel
-              className={stylesRegistration.switch}
-              control={
-                <Switch
-                  checked={respNameDisplay}
-                  onChange={(e) => setRespNameDisplay(e.target.checked)}
-                  color="default"
-                />
-              }
-              label="Affichage du nom du responsable"
-              style={{ color: respNameDisplay ? '#000000' : '#a0a7b2', marginBottom: '20px' }}      
- 
               />
-
+            </div>
             <div className={stylesRegistration.inputRegistrationContainer}>
+              <p className={stylesRegistration.orgInputTitle}>Téléphone (non public)</p>
+
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Téléphone du responsable"
+                placeholder="0123232323"
                 aria-label="phonePrivate"
                 id="phonePrivate"
                 onChange={(e) => setPhonePrivate(e.target.value)}
@@ -183,10 +191,12 @@ function RegistrationPrivateDataOrg() {
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
+
+              <p className={stylesRegistration.orgInputTitle}>Email (non public)</p>
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
-                placeholder="Email du responsable"
+                placeholder="martin@mail.fr"
                 aria-label="emailPrivate"
                 id="emailPrivate"
                 onChange={(e) => setEmailPrivate(e.target.value)}

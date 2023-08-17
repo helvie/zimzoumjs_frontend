@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.css'
 import React, { useEffect, useState } from 'react';
-// import OrgActivity from './OrganismActivity';
+import OrgActivity from './OrganismActivity';
 import { shuffleArray } from '../utils/shuffleArray';
 import dynamic from 'next/dynamic';
 import Header from './Header';
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { updateScreenWidth } from '../reducers/screen';
 import { useRouter } from 'next/router';
 
-
+const numberOfBackground = 0;
 
 const Map = dynamic(() => import('./Map'), { ssr: false });
 
@@ -17,6 +17,7 @@ const OrganismDisplay = (props) => {
   const router = useRouter();
 
   const screenHeight = useSelector((state) => state.screen.screenHeight)
+  const screenWidth = useSelector((state) => state.screen.screenWidth)
 
 
   const [divElements, setDivElements] = useState();
@@ -24,15 +25,14 @@ const OrganismDisplay = (props) => {
   // const screenHeight = useSelector((state) => state.screen.screenHeight);
   // const screenWidth = useSelector((state) => state.screen.screenWidth);
 
-console.log("esssaiiii  "+screenHeight)
 
   const dispatch = useDispatch();
   let colorsArray = [];
   let color = "#000000"
+  const allColors = ["#efc22b","#72A3D2", "#FA9255", "#F06761", "#AEB861", "#E699A6", "#ffffff"];
 
-  const [allColors, setAllColors] = useState([]);
+  // const [allColors, setAllColors] = useState([]);
 
-  console.log(props.orgNumber)
 
   useEffect(() => {    
     
@@ -40,18 +40,7 @@ console.log("esssaiiii  "+screenHeight)
       try {
         const response = await fetch(`http://localhost:3000/organisms/${props.orgNumber}`);
         const data = await response.json();
-        console.log(data.organism.location.route)
         setDivElements(data.organism);
-
-        const initialFontsColors = ["#c52532", "#ff6600", "#4f6228", "#ac2e82", "#ac5208", "#008080"];
-        const numberOfColorsArray = Math.ceil(16 / initialFontsColors.length);
-        const colorsArray = [];
-        for (let i = 0; i < numberOfColorsArray; i++) {
-          colorsArray.push(...shuffleArray(initialFontsColors));
-        }
-        setAllColors(colorsArray);
-        console.log(colorsArray);
-        console.log(divElements.location)
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -60,30 +49,25 @@ console.log("esssaiiii  "+screenHeight)
 
     fetchData();
 
-    // const handleResize = () => {
-    //   dispatch(updateScreenWidth(window.innerWidth));
-    //   dispatch(updateScreenHeight(window.innerHeight));
-    // };
-
-    // window.addEventListener('resize', handleResize);
-
-    // return () => {
-    //   window.removeEventListener('resize', handleResize);
-    // };
   }, [props.orgNumber]);
   
-  //   const orgActivities = divElements.map((data, i) => {
-  //   if (screenWidth > 768) { backgroundColor = i === 0 ? "#ffffff" : (i % 2 !== 0 ? (backgroundColor === "#ffffff" ? "#F2F2F2" : "#ffffff") : backgroundColor); }
-  //   else { backgroundColor = backgroundColor === "#ffffff" ? "#F2F2F2" : "#ffffff" }
-  //   backgroundArrowColor = backgroundColor === "#ffffff" ? "#E8E8E8" : "#dddddd"
-  //   color = allColors[i]
+    const orgActivities = divElements?.regularClasses?.map((data, i) => {  
 
-  //   data.style = { backgroundColor: backgroundColor, color: color, minHeight: thirdScreen };
+      // screenWidth > 768
 
-  //   // if (i >= 0 && i < 5) {
-  //   return <OrgActivity key={i} style={data.style} backgroundArrowColor={backgroundArrowColor} color={color} activity={data.activity} description={data.description} detail={data.detail} />;
-  //   // }
-  // });
+      const activityClass = screenWidth < 768 ? "transparent" : i%2 === 0 ? "black" : "transparent"; 
+
+    // if (screenWidth > 768) { backgroundColor = i === 0 ? "#ffffff" : (i % 2 !== 0 ? (backgroundColor === "#ffffff" ? "#F2F2F2" : "#ffffff") : backgroundColor); }
+    // else { backgroundColor = backgroundColor === "#ffffff" ? "#F2F2F2" : "#ffffff" }
+    // backgroundArrowColor = backgroundColor === "#ffffff" ? "#E8E8E8" : "#dddddd"
+
+    data.style = { backgroundColor: allColors[numberOfBackground], color: color, minHeight: thirdScreen, borderRightColor : activityClass };
+    numberOfBackground = numberOfBackground===allColors.length-1?0:numberOfBackground+1;
+
+    // if (i >= 0 && i < 5) {
+    return <OrgActivity key={i} style={data.style} classActivity = {activityClass} backgroundColor={allColors[numberOfBackground]} backgroundArrowColor={backgroundArrowColor} color={color} activity={data.activity} description={data.description} detail={data.regularClassesDetails} />;
+    // }
+  });
 
 
   let backgroundColor = "#ffffff";
@@ -96,7 +80,7 @@ console.log("esssaiiii  "+screenHeight)
 <Header />
 {divElements && (
 
-      <div className={styles.orgData} style={{ minHeight: thirdScreen }}>
+      <div className={styles.orgData}>
         <div className={styles.orgLeftData}>
           <h1 className={styles.orgDataTitle}>{divElements.orgName}</h1>
           <p className={styles.orgDataAddress}>{divElements.location.route} – {divElements.location.postalCode} {divElements.location.city}</p>
@@ -110,7 +94,7 @@ console.log("esssaiiii  "+screenHeight)
 )}
         {divElements && (
 
-      <div className={styles.orgDescription} style={{ minHeight: thirdScreen }}>
+      <div className={styles.orgDescription}>
         <p>{divElements.description}</p>
       </div>
         )}
@@ -128,7 +112,7 @@ console.log("esssaiiii  "+screenHeight)
 
 
     <div className={styles.orgActivitiesContainer}>
-      {/* {orgActivities} */}
+      {orgActivities}
     </div>
   </main>
   );
@@ -142,12 +126,10 @@ export default OrganismDisplay;
 
   //       fetch(`http://localhost:3000/organisms/${props.orgNumber}'`);
   //       const data = await response.json();
-  //       console.log('Registration successful:', data);
   //       setDivElements(data);
 
       
   //     } catch (error) {
-  //       console.error('Registration failed:', error);
   //     }
   //   };
 
