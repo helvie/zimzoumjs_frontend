@@ -18,14 +18,14 @@ function RegistrationPublicDataOrg() {
 
   const [organismSort, setOrganismSort] = useState('');
   const [orgName, setOrgName] = useState('');
-  const [location, setlocation] = useState({});
+  const [location, setLocation] = useState({});
   const [emailPublic, setEmailPublic] = useState('');
   const [phonePublic, setPhonePublic] = useState('');
   const [website, setWebsite] = useState('');
   const [doc, setDoc] = useState('');
   const [photo, setPhoto] = useState('');
-  const [docURL, setDocURL] = useState('');
-  const [photoURL, setPhotoURL] = useState('');
+  // const [docURL, setDocURL] = useState('');
+  // const [photoURL, setPhotoURL] = useState('');
   const [description, setDescription] = useState('');
   const [orgVisible, setOrgVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -58,7 +58,7 @@ function RegistrationPublicDataOrg() {
     setSearchTerm(city.properties.label);
     setResults([]);
 
-    setlocation({
+    setLocation({
       route:city.properties.name,
       postalCode:city.properties.postcode,
       city:city.properties.city,
@@ -181,7 +181,7 @@ function RegistrationPublicDataOrg() {
   const resetForm = () => {
     setOrganismSort('');
     setOrgName('');
-    setlocation({});
+    setLocation({});
     setEmailPublic('');
     setPhonePublic('');
     setWebsite('');
@@ -357,7 +357,8 @@ function RegistrationPublicDataOrg() {
               }
               label="Organisme visible après création"
 
-              style={{ color: orgVisible ? '#000000' : '#a0a7b2', marginBottom: '50px' }}              />
+              style={{ color: orgVisible ? '#000000' : '#a0a7b2', marginBottom: '50px' }}              
+              />
 
 
             <div className={stylesRegistration.inputRegistrationContainer}>

@@ -133,6 +133,10 @@
 .formBlock .btn {
     border-radius: 8px;
 }
+/* 
+.connectedMail {
+    color:#efc22b;
+} */
 
 
 @media (max-width: 767px) {

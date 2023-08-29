@@ -3,10 +3,15 @@ import stylesRegistration from '../styles/Registration.module.css';
 import stylesGeneral from '../styles/General.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../reducers/user';
+import { useRouter } from 'next/router';
+
 
 import Header from './Header';
 
 function ConnectionUserForm() {
+
+  const router = useRouter();
+
   const dispatch = useDispatch();
 
   const [signinEmail, setSigninEmail] = useState('');
@@ -66,7 +71,9 @@ function ConnectionUserForm() {
           // updateOnRegistration(regUsername)
 
           // window.location.assign('/')
-          dispatch(login(data.token))
+          // console.log(data)
+          dispatch(login(data))
+          router.push('/');
           return true
         }
         else {
@@ -109,7 +116,7 @@ function ConnectionUserForm() {
 
               <input
                 className={stylesRegistration.inputRegistration}
-                type="text"
+                type="password"
                 placeholder="***"
                 aria-label="Full name"
                 id="signinPassword"

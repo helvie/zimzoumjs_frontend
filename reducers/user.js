@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	token: "",
+	mail: "",
 	createdOrganism: "essai"
 };
 
@@ -15,10 +16,13 @@ export const userSlice = createSlice({
 		},
 
 		login: (state, action) => {
-			state.token = action.payload;
+			console.log(action)
+			state.token = action.payload.token;
+			state.mail = action.payload.mail;
 		},
 		logout: (state) => {
 			state.token = null;
+			state.mail= null;
 		  },
 	},
 });

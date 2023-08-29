@@ -9,6 +9,7 @@ function Burger() {
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
+  const mail = useSelector((state) => state.user.mail);
 
   const createdOrganism = useSelector((state) => state.user.createdOrganism);
 
@@ -71,6 +72,11 @@ function Burger() {
   
       <div className={`${stylesBurger.owlMenu} ${menuActive ? stylesBurger.active : ''}`}>
         <ul>
+        {token && (
+            <li>
+              <a style={{color:"#fa9255"}}>{mail}</a>
+            </li>
+          )}
           <li>
             <a onClick={() => handlePageClick('/')}>Home</a>
           </li>

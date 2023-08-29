@@ -59,8 +59,6 @@ function RegistrationRegularClass() {
 
   const registrationData = () => {
 
-
-
     return new Promise((resolve, reject) => {
 
       const dataActivity = {

@@ -4,7 +4,6 @@ import styles from '../styles/Home.module.css'
 // import stylesGeneral from '../styles/General.module.css';
 
 function OrgActivityDetail(props) {
-  console.log("les props : "+props.detail.startHours)
   const {
     startHours,
     startMinutes,
@@ -17,6 +16,9 @@ function OrgActivityDetail(props) {
   const formatTime = (value) => {
     return !value ? "00" : value < 10 ? `0${value}` : value;
   };
+
+  
+
 
         return (
             <div className={styles.orgActivityText}>
