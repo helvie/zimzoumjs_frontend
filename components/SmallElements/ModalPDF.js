@@ -8,9 +8,6 @@ const ModalPDF = ({ pdfUrl, onClose }) => {
       <div className="modal-content">
       <span className="close" style={{color:"#cc5500", fontSize:"50px", fontWeight:"bold", cursor:"pointer"}} onClick={onClose}>&times;</span>
         <iframe src={pdfUrl} width="100%" height="500px" frameborder="0"></iframe>
-        {/* <Document file={pdfUrl}>
-          <Page pageNumber={1} />
-        </Document> */}
       </div>
     </div>
   );

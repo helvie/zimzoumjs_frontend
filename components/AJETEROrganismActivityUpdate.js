@@ -7,15 +7,23 @@ import stylesGeneral from '../styles/General.module.css';
 
 function OrgActivityUpdate(props) {
 
-  const backgroundArrow = { backgroundColor: props.backgroundArrowColor };
-  const color = { color: props.color };
+  // const backgroundArrow = { backgroundColor: props.backgroundArrowColor };
+  // const color = { color: props.color };
 
   const [activityArrayItem, setActivityArrayItem] = useState(0);
   const [activityScreen, setActivityScreen] = useState(0);
 
-  const nbOfClasses = props.detail.length;
+  // const nbOfClasses = props.detail.length;
 
-
+  const {
+    startAge,
+    endAge,
+    activity,
+    description,
+    regularClassesDetails,
+    visible,
+    _id
+  } = props.data;
 
   const handleReturn = () => {
     activityScreen === 2
@@ -46,7 +54,7 @@ function OrgActivityUpdate(props) {
   // }
 
 
-  const classes = props.detail.map((data, i) => {
+  const classes = regularClassesDetails.map((data, i) => {
       return <OrgActivityDetailUpdate key={i} detail={data}
       />;
 

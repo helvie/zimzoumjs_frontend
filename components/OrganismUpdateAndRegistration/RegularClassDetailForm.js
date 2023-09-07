@@ -1,7 +1,8 @@
 import React from 'react';
-import SelectTime from './SelectTime';
-import SelectAge from './SelectAge';
-import stylesRegistration from '../styles/Registration.module.css';
+import SelectTime from '../SmallElements/SelectTime';
+import SelectAge from '../SmallElements/SelectAge';
+import stylesRegistration from '../../styles/Registration.module.css';
+import { respCivilityList, organismSortList, respRoleList, daysList, availabilityList, gradeList  } from '../../utils/dataObjects';
 
 function RegularClassDetailForm(props) {
   const handleInputChange = (fieldName, value) => {
@@ -39,6 +40,7 @@ function RegularClassDetailForm(props) {
                   value={props.data.detailStartAge}
                   onChange={(value) => handleInputChange('detailStartAge', value)}
                   maxValue={98}
+                  name="detailStartAge"
                 />
               </div>
             {/* </div> */}

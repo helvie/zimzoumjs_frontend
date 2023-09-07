@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import stylesRegistration from '../styles/Registration.module.css';
 import stylesGeneral from '../styles/General.module.css';
 import { useDispatch } from 'react-redux';
-import { login } from '../reducers/user';
+import { login } from '../../reducers/user';
 import { useRouter } from 'next/router';
 
 import Header from './Header';

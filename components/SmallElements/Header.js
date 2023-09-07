@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 // import {sideBar};
 import Burger from './Burger';
-import stylesHeader from '../styles/Header.module.css'
+import stylesHeader from '../../styles/Header.module.css'
 import { useState, useEffect } from 'react';
-import { updateScreenWidth } from '../reducers/screen';
+import { updateScreenWidth } from '../../reducers/screen';
 
 // import { updateScreenHeight } from '../reducers/screen';
 // import { updateScreenWidth } from '../reducers/screen';

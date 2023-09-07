@@ -3,7 +3,7 @@ import stylesRegistration from '../styles/Registration.module.css';
 // import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { updateOrganismData, updateImage, updateDoc } from '../reducers/organism';
+import { updateOrganismData, updateImage, updateDoc } from '../../reducers/organism';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Header from './Header';
@@ -194,47 +194,6 @@ function RegistrationPublicDataOrg() {
 
   //----------------------------------------------------------------------------------------
 
-  // const registrationData = () => {
-  //   return new Promise((resolve, reject) => {
-  //     const dataOfOrganism = {
-  //       organismSort: organismSort,
-  //       orgName: orgName,
-  //       location: location,
-  //       emailPublic: emailPublic,
-  //       phonePublic: phonePublic,
-  //       website: website,
-  //       description: description,
-  //       orgVisible: orgVisible,
-  //       respCivility: orgData.respCivility,
-  //       respName: orgData.respName,
-  //       respNameDisplay: orgData.respNameDisplay,
-  //       phonePrivate: orgData.phonePrivate,
-  //       emailPrivate: orgData.emailPrivate,
-  //       image: photoURL,
-  //       doc: docURL
-  //     };
-  
-  //     const formData = new FormData();
-  //     formData.append('photo', photo);
-  //     formData.append('doc', doc);
-  //     formData.append('orgData', JSON.stringify(dataOfOrganism));
-  //     formData.append('token', userToken);
-  
-  //     fetch('http://localhost:3000/registration/organismRegistration', {
-  //       method: 'POST',
-  //       body: formData
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         resolve();
-  //       })
-  //       .catch((error) => {
-  //         console.error('Erreur enregistrement fiche', error);
-  //         reject(error);
-  //       });
-  //   });
-  // };
-  //----------------------------------------------------------------------------------------
   const registrationData = () => {
     return new Promise((resolve, reject) => {
       const dataOfOrganism = {

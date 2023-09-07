@@ -33,16 +33,17 @@ h3 {
  font-size:1.6rem;
 }
 
+
 input {
   @apply
   w-full
 }
 
-.siteName {
+/* .siteName {
   width:10px;
   height:10px;
   background-color:red;
-}
+} */
 
 /* .MuiFormControlLabel-root {
   display:flex;

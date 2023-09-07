@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
 
 const ModalImage = ({ imageUrl, onClose }) => {
+
   return (
     <div className="modal">
       <div className="modal-content">

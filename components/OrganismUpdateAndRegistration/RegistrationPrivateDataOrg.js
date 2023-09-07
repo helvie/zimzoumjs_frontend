@@ -3,7 +3,7 @@ import stylesRegistration from '../styles/Registration.module.css';
 // import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { updateOrganismData } from '../reducers/organism';
+import { updateOrganismData } from '../../reducers/organism';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Header from './Header';

@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectTime from './SelectTime';
+import SelectTime from './SmallElements/SelectTime';
 import SelectAge from './SelectAge';
 import stylesRegistration from '../styles/Registration.module.css';
 

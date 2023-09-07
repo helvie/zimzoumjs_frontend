@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import stylesBurger from '../styles/Burger.module.css';
+import stylesBurger from '../../styles/Burger.module.css';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateCreatedOrganism } from '../reducers/user';
-import { logout } from '../reducers/user';
+import { updateCreatedOrganism } from '../../reducers/user';
+import { logout } from '../../reducers/user';
 
 function Burger() {
 
@@ -104,9 +104,6 @@ function Burger() {
               <a onClick={() => handlePageClick('/connectionUser')}>Login</a>
             </li>
           )}
-          {/* <li>
-            <a onClick={() => handlePageClick('/page5')}>Page 5</a>
-          </li> */}
         </ul>
       </div>
     </div>
