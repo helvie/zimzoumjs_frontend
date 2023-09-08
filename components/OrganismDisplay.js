@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import OrgActivity from './OrganismActivity';
 import { shuffleArray } from '../utils/shuffleArray';
 import dynamic from 'next/dynamic';
-import Header from './Header';
+import Header from './SmallElements/Header';
 import { useDispatch, useSelector } from 'react-redux';
 // import { updateScreenHeight } from '../reducers/screen';
 // import { updateScreenWidth } from '../reducers/screen';
@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 const numberOfBackground = 0;
 
-const Map = dynamic(() => import('./Map'), { ssr: false });
+const Map = dynamic(() => import('./SmallElements/Map'), { ssr: false });
 
 const OrganismDisplay = (props) => {
   const router = useRouter();

@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import OrgActivity from './OrganismActivity';
 import { shuffleArray } from '../utils/shuffleArray';
 import dynamic from 'next/dynamic';
-import Header from './Header';
+import Header from './SmallElements/Header';
 import { useDispatch, useSelector } from 'react-redux';
 // import { updateScreenHeight } from '../reducers/screen';
 // import { updateScreenWidth } from '../reducers/screen';
 import OrganismsListOneOrg from '../components/OrganismsListOneOrg';
 
-const Map = dynamic(() => import('./Map'), { ssr: false });
+const Map = dynamic(() => import('./SmallElements/Map'), { ssr: false });
 
 function OrganismList() {
 
