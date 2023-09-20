@@ -237,16 +237,15 @@
   max-md:w-full 
   flex flex-row 
   justify-between 
-  text-black;
+  text-black
+  h-80
+  border-t-4 
+  border-r-4 
+  border-black 
+  border-solid;
 }
 
-.orgActivityContainer {
-  min-height: 300px;
-  border-top-width: 4px;
-  border-right-width: 4px;
-  border-color: black;
-  border-style: solid;
-}
+
 
 
 .orgActivityDescription {
