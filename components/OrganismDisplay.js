@@ -26,7 +26,6 @@ const OrganismDisplay = (props) => {
   let color = "#000000"
   const allColors = ["#efc22b", "#72A3D2", "#FA9255", "#F06761", "#AEB861", "#E699A6", "#ffffff"];
   let backgroundArrowColor = "#ffffff";
-  let thirdScreen = screenHeight / 3;
 
   //oooooooooooooooo Récupération des données de l'organisme oooooooooooooooooooo
 
