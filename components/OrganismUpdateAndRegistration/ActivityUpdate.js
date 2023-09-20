@@ -5,7 +5,7 @@ import stylesRegistration from '../../styles/Registration.module.css';
 import moment from 'moment';
 import RegularClassForm from './RegularClassForm';
 import { useSelector } from 'react-redux';
-import { BACKEND_URL } from '../utils/urls';
+import { BACKEND_URL } from '../../utils/urls';
 
 ///////////////////////////////////////////////////////////////////////////////////
 

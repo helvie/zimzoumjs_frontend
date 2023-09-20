@@ -14,7 +14,7 @@ import ModalPDF from '../SmallElements/ModalPDF';
 import Header from '../SmallElements/Header';
 import ActivityBeforeUpdate from './ActivityBeforeUpdate';
 import ActivityUpdate from './ActivityUpdate';
-import { BACKEND_URL } from '../utils/urls';
+import { BACKEND_URL } from '../../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 

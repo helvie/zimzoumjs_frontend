@@ -7,7 +7,7 @@ import stylesGeneral from '../../styles/General.module.css';
 import { login } from '../../reducers/user';
 import { useRouter } from 'next/router';
 import Header from '../SmallElements/Header';
-import { BACKEND_URL } from '../utils/urls';
+import { BACKEND_URL } from '../../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 
