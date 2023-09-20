@@ -26,6 +26,7 @@ const OrganismDisplay = (props) => {
   let color = "#000000"
   const allColors = ["#efc22b", "#72A3D2", "#FA9255", "#F06761", "#AEB861", "#E699A6", "#ffffff"];
   let backgroundArrowColor = "#ffffff";
+  let thirdScreen = screenHeight / 3;
 
   //oooooooooooooooo Récupération des données de l'organisme oooooooooooooooooooo
 
@@ -55,7 +56,7 @@ const OrganismDisplay = (props) => {
 
     const activityClass = screenWidth < 768 ? "transparent" : i % 2 === 0 ? "black" : "transparent";
 
-    data.style = { backgroundColor: "allColors[numberOfBackground]" };
+    data.style = { backgroundColor: allColors[numberOfBackground] };
     numberOfBackground = numberOfBackground === allColors.length - 1 ? 0 : numberOfBackground + 1;
 
     return <OrgActivity key={i} style={data.style} classActivity={activityClass} backgroundColor={allColors[numberOfBackground]} backgroundArrowColor={backgroundArrowColor} color={color} activity={data.activity} description={data.description} detail={data.regularClassesDetails} />;
