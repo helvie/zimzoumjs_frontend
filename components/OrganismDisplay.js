@@ -55,7 +55,7 @@ const OrganismDisplay = (props) => {
 
     const activityClass = screenWidth < 768 ? "transparent" : i % 2 === 0 ? "black" : "transparent";
 
-    data.style = { backgroundColor: "red" };
+    data.style = { backgroundColor: "allColors[numberOfBackground]" };
     numberOfBackground = numberOfBackground === allColors.length - 1 ? 0 : numberOfBackground + 1;
 
     return <OrgActivity key={i} style={data.style} classActivity={activityClass} backgroundColor={allColors[numberOfBackground]} backgroundArrowColor={backgroundArrowColor} color={color} activity={data.activity} description={data.description} detail={data.regularClassesDetails} />;
