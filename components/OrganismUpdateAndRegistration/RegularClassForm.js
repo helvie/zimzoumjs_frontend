@@ -1,8 +1,12 @@
 import stylesRegistration from '../../styles/Registration.module.css';
-import { categoryList } from '../../utils/dataObjects';
-import SelectAge from '../SmallElements/SelectAge';
+
 import { FormControlLabel } from '@material-ui/core';
 import Switch from '@material-ui/core/Switch';
+
+import SelectAge from '../SmallElements/SelectAge';
+import { categoryList } from '../../utils/dataObjects';
+
+////////////////////////////////////////////////////////////////////////////////
 
 function RegularClassForm(props) {
 
@@ -10,6 +14,9 @@ function RegularClassForm(props) {
     props.updateActivityField(fieldName, value);
   };
 
+  const errors = props.errors;
+
+////////////////////////////////////////////////////////////////////////////////
 
   return (
     <>
@@ -37,7 +44,7 @@ function RegularClassForm(props) {
         </div>
       </div>
 
-      {/* ---------------------------------- ACTIVITY -------------------------------------- */}
+      {/* ---------------------- Input nom de l'activité ------------------------- */}
 
       <div className={`${stylesRegistration.formActivityElement2} ${stylesRegistration.formActivityElement}`}>
         <div className={stylesRegistration.formActivitySubelement}>
@@ -53,11 +60,11 @@ function RegularClassForm(props) {
             onChange={(e) => handleInputChange("activity", e.target.value)}
             value={props.activity}
           />
-          {/* {errors.activity && <p className={stylesRegistration.error}>{errors.activity}</p>} */}
+          {errors && errors.activity && <p className={stylesRegistration.error}>{errors.activity}</p>}
         </div>
       </div>
 
-      {/* --------------------------------- AGE MINIMUM ------------------------------------ */}
+      {/* ------------------------ Input age minimum ------------------------ */}
 
       <div className={`${stylesRegistration.formActivityElement1} ${stylesRegistration.formActivityElement}`}>
         <div className={stylesRegistration.formActivitySubelement}>
@@ -69,17 +76,19 @@ function RegularClassForm(props) {
               onChange={(selectedValue) => handleInputChange("startAge", selectedValue)}
               maxValue={98}
             />
-          </div>
+            
+
+          </div>{errors && errors.age && <p className={stylesRegistration.error}>{errors.age}</p>}
         </div>
       </div>
 
-      {/* --------------------------------- AGE MAXIMUM ------------------------------------ */}
+      {/* ------------------------ Input age maximum ------------------------ */}
 
       <div className={`${stylesRegistration.formActivityElement1} ${stylesRegistration.formActivityElement}`}>
         <div className={stylesRegistration.formActivitySubelement}>
           <p className={stylesRegistration.inputTitle}>Age maximum</p>
           <div className={stylesRegistration.inputSelectContainer}>
-          <SelectAge
+            <SelectAge
               value={props.endAge}
               name="endAge"
               onChange={(selectedValue) => handleInputChange("endAge", selectedValue)}
@@ -89,7 +98,7 @@ function RegularClassForm(props) {
         </div>
       </div>
 
-      {/* ------------------------------ AGE DESCRIPTION ------------------------------------ */}
+      {/* ------------------------ Input description ------------------------ */}
 
       <div className={`${stylesRegistration.formActivityElement3} ${stylesRegistration.formActivityElement}`}>
         <div className={stylesRegistration.formActivitySubelement}>
@@ -104,11 +113,11 @@ function RegularClassForm(props) {
             onChange={(e) => handleInputChange("description", e.target.value)}
             value={props.description}
           />
-          {/* {errors.description && <p className={stylesRegistration.error}>{errors.description}</p>} */}
+          {errors && errors.description && <p className={stylesRegistration.error}>{errors.description}</p>}
         </div>
       </div>
 
-      {/* ------------------------- VISIBLE / NON VISIBLE ------------------------------ */}
+      {/* ------------------- Switch visibilité de l'organisme ------------------ */}
 
       <div className={`${stylesRegistration.formActivityElement2} ${stylesRegistration.formActivityElement}`}>
         <div className={stylesRegistration.formActivitySubelement2}>

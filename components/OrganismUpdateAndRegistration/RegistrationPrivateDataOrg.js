@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import stylesRegistration from '../styles/Registration.module.css';
-// import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch } from 'react-redux';
+
+import stylesRegistration from '../../styles/Registration.module.css';
+import stylesGeneral from '../../styles/General.module.css';
+
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Header from '../SmallElements/Header';
 import { updateOrganismData } from '../../reducers/organism';
-import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import Header from './Header';
-import stylesGeneral from '../styles/General.module.css';
+import { respCivilityList, respRoleList } from '../../utils/dataObjects';
+
+////////////////////////////////////////////////////////////////////////////////
 
 function RegistrationPrivateDataOrg() {
   const [respRole, setRespRole] = useState('');
@@ -18,19 +22,24 @@ function RegistrationPrivateDataOrg() {
   const [emailPrivate, setEmailPrivate] = useState('');
   const [errors, setErrors] = useState({}); // State pour les erreurs
 
-  const orgData = useSelector((state) => state.organismData)
   const dispatch = useDispatch();
-
   const router = useRouter();
 
+  //oooooooooooo Réinitialisation des erreurs à la validation d'un input ooooooooooo
 
-  // Effet pour réinitialiser les erreurs lorsque les champs sont modifiés
   useEffect(() => {
     setErrors({});
   }, [respName, phonePrivate, emailPrivate]);
 
+  //oooooooooooooooooooooooooo Vérification des erreurs oooooooooooooooooooooooooo
+
   const handleValidPrivateData = () => {
     const validationErrors = {};
+
+    const validateEmail = (email) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
 
     if (!respName) {
       validationErrors.respName = "Veuillez remplir le champ 'Nom du responsable'";
@@ -72,10 +81,8 @@ function RegistrationPrivateDataOrg() {
     resetForm();
   };
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+
+//ooooooooooooooooooooooo Réinitialisation du formulaire oooooooooooooooooooooooooo
 
   const resetForm = () => {
     setRespRole('');
@@ -85,11 +92,15 @@ function RegistrationPrivateDataOrg() {
     setErrors({});
   };
 
+  //oooooooooooooo Stockage des données du formulaire dans le réducer ooooooooooo
+
   function registrationData() {
+
     const privateOrgData =
     {
       respCivility: respCivility,
       respName: respName,
+      respRole: respRole,
       respNameDisplay: respNameDisplay,
       phonePrivate: phonePrivate,
       emailPrivate: emailPrivate
@@ -100,9 +111,10 @@ function RegistrationPrivateDataOrg() {
 
   }
 
+  ////////////////////////////////////////////////////////////////////////////////
+
   return (
     <main className={stylesGeneral.orgContent}>
-      {/* <div className={styles.orgFirstScreen}> */}
 
       <Header />
 
@@ -114,6 +126,9 @@ function RegistrationPrivateDataOrg() {
           <h1 className={stylesRegistration.formTitle}></h1>
 
           <form className="w-full">
+
+            {/* ----------- Menu déroulant civilité du responsable -------------- */}
+
             <div className={stylesRegistration.inputRegistrationContainer}>
 
               <p className={stylesRegistration.orgInputTitle}>Civilité</p>
@@ -125,10 +140,15 @@ function RegistrationPrivateDataOrg() {
                 onChange={(e) => setRespCivility(e.target.value)}
               >
                 <option value="">-</option>
-                <option value="Madame">Madame</option>
-                <option value="Monsieur">Monsieur</option>
+                {Object.entries(respCivilityList).map(([key, value]) => (
+                  <option key={key} value={key}>
+                    {value}
+                  </option>
+                ))}
               </select>
             </div>
+
+            {/* --------------- Input nom du responsable ------------------ */}
 
             <div className={stylesRegistration.inputRegistrationContainer}>
 
@@ -146,21 +166,31 @@ function RegistrationPrivateDataOrg() {
               {errors.respName && <p className={stylesRegistration.error}>{errors.respName}</p>}
             </div>
 
+            {/* --------------------- Menu déroulant  ------------------- */}
+
             <div className={stylesRegistration.inputRegistrationContainer}>
 
               <p className={stylesRegistration.orgInputTitle}>Rôle</p>
 
-              <input
-                className={stylesRegistration.inputRegistration}
-                type="text"
-                placeholder="directeur, président, ..."
-                aria-label="respRole"
+              <select
+                className={stylesRegistration.inputRegistration + ' ' + stylesRegistration.placeholderOption}
                 id="respRole"
-                onChange={(e) => setRespRole(e.target.value)}
                 value={respRole}
-              />
-              {errors.respName && <p className={stylesRegistration.error}>{errors.respName}</p>}
-            </div>
+                onChange={(e) => setRespRole(e.target.value)}
+              >
+                <option value="">-</option>
+                {Object.entries(respRoleList).map(([key, value]) => (
+                  <option key={key} value={key}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+              
+              
+                          </div>
+
+            {/* ----------- Switch affichage du nom du responsable  -------------- */}
+
             <div className={stylesRegistration.orgSwitch}>
               <FormControlLabel
                 control={
@@ -175,6 +205,9 @@ function RegistrationPrivateDataOrg() {
 
               />
             </div>
+
+            {/* ----------------- Input téléphone du responsable ------------------- */}
+
             <div className={stylesRegistration.inputRegistrationContainer}>
               <p className={stylesRegistration.orgInputTitle}>Téléphone (non public)</p>
 
@@ -190,6 +223,8 @@ function RegistrationPrivateDataOrg() {
               {errors.phonePrivate && <p className={stylesRegistration.error}>{errors.phonePrivate}</p>}
             </div>
 
+            {/* ----------------- Input mail du responsable ------------------- */}
+
             <div className={stylesRegistration.inputRegistrationContainer}>
 
               <p className={stylesRegistration.orgInputTitle}>Email (non public)</p>
@@ -204,6 +239,8 @@ function RegistrationPrivateDataOrg() {
               />
               {errors.emailPrivate && <p className={stylesRegistration.error}>{errors.emailPrivate}</p>}
             </div>
+
+            {/* ------- Bouton d'envoi des données du formulaire dans le réducer -----*/}
 
             <button
               className={stylesRegistration.validButton}

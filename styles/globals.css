@@ -22,7 +22,7 @@ body {
 
 h1 {
   @apply
-  text-2xl   
+  text-3xl   
   max-md:text-xl
   max-sm:text-lg
   mb-4
@@ -39,17 +39,6 @@ input {
   w-full
 }
 
-/* .siteName {
-  width:10px;
-  height:10px;
-  background-color:red;
-} */
-
-/* .MuiFormControlLabel-root {
-  display:flex;
-  background-color:pink;
-  self-align:center
-} */
 
 input:focus {
   outline: none; /* Désactiver l'outline au focus */

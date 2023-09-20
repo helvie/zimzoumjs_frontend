@@ -1,431 +1,445 @@
-  
-  .subtitle {
-    @apply
-    text-xl 
-    font-bold 
-    mb-2
-  }
 
-  .text {
-    @apply
-    text-gray-600
-  }
-
-
-  .orgDescription {
-    @apply 
-    flex 
-    flex-col
-    justify-evenly
-    items-center      
-    pl-8
-    pr-8
-    pb-8    
-    leading-7;
-    background-color:#efc22b;
-  }
-
-  /* .orgNameAndDataContainer {
-    @apply 
-    flex 
-    flex-col  
-    items-center 
-    justify-center 
-    md:flex-row
-    max-md:mb-4
-    bg-white;
-    min-height:33%;
-
-  } */
-
-
-  .orgData {
-    @apply 
-    flex 
-    flex-row
-    justify-evenly 
-    items-center 
-    p-8;
-    background-color:#efc22b;
-    /* max-2xl:pl-7  
-    max-md:ml-0 
-    max-md:pl-0    
-    max-md:pb-4 */
-    /* bg-yellow-400 */
-  }
-
-  .orgDataUpdate {
-    @apply 
-    flex 
-    flex-col
-    justify-evenly 
-    items-start 
-    p-8
-    bg-white
-    m-16
-    border-black;
-    border-width:3px;
-    border-radius:40px;
-    /* max-2xl:pl-7  
-    max-md:ml-0 
-    max-md:pl-0    
-    max-md:pb-4 */
-    /* bg-yellow-400 */
-  }
-
-  .orgDataUpdate h1 {
-    align-self:center
-  }
-
-  
-  .orgDescriptionUpdate {
-    @apply 
-    flex 
-    flex-col
-    justify-evenly
-    items-center      
-    pl-8
-    pr-8
-    pb-8    
-    leading-7;
-    background-color:#fff;
-  }
-
-  .orgLeftData {
-    /* @apply */
-    /* p-12
-    m-12 */
-  }
-  
-  .orgRightData {
-    @apply
-    flex
-    flex-col
-    items-center
-    /* bg-lime-500 */
-    /* p-12
-    m-12 */
-  }
-  /* .orgData > div {
-    @apply
-    
-  } */
-
-  .orgDataText {
-    @apply
-    text-base 
-    text-yellow-900
-    
-  }
-
-  .orgDataTitle {
-    @apply
-    text-2xl   
-    max-md:text-xl
-    max-sm:text-lg
-    font-bold 
-    mb-4
-    text-black
-  }
-
-  
-  .orgDataTitleUpdate {
-    @apply
-    text-2xl   
-    max-md:text-xl
-    max-sm:text-lg
-    font-bold 
-    mb-4
-    text-black
-    /* bg-blue-500 */
-    w-full
-  }
-
-  .orgDataTextUpdate {
-    @apply
-    text-xl   
-    max-md:text-xl
-    max-sm:text-lg
-    /* font-bold  */
-    mb-4
-    text-black
-    /* bg-blue-500 */
-    w-full
-  }
-/* 
-  .dataOfOrganism {
-    @apply
-    bg-lime-600
-  } */
-
-.inputAndIconContainer {
-  @apply
-  flex
-  flex-row
+.activityBeforeUpdate {
+  @apply 
+  flex 
+  w-full 
+  flex-col 
   items-center
+
 }
 
-.locationChoiceList {
-  @apply
-  ml-10
-  p-5
-  bg-orange-200
-  rounded-lg;
-  min-width:200px;
+
+.activityBeforeUpdate h2 {
+  font-size: 30px;
+  color: #cf443f;
+  margin-bottom: 10px;
 }
 
+
+.activityFooter {
+  @apply 
+  flex 
+  flex-row 
+  justify-end 
+  items-center 
+  mt-4 
+  mb-4
+}
+
+
+.arrow {
+  @apply 
+  text-3xl 
+  cursor-pointer
+}
+
+
+.arrowContainer {
+  @apply 
+  flex 
+  justify-center 
+  items-center
+  h-10 mr-4
+  rounded-xl
+}
+
+
+.arrowsContainer {
+  @apply 
+  w-1/6 
+  flex 
+  flex-col 
+  items-end 
+  justify-center
+}
+
+
+.changeDropDownMenu {
+  @apply 
+  border-black 
+  border-solid 
+  bg-orange-400 
+  ml-2 
+  p-1 
+  rounded-xl;
+  border-width: 3px;
+}
+
+
+.changeImageAndPdf {
+  @apply 
+  border-black 
+  border-solid 
+  bg-orange-400 
+  ml-2
+  p-1 
+  rounded-xl;
+  border-width: 3px;
+}
+
+
+.changeInput {
+  @apply 
+  border-black 
+  border-solid 
+  bg-orange-400 
+  ml-2 
+  w-min 
+  p-1 
+  rounded-xl;
+  border-width: 3px;
+}
+
+
+.changeInput::placeholder {
+  @apply 
+  text-lg;
+  color: #c06617;
+  font-style: italic;
+}
+
+
+.changeTextarea {
+  @apply 
+  border-black 
+  border-solid 
+  bg-orange-400 
+  ml-2 
+  w-min 
+  p-1 
+  rounded-xl;
+  border-width: 3px;
+  width: 100%;
+}
+
+
+.detailActivityBeforeUpdate {
+  @apply 
+  mt-12
+}
+
+
+.detailsContainer {
+  width: 100%
+}
 
 
 .icon {
   cursor: pointer;
 }
-/* 
-.orgSwitchUpdate label {
-  @apply
-  text-2xl
-  
-} */
-
-  .changeInput {
-    @apply
-    border-black
-    border-solid
-    bg-orange-400
-    ml-2
-    w-min
-    p-1
-    rounded-xl;
-    border-width:3px;
-  }
-
-  .changeImageAndPdf {
-    @apply
-    border-black
-    border-solid
-    bg-orange-400
-    ml-2
-    /* w-min */
-    p-1
-    rounded-xl;
-    border-width:3px;
-  }
-
-  .changeDropDownMenu {
-    @apply
-    border-black
-    border-solid
-    bg-orange-400
-    ml-2
-    p-1
-    rounded-xl;
-    border-width:3px;
-  }
-  
-
-  .changeTextarea {
-    @apply
-    border-black
-    border-solid
-    bg-orange-400
-    ml-2
-    w-min
-    p-1
-    rounded-xl;
-    border-width:3px;
-    width:100%;
-  }
-  .orgDataAddress {
-    @apply
-    font-bold
-    mb-1
-    text-white
-  
-  }
-  .orgActivitiesContainer {
-    @apply
-    flex 
-    flex-wrap
-  }
-  
-  .orgActivityContainer {
-    @apply
-    w-3/6 
-    max-md:w-full
-    flex
-    flex-row 
-    justify-between
-    text-black;
-    min-height:300px;
-    border-top-width:4px;
-    border-right-width:4px;
-    border-color:black;
-    border-style:solid;
-    
-  }
-
-  .orgActivityUpdateContainer {
-    @apply
-    w-full
-    p-8
-    flex
-    flex-col 
-    justify-between
-    text-black;
-    /* min-height:300px; */
-    border-top-width:4px;
-    border-right-width:4px;
-    border-color:black;
-    border-style:solid;
-    
-  }
-
-  .orgActivityTitleText {
-    @apply
-    flex
-    justify-center
-    items-center
-    w-full
-    text-2xl
-    cursor-pointer;
-  }
-
-  .arrowsContainer {
-    @apply
-    w-1/6
-    flex
-    flex-col
-    items-end
-    justify-center
-  }
-
-  .orgFirstScreen {
-    @apply
-    flex-col
-  }
-
-  /* .orgMap {
-    @apply
-    bg-blue-500
-    w-full;
-  } */
-  .mapContainer {
-    width: 100%;  
-    height: 100%;  
-    z-index: 1;
-  }
-
-  .arrowContainer {
-    @apply
-    flex
-    justify-center
-    items-center
-    /* bg-white */
-    /* w-10 */
-    h-10
-    mr-4
-    /* mt-4 */
-    rounded-xl
-    
-  }
-
-  .orgActivityDetailTitle {
-    /* @apply
-    text-xl */
-  }
-
-  .orgActivityDetailContainer {
-    @apply
-    p-8
-    w-full
-    flex
-    flex-col
-    justify-between
-  }
-
-  .orgActivityDetailUpdateContainer {
-    @apply
-    /* p-8 */
-    w-full
-    flex
-    flex-col
-    justify-between
-  }
-
-  .orgActivityText {
-    @apply
-    text-black
-    leading-8
-  }
-
-  .arrow {
-    @apply
-    text-3xl
-    cursor-pointer
-  }
-
-  .orgActivityDescription {
-    @apply
-    text-black
-    leading-8
-    p-8
-    w-full
-    flex
-    flex-col
-    justify-between;
-
-  }
-
-  /* .orgMapAndImg {
-    @apply
-    flex
-    flex-row
-  } */
-
-  .orgImg2 {
-    max-height:100%
-  }
 
 
-  .orgRightData {
-    @apply
-    flex
-    flex-col
-    items-start
-    /* bg-lime-500 */
-    /* p-12
-    m-12 */
-  }
-
-  .orgLeftData {
-    @apply
-    flex
-    flex-col
-    items-start
-    /* bg-lime-500 */
-    /* p-12
-    m-12 */
-  }
-
-  .leftActivity {
-    border-right:black solid 4px;
-    color:rec;
-  }
-
-  .changeInput::placeholder {
-    @apply
-    text-lg;
-    color:#c06617;
-    font-style:italic;
+.inputAndIconContainer {
+  @apply 
+  flex 
+  flex-row 
+  items-center
 }
 
-  @media (min-width: 767px) {
+
+.leftActivity {
+  border-right: black solid 4px;
+}
+
+
+.locationChoiceList {
+  @apply 
+  ml-10 
+  p-5 
+  bg-orange-200 
+  rounded-lg;
+  min-width: 200px;
+}
+
+
+.mapContainer {
+  height: 400px;
+  z-index: 1;
+}
+
+
+.nbOfPages {
+  @apply text-right;
+}
+
+
+.orgData {
+  @apply 
+  flex 
+  flex-row 
+  justify-evenly 
+  items-center 
+  p-8;
+  background-color: #efc22b;
+}
+
+
+.orgDataUpdate {
+  @apply 
+  flex 
+  flex-col 
+  justify-evenly 
+  items-start 
+  p-8 
+  bg-white 
+  m-16 
+  border-black;
+  border-width: 3px;
+  border-radius: 40px;
+}
+
+
+.orgDataUpdate h1 {
+  align-self: center
+}
+
+
+.orgDescription {
+  @apply 
+  flex 
+  flex-col 
+  justify-evenly 
+  items-center 
+  pl-8 
+  pr-8 
+  pb-8 
+  leading-7;
+  background-color: #efc22b;
+}
+
+
+.orgDescriptionUpdate {
+  @apply 
+  flex 
+  flex-col 
+  justify-evenly 
+  items-center 
+  pl-8 
+  pr-8 
+  pb-8 
+  leading-7;
+  background-color: #fff;
+}
+
+
+.orgActivitiesContainer {
+  @apply 
+  flex 
+  flex-wrap
+}
+
+
+.orgActivityContainer {
+  @apply 
+  w-3/6 
+  max-md:w-full 
+  flex flex-row 
+  justify-between 
+  text-black;
+  min-height: 300px;
+  border-top-width: 4px;
+  border-right-width: 4px;
+  border-color: black;
+  border-style: solid;
+}
+
+
+.orgActivityDescription {
+  @apply 
+  text-black 
+  leading-8 
+  p-8 
+  w-full 
+  flex 
+  flex-col 
+  justify-between;
+}
+
+
+.orgActivityDetailContainer {
+  @apply 
+  p-8 
+  w-full 
+  flex 
+  flex-col 
+  justify-between
+}
+
+
+.orgActivityDetailUpdateContainer {
+  @apply
+  w-full 
+  flex 
+  flex-col 
+  justify-between
+}
+
+
+.orgActivityText {
+  @apply 
+  text-black 
+  leading-8
+}
+
+
+.orgActivityTitleText {
+  @apply 
+  flex 
+  justify-center 
+  items-center 
+  w-full 
+  text-2xl 
+  cursor-pointer;
+}
+
+
+.orgActivityUpdateContainer {
+  @apply 
+  w-full 
+  p-8 
+  flex 
+  flex-col 
+  justify-between 
+  text-black;
+  border-top-width: 4px;
+  border-right-width: 4px;
+  border-color: black;
+  border-style: solid;
+}
+
+
+.organismsContainer {
+  @apply 
+  flex 
+  flex-col 
+  items-center 
+  gap-4 
+  bg-white 
+  p-4 
+  rounded-lg 
+  cursor-pointer
+}
+
+
+.organismContainer {
+  @apply
+  p-4 
+  rounded-3xl 
+  shadow-md 
+  w-4/5 
+  mt-4 
+  mb-4 
+  border-black 
+  border-4
+}
+
+
+.orgDataAddress {
+  @apply 
+  font-bold 
+  mb-1 
+  text-white
+}
+
+
+.orgDataText {
+  @apply 
+  text-base 
+  text-yellow-900
+}
+
+
+.orgDataTextUpdate {
+  @apply 
+  text-xl 
+  max-md:text-xl 
+  max-sm:text-lg
+  mb-4 
+  text-black
+  w-full
+}
+
+
+.orgDataTitle {
+  @apply 
+  text-2xl 
+  max-md:text-xl 
+  max-sm:text-lg 
+  font-bold 
+  mb-4 
+  text-black
+}
+
+
+.orgDataTitleUpdate {
+  @apply 
+  text-2xl 
+  max-md:text-xl 
+  max-sm:text-lg 
+  font-bold 
+  mb-4 
+  text-black
+  w-full
+}
+
+
+.orgFirstScreen {
+  @apply 
+  flex-col
+}
+
+
+.orgImg2 {
+  max-height:100%;
+}
+
+
+.orgLeftData {
+  @apply 
+  flex 
+  flex-col 
+  items-start
+}
+
+
+.orgMap {
+  @apply w-full;
+}
+
+
+.orgRightData {
+  @apply 
+  flex 
+  flex-col 
+  items-start;
+  width: 50%;
+}
+
+
+.subtitle {
+  @apply 
+  text-xl 
+  font-bold 
+  mb-2
+}
+
+
+.text {
+  @apply 
+  text-gray-600
+}
+
+
+.yellowBackground {
+  background-color: #efc22b;
+}  
+
+@media (min-width: 767px) {
 
   .orgMapAndImg {
     display: flex;
     flex-direction: row;
     width: 100%;
-    /* border-width:4px;
-    border-color:black; */
   }
   
   .orgMap {
@@ -439,8 +453,6 @@
   .orgImgContainer {
     flex: 0 0 40%;
     max-width: 40%;
-    border-top:black 4px solid;
-
   }
 
 }
@@ -451,29 +463,21 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* border-width:4px;
-    border-color:black; */
   }
   
   .orgMap {
-    /* flex: 1; */
-    /* border-right-width:4px;
-    border-color:black; */
-    /* flex:1; */
     @apply
     border-t-4 
     border-r-transparent
     border-black;
-
     width:100%;
     height:300px;
   }
   
   .orgImgContainer {
-    /* flex: 0 0 40%; */
-    width: 100%;
-    border-top:black 4px solid;
-    
+    @apply
+    w-full
+    mb-10    
   }
 
   
@@ -507,70 +511,4 @@
   .leftActivity {
     border-right:none;
   }
-}
-
-.organismsContainer {
-  @apply
-  flex 
-  flex-col 
-  items-center
-  gap-4 
-  bg-white 
-  p-4 
-  rounded-lg
-  cursor-pointer
-}
-
-.organismContainer {
-  @apply
-  /* bg-white  */
-  p-4 
-  rounded-3xl
-  shadow-md
-  w-4/5
-  mt-4
-  mb-4
-  border-black
-  border-4
-}
-
-.nbOfPages {
-  @apply
-  text-right;
-}
-
-.activityFooter {
-  @apply
-  flex
-  flex-row
-  justify-end
-  items-center
-  mt-4
-  mb-4
-}
-
-
-.detailActivityBeforeUpdate {
-  @apply
-  mt-12
-}
- 
-.activityBeforeUpdate {
-  @apply
-  flex
-  w-full
-  flex-col
-  items-center
-  /* bg-lime-600 */
-  /* p-12 */
-}
-
-.activityBeforeUpdate h2 {
-  font-size:30px;
-  color:#cf443f;
-  margin-bottom:10px;
-}
-
-.detailsContainer {
-  width:100%
 }

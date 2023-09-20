@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import stylesRegistration from '../styles/Registration.module.css';
-import stylesGeneral from '../styles/General.module.css';
 import { useDispatch } from 'react-redux';
+
+import stylesRegistration from '../../styles/Registration.module.css';
+import stylesGeneral from '../../styles/General.module.css';
+
 import { login } from '../../reducers/user';
 import { useRouter } from 'next/router';
+import Header from '../SmallElements/Header';
 
-import Header from './Header';
+////////////////////////////////////////////////////////////////////////////////
 
 function RegistrationUserForm() {
 
@@ -18,8 +21,28 @@ function RegistrationUserForm() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
 
+//ooooooooooooo Vérification des données de formulaire avant enregistrement oooooooooo
+
   const handleSignUp = () => {
     const errors = {};
+
+    const validateEmail = (email) => {
+      // Vérification de l'adresse e-mail à l'aide d'une expression régulière
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+  
+    const hasSpecialChar = (password) => {
+      // Vérification de la présence d'un signe spécial dans le mot de passe à l'aide d'une expression régulière
+      const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+      return specialCharRegex.test(password);
+    };
+  
+    const hasUppercase = (password) => {
+      // Vérification de la présence d'une majuscule dans le mot de passe à l'aide d'une expression régulière
+      const uppercaseRegex = /[A-Z]/;
+      return uppercaseRegex.test(password);
+    };
 
     if (!signUpEmail) {
       errors.email = "Veuillez remplir le champ email";
@@ -47,23 +70,7 @@ function RegistrationUserForm() {
     resetForm();
   };
 
-  const validateEmail = (email) => {
-    // Vérification de l'adresse e-mail à l'aide d'une expression régulière
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const hasSpecialChar = (password) => {
-    // Vérification de la présence d'un signe spécial dans le mot de passe à l'aide d'une expression régulière
-    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
-    return specialCharRegex.test(password);
-  };
-
-  const hasUppercase = (password) => {
-    // Vérification de la présence d'une majuscule dans le mot de passe à l'aide d'une expression régulière
-    const uppercaseRegex = /[A-Z]/;
-    return uppercaseRegex.test(password);
-  };
+//oooooooooooooooooooooooooooo Mise à vide des champs ooooooooooooooooooooooooooo
 
   const resetForm = () => {
     setSignUpEmail('');
@@ -72,7 +79,7 @@ function RegistrationUserForm() {
     setValidationErrors({});
   };
 
-
+//oooooooooooooooooo Enregistrement des données en base de données ooooooooooooooooo
 
   function registrationUser() {
 
@@ -87,13 +94,10 @@ function RegistrationUserForm() {
       // Transfert vers page d'accueil
       .then(data => {
         if (data.result) {
-          // modalContent= "coucou"
-
-          // updateOnRegistration(regUsername)
-
-          // window.location.assign('/')
           dispatch(login(data.token))
-          router.push('/')
+          console.log("essai "+data.token)
+          dispatch(login(data))
+          router.push('/registrationPrivateDataOrg')
           return true
         }
         else {
@@ -102,9 +106,10 @@ function RegistrationUserForm() {
       })
   }
 
+  ////////////////////////////////////////////////////////////////////////////////
+
   return (
     <main className={stylesGeneral.orgContent}>
-      {/* <div className={styles.orgFirstScreen}> */}
 
       <Header />
 
@@ -115,6 +120,9 @@ function RegistrationUserForm() {
 
           <h1 className={stylesRegistration.formTitle}>Enregistrement d'un utilisateur</h1>
           <form className="w-full">
+
+            {/* --------------------------- Input email ------------------------- */}
+
             <div className={stylesRegistration.inputRegistrationContainer}>
               <p className={stylesRegistration.orgInputTitle}>Email de connexion</p>
 
@@ -124,12 +132,14 @@ function RegistrationUserForm() {
                 placeholder="mjc@mail.fr"
                 aria-label="signupEmail"
                 id="signupEmail"
-                // onBlur={handleEmailBlur}
                 onChange={(e) => setSignUpEmail(e.target.value)}
                 value={signUpEmail}
               />
               {validationErrors.email && <p className={stylesRegistration.error}>{validationErrors.email}</p>}
             </div>
+
+            {/* ------------------------ Input mot de passe ----------------------- */}
+
 
             <div className={stylesRegistration.inputRegistrationContainer}>
               <p className={stylesRegistration.orgInputTitle}>Mot de passe</p>
@@ -140,14 +150,14 @@ function RegistrationUserForm() {
                 placeholder="***"
                 aria-label="Mot de passe"
                 id="signUpPassword"
-                // onBlur={handlePasswordBlur}
                 onChange={(e) => setSignUpPassword(e.target.value)}
                 value={signUpPassword}
               />
               {validationErrors.password && <p className={stylesRegistration.error}>{validationErrors.password}</p>}
             </div>
 
-            {/* Ajouter le champ de confirmation du mot de passe */}
+            {/* ------------------ Input répétion mot de passe -------------------- */}
+
             <div className={stylesRegistration.inputRegistrationContainer}>
               <p className={stylesRegistration.orgInputTitle}>Répétition du mot de passe</p>
 
@@ -157,12 +167,13 @@ function RegistrationUserForm() {
                 placeholder="***"
                 aria-label="Confirmation mot de passe"
                 id="confirmPassword"
-                // onBlur={handleConfirmPasswordBlur}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 value={confirmPassword}
               />
               {validationErrors.confirmPassword && <p className={stylesRegistration.error}>{validationErrors.confirmPassword}</p>}
             </div>
+
+            {/* ------------------------ VALIDATION FORMULAIRE ------------------------------ */}
 
             <button
               className={stylesRegistration.validButton}

@@ -1,8 +1,11 @@
 import React from 'react';
-import { Document, Page } from 'react-pdf';
+
+////////////////////////////////////////////////////////////////////////////////
 
 const ModalPDF = ({ pdfUrl, onClose }) => {
-            console.log(pdfUrl)
+
+////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="modal">
       <div className="modal-content">

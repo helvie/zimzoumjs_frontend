@@ -1,22 +1,147 @@
-.registerSection {
+#startHours {
+    @apply 
+    mr-4
+}
+
+
+.activityForm {
+    @apply 
+    w-full 
+    flex 
+    flex-wrap
+}
+
+
+.blackText {
+    @apply 
+    text-red-200
+}
+
+
+.buttonAndDescriptionContainer {
+    @apply 
+    w-full 
+    flex 
+    flex-row 
+    m-4
+}
+
+
+.buttonContainer {
+    @apply 
+    w-full 
+    m-3
+}
+
+
+.buttonRemoveAdd {
     @apply 
     flex 
-    flex-col
+    flex-shrink-0 
+    bg-white 
+    text-black 
+    py-2 
+    px-4 
+    mr-4 
+    my-4 
+    rounded-xl 
+    shadow-sm 
+    shadow-black 
+    hover:bg-black 
+    hover:text-white
 }
+
+
+.cityItem {
+    cursor: pointer;
+}
+
+
+.detailActivityForm {
+    @apply 
+    w-full 
+    flex 
+    flex-wrap 
+    mt-12 
+    rounded-lg
+}
+
+
+.detailActivityForm .inputRegistration {
+    background-color: #AEB861;
+}
+
+
+.detailActivityForm select {
+    background-color: #AEB861;
+}
+
+
+.error {
+    @apply 
+    text-orange-600 
+    text-base 
+    italic
+}
+
+
+.formActivityElement {
+    @apply 
+    flex 
+    max-lg:w-full 
+    justify-end 
+    mb-4 
+    h-24
+}
+
+
+.formActivityElement1 {
+    @apply 
+    w-1/5 
+    max-lg:w-full
+}
+
+
+.formActivityElement2 {
+    @apply 
+    w-2/5 
+    max-lg:w-full
+}
+
+
+.formActivityElement3 {
+    @apply 
+    w-3/5 
+    max-lg:w-full 
+    mt-4
+}
+
+
+.formActivitySubelement {
+    @apply 
+    flex 
+    flex-col 
+    justify-center 
+    m-4 
+    self-end 
+    w-full;
+}
+
+
+.formActivitySubelement2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 4px;
+    margin-top: 40px;
+    width: 100%;
+}
+
 
 .formBackground {
-    @apply 
-    w-4/5 
-    bg-white 
-    p-4
+    @apply w-4/5 bg-white p-4
 }
 
-.orgFormBackground {
-    @apply 
-    w-4/5 
-    bg-white 
-    p-12
-}
 
 .formContainer {
     @apply 
@@ -27,25 +152,37 @@
     justify-start 
     pt-10 
     pb-10;
-    min-height:100vh
+    min-height: 100vh
 }
 
 
-#startHours {
-    @apply mr-4
+.formContent {
+    @apply 
+    w-full 
+    flex 
+    flex-wrap 
+    justify-between
 }
 
 
-
-.inputRegistration::placeholder {
-    color:#c06617;
-    font-style:italic;
+.formDetailActivityElement {
+    @apply 
+    flex 
+    max-lg:w-full 
+    w-1/4 
+    justify-end 
+    mb-4 
+    h-24
 }
-/* .placeholderOption {
-    @apply
-    text-gray-500 
-    
-} */
+
+
+.formDetailActivitySubelement {
+    @apply 
+    m-4 
+    self-end 
+    w-full;
+}
+
 
 .formTitle {
     @apply 
@@ -53,355 +190,160 @@
     text-center
 }
 
-.swith {
+
+.inputRegistration {
     @apply 
-    mb-24
-}
-
-.orgSwitch {
-    @apply 
-    mt-8
-}
-.uploadBtn {
-    border: #cccccc 1px solid;
-    padding: 4px;
-    border-radius: 5px;
-}
-
-.uploadLabel {
-    margin-top:30px;
-    margin-left: 8px;
-    /* margin-bottom: 8px; */
-}
-
-.uploadInput {
-    margin-bottom: 30px;
-}
-/* 
-.validButton {
-    @apply 
-    flex
-    flex-shrink-0 
-    bg-amber-800 
-    hover:bg-amber-900 
-    border-amber-800 
-    hover:border-amber-900 
-    text-sm border-4 
-    text-white 
-    py-1 
-    px-2 
-    rounded
-    w-1/4
-    mt-4    
-
-} */
-
-.buttonRemoveAdd {
-    @apply 
-    flex
-    flex-shrink-0 
-    bg-white 
-    text-black 
-    py-2 
-    px-4 
-    mr-4
-    my-4
-    rounded-xl 
-    shadow-sm 
-    shadow-black
-    hover:bg-black
-    hover:text-white
-}
-
-
-.validButton {
-    @apply 
-    flex
-    flex-shrink-0 
-    hover:bg-white 
-    hover:text-black 
-    py-2 
-    px-4
-    ml-1 
-    mr-4
-    my-4
-    mt-12
-    rounded-xl 
-    shadow-sm 
-    shadow-black
-    bg-black
-    text-white
-}
-
-.error {
-    @apply 
-    text-orange-600 
-    text-base 
-    italic
-}
-
-
-
-.blackText {
-    @apply text-red-200
-}
-
-/* .inputRegistrationContainer {
-    @apply 
-    flex 
-    flex-col 
-    justify-end 
-    items-start
-    w-full
-    border-b 
-    border-lime-800
-    pb-1
-}
-
-.inputRegistrationContainer2 {
-    @apply 
-    flex 
-    flex-col 
-    justify-end 
-    items-start
-    w-full
-}
-
-.inputRegistrationContainer3 {
-    @apply 
-    flex 
-    flex-col 
-    justify-between 
-    items-start
-    w-3/4
-    pr-3
-} */
-
-/* .inputRegistration {
-    @apply 
-    appearance-none 
-    bg-transparent 
-    border-none 
     w-full 
-    text-gray-700
-    leading-tight 
-    focus:outline-none
-} */
+    p-2 
+    rounded-lg 
+    border 
+    bg-orange-400 
+    border-black 
+    border-solid;
+    border-width: 3px;
+}
+
 
 .inputRegistration option {
-    @apply
+    @apply 
     w-full
 }
 
-/* .inputRegistration::placeholder {
-    @apply
-    text-gray-500
-} */
+
+.inputRegistration::placeholder {
+    color: #c06617;
+    font-style: italic;
+}
+
+
 .inputSelectContainer {
     @apply 
     flex 
     flex-row 
-    flex-grow
+    flex-grow 
     w-full
 }
 
+
 .inputSelectContainer select {
-    @apply
+    @apply 
     text-left 
-    /* border-b 
-    border-lime-800 */
     w-full 
-    p-2
-    w-full  
-    p-2
-    rounded-lg
-    bg-orange-400
-    border
-    border-black
+    p-2 
+    rounded-lg 
+    bg-orange-400 
+    border 
+    border-black 
     border-solid;
-    border-width:3px;
-
-    /* border-bottom: 1px solid #3f6212 !important; */
-    /* background-color: green; */
-}
-.inputRegistration {
-    @apply
-    /* text-left 
-    /* border-b 
-    border-lime-800 */
-    w-full  
-    p-2
-    rounded-lg
-    border
-    bg-orange-400
-    border-black
-    border-solid;
-    border-width:3px;
-
-
-    /* border-bottom: 1px solid #3f6212 !important; */
-    /* background-color: green; */
-}
-.detailActivityForm .inputRegistration {
-    background-color:#AEB861;
-
+    border-width: 3px;
 }
 
-.detailActivityForm select {
-    background-color:#AEB861;
-}
 
 .inputSelectContainer> :first-child {
     @apply 
     mr-2;
 }
 
+
 .inputSelectContainer> :nth-child(2) {
     @apply 
     ml-2;
 }
 
+
 .inputSelectContainer option {
-    @apply
+    @apply 
     w-full
 }
+
 
 .inputTitle {
-    @apply
+    @apply 
     mb-2.5 
     text-black
 }
 
-.orgInputTitle {
-    @apply
-    mb-2.5 
-    mt-5
-    text-black
-}
-
-.formContent {
-    @apply 
-    w-full
-    flex 
-    flex-wrap 
-    justify-between
-}
-
-.formDetailActivityElement {
-    @apply 
-    flex
-    max-lg:w-full 
-    w-1/4 
-    justify-end 
-    mb-4
-    h-24
-}
-
-.formActivityElement {
-    @apply 
-    flex
-    max-lg:w-full 
-    justify-end 
-    mb-4
-    h-24
-}
-/* 
-.formActivityElement label {
-    @apply 
-    flex
-    bg-yellow-200
-    mb-0
-} */
-
-
-
-
-.formActivityElement1 {
-    @apply 
-    w-1/5 
-    max-lg:w-full 
-
-}
-
-
-.formActivityElement2 {
-    @apply 
-    w-2/5 
-    max-lg:w-full 
-
-}
-
-.formActivityElement3 {
-    @apply 
-    w-3/5
-    max-lg:w-full
-    mt-4 
-
-}
-
-.formDetailActivitySubelement {
-    @apply 
-    m-4
-    self-end
-    w-full;
-}
-
-.formActivitySubelement {
-    @apply 
-    flex
-    flex-col
-    justify-center
-    m-4
-    self-end
-    w-full;
-}
-
-.formActivitySubelement2 {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin: 4px;
-    margin-top:40px;
-    width: 100%;
-  }
-.detailActivityForm {
-    @apply 
-    w-full 
-    flex 
-    flex-wrap
-    mt-12
-    rounded-lg
-    /* bg-gray-200 */
-}
-
-.activityForm {
-    @apply 
-    w-full 
-    flex 
-    flex-wrap
-}
 
 .leftSelect {
-    @apply mr-2
+    @apply 
+    mr-2
 }
+
+
+.orgFormBackground {
+    @apply 
+    w-4/5 
+    bg-white 
+    p-12
+}
+
+
+.orgInputTitle {
+    @apply 
+    mb-2.5 
+    mt-5 
+    text-black 
+    text-lg
+}
+
+
+.orgSwitch {
+    @apply 
+    mt-8
+}
+
+
+.registerSection {
+    @apply 
+    flex 
+    flex-col
+}
+
 
 .rightSelect {
     @apply ml-2
 }
 
-.buttonAndDescriptionContainer {
-    @apply
-    w-full
-    flex
-    flex-row
-    m-4
-}
 
-.buttonContainer {
-    @apply
-    w-full
-    m-3
+.swith {
+    @apply 
+    mb-24
 }
 
 
+.uploadBtn {
+    border: #cccccc 1px solid;
+    padding: 4px;
+    border-radius: 5px;
+}
 
+
+.uploadInput {
+    margin-bottom: 30px;
+}
+
+
+.uploadLabel {
+    margin-top: 30px;
+    margin-left: 8px;
+}
+
+
+.validButton {
+    @apply 
+    flex 
+    flex-shrink-0 
+    hover:bg-white 
+    hover:text-black 
+    py-2 
+    px-4 
+    ml-1 
+    mr-4 
+    my-4 
+    mt-12 
+    rounded-xl 
+    shadow-sm 
+    shadow-black 
+    bg-black 
+    text-white
+}

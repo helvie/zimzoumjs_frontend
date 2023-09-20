@@ -1,117 +1,71 @@
 import React, { useState, useEffect } from 'react';
-import stylesRegistration from '../../styles/Registration.module.css';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import SelectAge from '../SmallElements/SelectAge';
-import RegularClassDetailForm from './RegularClassDetailForm';
-import moment from 'moment';
-import { categoryList, gradeList } from '../../utils/dataObjects';
 import { useSelector } from 'react-redux';
+
+import stylesRegistration from '../../styles/Registration.module.css';
+import moment from 'moment';
+import { useRouter } from 'next/router';
+
 import RegularClassForm from './RegularClassForm';
+import RegularClassDetailForm from './RegularClassDetailForm';
 
-//----------------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
-function RegistrationRegularClass(props) {
+function RegistrationRegularClass() {
 
-  const actData = props.data;
+  const currentDate = moment().format('YYYY-MM-DD');
 
-  // const activityData={
-
-  // }
-
-  // const [category, setCategory] = useState(activityUpdate ? actData.category : '');
-  // const [startAge, setStartAge] = useState(0);
-  // const [endAge, setEndAge] = useState(99);
-  // const [description, setDescription] = useState('');
-  // const [visible, setVisible] = useState('');
-  // const [activity, setActivity] = useState('');
+  const router = useRouter();
 
   const [details, setDetails] = useState([]);
   const [errors, setErrors] = useState({});
-  // const [activityData, setActivityData] = useState({});
+  const [activityData, setActivityData] = useState({
+    category:"",
+    startAge:"",
+    endAge:"",
+    activity:"",
+    description:"",
+    visible:false,
+    valid: true,
+  });
 
   const token = useSelector((state) => state.user.token);
 
-  const activityUpdate = props.activityUpdate;
-
-  const regularClassesDetails = props.data.regularClassesDetails;
-
-  const newDetails = regularClassesDetails.map((regularClassDetail, i) => {
-    const {
-      availability,
-      availabilityDate,
-      detailStartAge,
-      detailEndAge,
-      day,
-      startHours,
-      startMinutes,
-      endMinutes,
-      endHours,
-      grade,
-      animator
-    } = regularClassDetail;
   
-    return {
-      id: i,
-      data: {
-        availability,
-        availabilityDate,
-        detailStartAge,
-        detailEndAge,
-        day,
-        startHours,
-        startMinutes,
-        endMinutes,
-        endHours,
-        grade,
-        animator
-      }
-    };
-  });
-  
-  // Mettre à jour le state avec le nouvel array newEnfants
-  setDetails([...details, ...newDetails]);
-  // handleEnfantDataChange = (enfantId, fieldName, fieldValue)
+  //oooooooooooooooooooooo Ajout d'un créneau d'activité oooooooooooooooooooooooooooooo
 
-  // Utilisez useEffect pour remplir les états avant de les afficher
-  useEffect(() => {
-    // Mettez ici la logique pour remplir les états en fonction de la valeur de activityUpdate
-    if (activityUpdate) {
-      setCategory(actData.category);
-      setStartAge(actData.startAge);
-      setEndAge(actData.endAge);
-      setDescription(actData.description);
-      setVisible(actData.visible);
-      setActivity(actData.activity);
-    }
-  }, [activityUpdate]); // Déclenche l'effet à chaque changement de activityUpdate
+  const updateActivityField = (fieldName, fieldValue) => {
+    setActivityData((prevActivityData) => ({
+      ...prevActivityData,
+      [fieldName]: fieldValue,
+    }));
+  };
 
   const handleAddDetail = (e) => {
-    e.preventDefault(); // Empêche la soumission du formulaire
+    e.preventDefault(); 
     setDetails([...details, { id: details.length + 1, data: {} }]);
     setErrors({});
   };
+
+  //ooooooooooooooo Suppression du dernier créneau d'activité affiché ooooooooooooooooo
 
   const handleRemoveDetail = () => {
     setDetails((prevState) => prevState.slice(0, -1));
     setErrors({});
   };
 
+  //ooooooooooooooo Mise à jour des données d'un créneau d'activité oooooooooooooooooo
+
   const handleDetailDataChange = (detailId, fieldName, fieldValue) => {
     setDetails((prevState) =>
       prevState.map((detail) =>
-      detail.id === detailId ?
+        detail.id === detailId ?
           { ...detail, data: { ...detail.data, [fieldName]: fieldValue, availabilityDate: currentDate } } : detail
       )
     );
     setErrors((prevErrors) => ({ ...prevErrors, [detailId]: {} }));
   };
 
-
-  const currentDate = moment().format('YYYY-MM-DD');
-
-  //-------------------------------------------------------------------------------------------------
-  //----------------------------------------------------------------------------------------------
+  //ooooooooooooo Enregistrement des nouvelles données en bases de données ooooooooooo
 
   const registrationData = () => {
 
@@ -121,19 +75,10 @@ function RegistrationRegularClass(props) {
 
         token: token,
 
-        regularClass: {
-          category,
-          startAge,
-          endAge,
-          activity,
-          description,
-          visible,
-          valid: 1
-        },
+        regularClass: activityData,
 
         regularClassesDetails: details
       };
-
 
       fetch('http://localhost:3000/registration/activityRegistration', {
         method: 'POST',
@@ -144,6 +89,8 @@ function RegistrationRegularClass(props) {
         .then((data) => {
           console.log('Registration successful:', data);
           resolve();
+          router.push('/');
+
         })
         .catch((error) => {
           console.error('Registration failed:', error);
@@ -153,19 +100,45 @@ function RegistrationRegularClass(props) {
     });
   };
 
-  //----------------------------------------------------------------------------------------------
+  //oooooo Vérification des erreurs de formulaires avant enregistrement en BDD ooooooo
 
   const handleFormSubmit = (e) => {
 
     console.log("handleFormSubmit lancé")
-    e.preventDefault(); // Empêche le rechargement de la page
+    e.preventDefault();
     setErrors({})
 
     const validationErrors = {};
 
-    // Vérifier les erreurs pour chaque enfant
+
+    if (activityData.startAge >= activityData.endAge) {
+      validationErrors.age = `L'âge mini supérieur à âge maxi`;
+    
+    }
+
+    const validateText = (description) => {
+      const invalidCharsRegex = /[&\\+*=#%~\|[\]{}]/;
+      return !invalidCharsRegex.test(description);
+    };
+
+    if (!activityData.description) {
+      validationErrors.description = "Veuillez remplir le champ 'Description'";
+    } else if (!validateText(activityData.description)) {
+      validationErrors.description = "La description ne peut pas contenir les caractères spéciaux '& \\ + * = # % ~ | [ ] { }'";
+    }
+
+    if (!activityData.activity) {
+      validationErrors.activity = "Veuillez remplir le champ 'Activity'";
+    } else if (!validateText(activityData.activity)) {
+      validationErrors.description = "Le champ activité ne peut pas contenir les caractères spéciaux '& \\ + * = # % ~ | [ ] { }'";
+    }
+    
+
+
+
     details.forEach((detail) => {
       const detailErrors = {};
+      console.log("ages "+detail.data.detailStartAge+" "+detail.data.detailEndAge)
 
       if (detail.data.detailStartAge >= detail.data.detailEndAge) {
         detailErrors.detailEndAge = "L'âge maximum doit être supérieur à l'âge minimum";
@@ -179,44 +152,20 @@ function RegistrationRegularClass(props) {
 
       validationErrors[detail.id] = detailErrors;
 
-      if (startAge >= endAge) {
-        validationErrors.ageRange = `L'âge minimum ${detail.id} doit être inférieur à l'âge maximum`;
-      }
 
-      const validateText = (description) => {
-        const invalidCharsRegex = /[&\\+*=#%~\|[\]{}]/;
-        return !invalidCharsRegex.test(description);
-      };
 
-      if (!description) {
-        validationErrors.description = "Veuillez remplir le champ 'Description'";
-      } else if (!validateText(description)) {
-        validationErrors.description = "La description ne peut pas contenir les caractères spéciaux '& \\ + * = # % ~ | [ ] { }'";
-      }
-
-      if (!activity) {
-        validationErrors.activity = "Veuillez remplir le champ 'Activity'";
-      } else if (!validateText(activity)) {
-        validationErrors.description = "La description ne peut pas contenir les caractères spéciaux '& \\ + * = # % ~ | [ ] { }'";
-      }
+    });
 
       setErrors((prevErrors) => ({
         ...prevErrors,
         ...validationErrors,
       }));
 
-
-      // if (Object.keys(validationErrors).length > 0) {
-      //   setErrors(validationErrors);
-      //   return;
-      // }
-    });
-
     registrationData();
 
   };
 
-    //-----------------------------------------------------------------------------------------------
+  ////////////////////////////////////////////////////////////////////////////////
 
   return (
 
@@ -224,27 +173,21 @@ function RegistrationRegularClass(props) {
 
       <div className={stylesRegistration.activityForm}>
 
-        <RegularClassForm/>
+        <RegularClassForm 
+        updateActivityField={updateActivityField}
+        errors={errors}/>
 
 
-{/* ------------------------- CRENEAUX ACTIVITE ------------------------------ */}
+        {/* ------------------------- CRENEAUX ACTIVITE ------------------------------ */}
 
         {details.map((detail) => (
           <div key={detail.id}>
             <RegularClassDetailForm
               data={detail.data}
               onFieldChange={(fieldName, fieldValue) => handleDetailDataChange(detail.id, fieldName, fieldValue)}
+              errors={errors[detail.id]}
             />
-            {errors[detail.id] && (
-              <div>
-                {errors[detail.id].detailEndAge && (
-                  <p className={stylesRegistration.error}>{errors[detail.id].detailEndAge}</p>
-                )}
-                {errors[detail.id].animator && (
-                  <p className={stylesRegistration.error}>{errors[detail.id].animator}</p>
-                )}
-              </div>
-            )}
+
           </div>
         ))}
 
@@ -265,7 +208,7 @@ function RegistrationRegularClass(props) {
           </div>
           <div className="w-full">
 
-{/* ------------------------ VALIDATION FORMULAIRE ------------------------------ */}
+            {/* ------------------------ VALIDATION FORMULAIRE ------------------------------ */}
 
             <button
               type="submit"

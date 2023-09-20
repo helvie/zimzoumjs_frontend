@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import stylesRegistration from '../styles/Registration.module.css';
-// import { makeStyles } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux';
+
+import stylesGeneral from '../../styles/General.module.css';
+import stylesRegistration from '../../styles/Registration.module.css';
+import { useRouter } from 'next/router';
+
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { updateOrganismData, updateImage, updateDoc } from '../../reducers/organism';
-import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import Header from './Header';
-import stylesGeneral from '../styles/General.module.css';
+import Header from '../SmallElements/Header';
+import { organismSortList } from '../../utils/dataObjects';
 
-//----------------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 function RegistrationPublicDataOrg() {
 
+  const router = useRouter();
+
+
+  //------------------ Récupération des données privées dans le réducer -------------
   const orgData = useSelector((state) => state.organismData)
+
   const userToken = useSelector((state) => state.user.token)
 
   const [organismSort, setOrganismSort] = useState('');
@@ -24,8 +30,6 @@ function RegistrationPublicDataOrg() {
   const [website, setWebsite] = useState('');
   const [doc, setDoc] = useState('');
   const [photo, setPhoto] = useState('');
-  // const [docURL, setDocURL] = useState('');
-  // const [photoURL, setPhotoURL] = useState('');
   const [description, setDescription] = useState('');
   const [orgVisible, setOrgVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -33,11 +37,7 @@ function RegistrationPublicDataOrg() {
 
   const [errors, setErrors] = useState({}); // State pour les erreurs
 
-  // const orgData = useSelector((state) => state.organismData)
-  const dispatch = useDispatch();
-
-  const router = useRouter();
-
+  //oooooooooooooo Récupération des adresse de l'API selon saisie ooooooooooooooooooooo
 
   const handleSearchTerm = (text) => {
     if (text.length > 2) {
@@ -52,56 +52,53 @@ function RegistrationPublicDataOrg() {
     }
   };
 
-  //----------------------------------------------------------------------------------------
+  // //ooooooooooooo Stockage de l'adresse sélectionnée dans menu contextuel oooooooooooooo
 
   const handleCitySelected = (city) => {
     setSearchTerm(city.properties.label);
     setResults([]);
 
     setLocation({
-      route:city.properties.name,
-      postalCode:city.properties.postcode,
-      city:city.properties.city,
-      longitude:city.geometry.coordinates[0],
-      latitude:city.geometry.coordinates[1]
+      route: city.properties.name,
+      postalCode: city.properties.postcode,
+      city: city.properties.city,
+      longitude: city.geometry.coordinates[0],
+      latitude: city.geometry.coordinates[1]
     })
   };
 
-  //----------------------------------------------------------------------------------------
+  //oooooooooooooooooo Affichage des données saisies dans l'input ooooooooooooooooooo
 
   const getCityName = (value) => {
     setSearchTerm(value);
     handleSearchTerm(value);
   };
 
-//----------------------------------------------------------------------------------------
+  //oooooooooooooooooo Stockage de l'image téléchargée dans l'état ooooooooooooooooooooo
 
   // Fonction pour gérer l'événement de sélection du fichier
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
-    setPhoto(file); // Stockez le fichier dans l'état de votre composant React
+    setPhoto(file);
 
   };
 
-  
+  //oooooooooooooooooooo Stockage du pdf téléchargé dans l'état ooooooooooooooooooooooo
 
-//----------------------------------------------------------------------------------------
-
-  // Fonction pour gérer l'événement de sélection du fichier
   const handlePDFSelect = (event) => {
     const file = event.target.files[0];
-    setDoc(file); // Stockez le fichier dans l'état de votre composant React
+    setDoc(file);
 
   };
 
-  //----------------------------------------------------------------------------------------
+  //oooooooooooooooooooooo Réinitialisation des erreurs ooooooooooooooooooooooooooooo
 
   // Effet pour réinitialiser les erreurs lorsque les champs sont modifiés
   useEffect(() => {
     setErrors({});
   }, [orgName, phonePublic, emailPublic, website, description]);
 
-  //----------------------------------------------------------------------------------------
+  //oooooooooooooooooooooooo Contrôle validité des champs ooooooooooooooooooooooooooo
 
   const handleValidPublicData = () => {
     const validationErrors = {};
@@ -172,11 +169,9 @@ function RegistrationPublicDataOrg() {
 
     registrationData();
 
-    // // Toutes les vérifications ont réussi, procéder à l'étape d'inscription
-    // uploadPDF();
   };
 
-  //----------------------------------------------------------------------------------------
+  //oooooooooooooooooooooooooooo Mise à vide des champs ooooooooooooooooooooooooooo
 
   const resetForm = () => {
     setOrganismSort('');
@@ -192,7 +187,7 @@ function RegistrationPublicDataOrg() {
     setErrors({});
   };
 
-  //----------------------------------------------------------------------------------------
+  //ooooooo Enregistrement en BDD des données privées et publiques de l'organisme oooooo
 
   const registrationData = () => {
     return new Promise((resolve, reject) => {
@@ -213,13 +208,13 @@ function RegistrationPublicDataOrg() {
         image: '',
         doc: ''
       };
-  
+
       const formData = new FormData();
       formData.append('photo', photo);
       formData.append('doc', doc);
       formData.append('orgData', JSON.stringify(dataOfOrganism));
       formData.append('token', userToken);
-  
+
       fetch('http://localhost:3000/registration/organismRegistration', {
         method: 'POST',
         body: formData
@@ -227,6 +222,7 @@ function RegistrationPublicDataOrg() {
         .then((response) => response.json())
         .then((data) => {
           resolve();
+          router.push('/registrationRegularClass');
         })
         .catch((error) => {
           console.error('Registration failed:', error);
@@ -234,9 +230,11 @@ function RegistrationPublicDataOrg() {
         });
     });
   };
+
+  ////////////////////////////////////////////////////////////////////////////////
+
   return (
     <main className={stylesGeneral.orgContent}>
-      {/* <div className={styles.orgFirstScreen}> */}
 
       <Header />
 
@@ -250,7 +248,10 @@ function RegistrationPublicDataOrg() {
           <form className="w-full">
 
             <div className={stylesRegistration.inputRegistrationContainer}>
-            <p className={stylesRegistration.orgInputTitle}>Nom de l'organisme</p>
+
+              {/* ----------------- Input nom de l'organisme -------------------*/}
+
+              <p className={stylesRegistration.orgInputTitle}>Nom de l'organisme</p>
 
               <input
                 className={stylesRegistration.inputRegistration}
@@ -265,7 +266,10 @@ function RegistrationPublicDataOrg() {
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
-            <p className={stylesRegistration.orgInputTitle}>Type d'organisme</p>
+
+              {/* ----------------- Input nom de l'organisme -------------------*/}
+
+              <p className={stylesRegistration.orgInputTitle}>Type d'organisme</p>
 
               <select
                 className={stylesRegistration.inputRegistration + ' ' + stylesRegistration.placeholderOption}
@@ -274,13 +278,19 @@ function RegistrationPublicDataOrg() {
                 onChange={(e) => setOrganismSort(e.target.value)}
               >
                 <option value="">-</option>
-                <option value="Association">Association</option>
-                <option value="Mairie">Service de la Mairie</option>
+                {Object.entries(organismSortList).map(([key, value]) => (
+                  <option key={key} value={key}>
+                    {value}
+                  </option>
+                ))}
               </select>
             </div>
 
             <div className={stylesRegistration.inputRegistrationContainer}>
-            <p className={stylesRegistration.orgInputTitle}>Adresse</p>
+
+              {/* ---------------- Input adresse l'organisme -------------------*/}
+
+              <p className={stylesRegistration.orgInputTitle}>Adresse</p>
 
               <input
                 className={stylesRegistration.inputRegistration}
@@ -305,6 +315,8 @@ function RegistrationPublicDataOrg() {
               </div>
             </div>
 
+            {/* ---------------- Switch visibilité de l'oganisme ------------------*/}
+
             <FormControlLabel
               className={stylesRegistration.orgSwitch}
               control={
@@ -316,12 +328,14 @@ function RegistrationPublicDataOrg() {
               }
               label="Organisme visible après création"
 
-              style={{ color: orgVisible ? '#000000' : '#a0a7b2', marginBottom: '50px' }}              
-              />
+              style={{ color: orgVisible ? '#000000' : '#a0a7b2', marginBottom: '50px' }}
+            />
 
+            {/* ---------------- Input téléphone de l'organisme ------------------*/}
 
             <div className={stylesRegistration.inputRegistrationContainer}>
-            <p className={stylesRegistration.orgInputTitle}>Téléphone</p>
+
+              <p className={stylesRegistration.orgInputTitle}>Téléphone</p>
 
               <input
                 className={stylesRegistration.inputRegistration}
@@ -335,8 +349,10 @@ function RegistrationPublicDataOrg() {
               {errors.phonePublic && <p className={stylesRegistration.error}>{errors.phonePublic}</p>}
             </div>
 
+            {/* ------------------ Input email de l'organisme -------------------*/}
+
             <div className={stylesRegistration.inputRegistrationContainer}>
-            <p className={stylesRegistration.orgInputTitle}>Adresse mail</p>
+              <p className={stylesRegistration.orgInputTitle}>Adresse mail</p>
 
               <input
                 className={stylesRegistration.inputRegistration}
@@ -350,8 +366,11 @@ function RegistrationPublicDataOrg() {
               {errors.emailPublic && <p className={stylesRegistration.error}>{errors.emailPublic}</p>}
             </div>
 
+
+            {/* ------------------ Input site de l'organisme -------------------*/}
+
             <div className={stylesRegistration.inputRegistrationContainer}>
-            <p className={stylesRegistration.orgInputTitle}>Site internet</p>
+              <p className={stylesRegistration.orgInputTitle}>Site internet</p>
 
               <input
                 className={stylesRegistration.inputRegistration}
@@ -365,8 +384,10 @@ function RegistrationPublicDataOrg() {
               {errors.website && <p className={stylesRegistration.error}>{errors.website}</p>}
             </div>
 
+            {/* ---------------- Input description de l'organisme ------------------*/}
+
             <div className={stylesRegistration.inputRegistrationContainer}>
-            <p className={stylesRegistration.orgInputTitle}>Descriptif de l'organisme</p>
+              <p className={stylesRegistration.orgInputTitle}>Descriptif de l'organisme</p>
 
               <textarea
                 className={stylesRegistration.inputRegistration}
@@ -380,17 +401,32 @@ function RegistrationPublicDataOrg() {
               {errors.description && <p className={stylesRegistration.error}>{errors.description}</p>}
             </div>
 
-            {/* // Utilisation du formulaire HTML pour sélectionner le fichier */}
+            {/* ------------ Elément formulaire téléchargement image --------------- */}
+
             <div>
               <p className={stylesRegistration.uploadLabel}>Photo de l'organisme</p>
-              <input className={stylesRegistration.uploadInput} type="file" accept="image/*" onChange={handleFileSelect} style={{ color: 'gray' }} />
+              <input
+                className={stylesRegistration.uploadInput}
+                type="file"
+                accept="image/*"
+                onChange={handleFileSelect}
+                style={{ color: 'gray' }}
+              />
             </div>
+
+            {/* ------------- Elément formulaire téléchargement PDF --------------- */}
+
             <div>
               <p className={stylesRegistration.uploadLabel}>Fichier PDF</p>
-              <input className={stylesRegistration.uploadInput} type="file" accept=".pdf" onChange={handlePDFSelect} style={{ color: 'gray' }} />
+              <input className={stylesRegistration.uploadInput}
+                type="file"
+                accept=".pdf"
+                onChange={handlePDFSelect}
+                style={{ color: 'gray' }}
+              />
             </div>
-            {/* // Utilisation du bouton pour déclencher l'envoi du fichier */}
-            {/* <button className={stylesRegistration.uploadBtn} type="button" onClick={uploadPhoto}>Upload</button> */}
+
+            {/* ---------------------- Bouton de validation --------------------- */}
 
             <div>
               <button

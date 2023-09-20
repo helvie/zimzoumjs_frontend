@@ -1,5 +1,6 @@
-import RegistrationPrivateDataOrg from '../components/RegistrationPrivateDataOrg';
+import RegistrationPrivateDataOrg from '../components/OrganismUpdateAndRegistration/RegistrationPrivateDataOrg';
 
+////////////////////////////////////////////////////////////////////////////////
 
 function RegistrationPrivateDataPage() {
 

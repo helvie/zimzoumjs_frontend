@@ -1,8 +1,9 @@
 import RegistrationRegularClass from '../components/OrganismUpdateAndRegistration/RegistrationRegularClass';
+import Header from '../components/SmallElements/Header';
 import stylesGeneral from '../styles/General.module.css';
-import Header from '../components/Header';
 import stylesRegistration from '../styles/Registration.module.css';
 
+////////////////////////////////////////////////////////////////////////////////
 
 function RegistrationRegularClassPage() {
 

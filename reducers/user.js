@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+////////////////////////////////////////////////////////////////////////////////
+
 const initialState = {
 	token: "",
 	mail: "",
-	createdOrganism: "essai"
+	createdOrganism: "",
+	organismRegularClass: ""
 };
 
 export const userSlice = createSlice({
@@ -13,6 +16,10 @@ export const userSlice = createSlice({
 
 		updateCreatedOrganism : (state, action) => {
 			state.createdOrganism = action.payload;
+		},
+
+		updateOrganismRegularClass : (state, action) => {
+			state.organismRegularClass = action.payload;
 		},
 
 		login: (state, action) => {
@@ -27,6 +34,6 @@ export const userSlice = createSlice({
 	},
 });
 
-export const {login, logout, updateCreatedOrganism} = userSlice.actions;
+export const {login, logout, updateCreatedOrganism, updateOrganismRegularClass} = userSlice.actions;
 
 export default userSlice.reducer;

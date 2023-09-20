@@ -1,5 +1,6 @@
-import RegistrationUser from '../components/RegistrationUser';
+import RegistrationUser from '../components/OrganismUpdateAndRegistration/RegistrationUser';
 
+////////////////////////////////////////////////////////////////////////////////
 
 function RegistrationUserPage() {
 

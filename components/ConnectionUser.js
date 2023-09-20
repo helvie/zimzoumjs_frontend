@@ -1,25 +1,35 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import stylesRegistration from '../styles/Registration.module.css';
 import stylesGeneral from '../styles/General.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { login } from '../reducers/user';
 import { useRouter } from 'next/router';
+import Header from './SmallElements/Header';
 
-
-import Header from './Header';
+////////////////////////////////////////////////////////////////////////////////
 
 function ConnectionUserForm() {
 
   const router = useRouter();
-
   const dispatch = useDispatch();
 
   const [signinEmail, setSigninEmail] = useState('');
   const [signinPassword, setSigninPassword] = useState('');
   const [errors, setErrors] = useState({});
 
+  //oooooooooooooooo Vérification des erreurs avant enregistrement ooooooooooooooo
+
   const handleSignin = () => {
     const validationErrors = {};
+
+    const validateEmail = (email) => {
+      // Vérification de l'adresse e-mail à l'aide d'une expression régulière
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+
 
     if (!signinEmail) {
       validationErrors.email = "Veuillez remplir le champ email";
@@ -36,16 +46,11 @@ function ConnectionUserForm() {
       return;
     }
 
-    // Toutes les vérifications ont réussi, procéder à l'étape de connexion
     connectionUser();
     resetForm();
   };
 
-  const validateEmail = (email) => {
-    // Vérification de l'adresse e-mail à l'aide d'une expression régulière
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+  //ooooooooooooooooooo Mise à vide des champs de formulaire oooooooooooooooooooo
 
   const resetForm = () => {
     setSigninEmail('');
@@ -53,9 +58,10 @@ function ConnectionUserForm() {
     setErrors({});
   };
 
+  //oooooooooooo Récupération des données de l'utilisateur en base de données oooooooooo
+
   function connectionUser() {
 
-    // Envoi sur le back inscription
     fetch('http://localhost:3000/users/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -66,12 +72,7 @@ function ConnectionUserForm() {
       // Transfert vers page d'accueil
       .then(data => {
         if (data.result) {
-          // modalContent= "coucou"
 
-          // updateOnRegistration(regUsername)
-
-          // window.location.assign('/')
-          // console.log(data)
           dispatch(login(data))
           router.push('/');
           return true
@@ -83,9 +84,10 @@ function ConnectionUserForm() {
       })
   }
 
+  ////////////////////////////////////////////////////////////////////////////////
+
   return (
     <main className={stylesGeneral.orgContent}>
-      {/* <div className={styles.orgFirstScreen}> */}
 
       <Header />
 
@@ -95,24 +97,29 @@ function ConnectionUserForm() {
         <div className={stylesGeneral.loginFormBackground}>
 
           <h1 className={stylesRegistration.formTitle}>Connection d'un utilisateur</h1>
+
           <form className="w-full">
+
+            {/* --------------------------- Input email -------------------------- */}
+
             <div className={stylesRegistration.inputRegistrationContainer}>
-            <p className={stylesRegistration.orgInputTitle}>Email de connexion</p>
+              <p className={stylesRegistration.orgInputTitle}>Email de connexion</p>
               <input
                 className={stylesRegistration.inputRegistration}
                 type="text"
                 placeholder="contact@mjc.fr"
                 aria-label="signinEmail"
                 id="signinEmail"
-                // onBlur={handleEmailBlur}
                 onChange={(e) => setSigninEmail(e.target.value)}
                 value={signinEmail}
               />
               {errors.email && <p className={stylesRegistration.error}>{errors.email}</p>}
             </div>
 
+            {/* ------------------------ Input mot de passe ----------------------- */}
+
             <div className={stylesRegistration.inputRegistrationContainer}>
-            <p className={stylesRegistration.orgInputTitle}>Mot de passe</p>
+              <p className={stylesRegistration.orgInputTitle}>Mot de passe</p>
 
               <input
                 className={stylesRegistration.inputRegistration}
@@ -120,7 +127,6 @@ function ConnectionUserForm() {
                 placeholder="***"
                 aria-label="Full name"
                 id="signinPassword"
-                // onBlur={handlePasswordBlur}
                 onChange={(e) => setSigninPassword(e.target.value)}
                 value={signinPassword}
               />
@@ -128,12 +134,14 @@ function ConnectionUserForm() {
 
             </div>
 
+            {/* ------------------ Bouton de validation du formulaire ------------- */}
+
 
             <button
               className={stylesRegistration.validButton}
               type="button"
               onClick={handleSignin}
-              // disabled={!!error} // Désactiver le bouton si une erreur est présente
+            // disabled={!!error} // Désactiver le bouton si une erreur est présente
             >
               Se connecter
             </button>

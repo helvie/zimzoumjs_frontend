@@ -1,5 +1,6 @@
-import RegistrationPublicDataOrg from '../components/RegistrationPublicDataOrg';
+import RegistrationPublicDataOrg from '../components/OrganismUpdateAndRegistration/RegistrationPublicDataOrg';
 
+////////////////////////////////////////////////////////////////////////////////
 
 function RegistrationPublicDataPage() {
 

@@ -14,7 +14,6 @@ const useScreenResize = () => {
     const thisScreenHeight = window.innerHeight;
     dispatch(updateScreenHeight(thisScreenHeight));
 
-
   };
 
   useEffect(() => {

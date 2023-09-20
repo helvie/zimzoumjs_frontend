@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import stylesBurger from '../../styles/Burger.module.css';
 import { useRouter } from 'next/router';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateCreatedOrganism } from '../../reducers/user';
+
+import { updateCreatedOrganism, updateOrganismRegularClass } from '../../reducers/user';
 import { logout } from '../../reducers/user';
+
+////////////////////////////////////////////////////////////////////////////////
 
 function Burger() {
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
   const mail = useSelector((state) => state.user.mail);
-
+ 
   const createdOrganism = useSelector((state) => state.user.createdOrganism);
+  const organismRegularClass = useSelector((state) => state.user.organismRegularClass);
+  const [menuActive, setMenuActive] = useState(false);
+  const router = useRouter();
 
+  //oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 
   useEffect(() => {
- 
+
     const fetchData = async () => {
       try {
         const response = await fetch(`http://localhost:3000/organisms/createdOrganism`, {
@@ -24,42 +32,39 @@ function Burger() {
           body: JSON.stringify({ token: token }),
         });
         const data = await response.json();
-        if(data.organism){
-          dispatch(updateCreatedOrganism(true))
-        }
-        else{
-          dispatch(updateCreatedOrganism(false))
-        }
+        data.organism ? dispatch(updateCreatedOrganism(true)) : dispatch(updateCreatedOrganism(false));
+        console.log("result rg + "+data.regularClass)
+        data.regularClass ? dispatch(updateOrganismRegularClass(true)) : dispatch(updateOrganismRegularClass(false));
 
-        // setDivElements(data.organism);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-  
+
     fetchData();
-  
+
   }, []);
 
-
-
-
-
-  const [menuActive, setMenuActive] = useState(false);
-  const router = useRouter();
+  //oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 
   const toggleMenu = () => {
     setMenuActive(!menuActive);
   };
 
+  //oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
   const handlePageClick = (path) => {
     router.push(path);
   };
+
+  //oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 
   const handleLogout = (path) => {
     dispatch(logout())
     // router.push(path);
   };
+
+  ////////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className={stylesBurger.menuCircle}>
@@ -69,12 +74,12 @@ function Burger() {
       >
         <span></span>
       </button>
-  
+
       <div className={`${stylesBurger.owlMenu} ${menuActive ? stylesBurger.active : ''}`}>
         <ul>
-        {token && (
+          {token && (
             <li>
-              <a style={{color:"#fa9255"}}>{mail}</a>
+              <a style={{ color: "#fa9255" }}>{mail}</a>
             </li>
           )}
           <li>
@@ -91,15 +96,21 @@ function Burger() {
             </li>
           )}
           {token && createdOrganism ? (
-            <>
-              <li>
-                <a onClick={() => handlePageClick('/registrationRegularClass')}>Enregistrement activité</a>
-              </li>
-              <li>
-                <a onClick={() => handleLogout()}>Logout</a>
-              </li>
-            </>
-          ) : (
+            <li>
+              <a onClick={() => handlePageClick('/registrationRegularClass')}>Ajout d'une activité</a>
+            </li>
+          ) : null}
+          {token && createdOrganism && organismRegularClass ? (
+            <li>
+              <a onClick={() => handlePageClick('/organismUpdate')}>Modification organisme</a>
+            </li>
+          ) : null}
+          {token && (
+            <li>
+              <a onClick={() => handleLogout()}>Logout</a>
+            </li>
+          )}
+          {!token && (
             <li>
               <a onClick={() => handlePageClick('/connectionUser')}>Login</a>
             </li>
