@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 
 import RegularClassForm from './RegularClassForm';
 import RegularClassDetailForm from './RegularClassDetailForm';
-import { BACKEND_URL } from '../utils/urls';
+import { BACKEND_URL } from '../../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 

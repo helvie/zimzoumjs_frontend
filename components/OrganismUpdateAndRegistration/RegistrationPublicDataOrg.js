@@ -9,7 +9,7 @@ import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Header from '../SmallElements/Header';
 import { organismSortList } from '../../utils/dataObjects';
-import { BACKEND_URL } from '../utils/urls';
+import { BACKEND_URL } from '../../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 
