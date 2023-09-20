@@ -7,6 +7,7 @@ import stylesGeneral from '../styles/General.module.css';
 import { login } from '../reducers/user';
 import { useRouter } from 'next/router';
 import Header from './SmallElements/Header';
+import { BACKEND_URL } from '../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -62,7 +63,7 @@ function ConnectionUserForm() {
 
   function connectionUser() {
 
-    fetch('http://localhost:3000/users/signin', {
+    fetch(`${BACKEND_URL}/users/signin`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: signinEmail, password: signinPassword })

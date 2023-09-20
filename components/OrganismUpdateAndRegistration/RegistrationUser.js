@@ -7,6 +7,7 @@ import stylesGeneral from '../../styles/General.module.css';
 import { login } from '../../reducers/user';
 import { useRouter } from 'next/router';
 import Header from '../SmallElements/Header';
+import { BACKEND_URL } from '../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -84,7 +85,7 @@ function RegistrationUserForm() {
   function registrationUser() {
 
     // Envoi sur le back inscription
-    fetch('http://localhost:3000/users/signup', {
+    fetch(`${BACKEND_URL}/users/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: signUpEmail, password: signUpPassword })

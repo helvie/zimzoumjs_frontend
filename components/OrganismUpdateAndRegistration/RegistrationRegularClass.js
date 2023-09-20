@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 
 import RegularClassForm from './RegularClassForm';
 import RegularClassDetailForm from './RegularClassDetailForm';
+import { BACKEND_URL } from '../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -30,7 +31,7 @@ function RegistrationRegularClass() {
 
   const token = useSelector((state) => state.user.token);
 
-  
+
   //oooooooooooooooooooooo Ajout d'un créneau d'activité oooooooooooooooooooooooooooooo
 
   const updateActivityField = (fieldName, fieldValue) => {
@@ -80,7 +81,7 @@ function RegistrationRegularClass() {
         regularClassesDetails: details
       };
 
-      fetch('http://localhost:3000/registration/activityRegistration', {
+      fetch(`${BACKEND_URL}/registration/activityRegistration`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ dataActivity })

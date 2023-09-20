@@ -5,6 +5,7 @@ import stylesRegistration from '../../styles/Registration.module.css';
 import moment from 'moment';
 import RegularClassForm from './RegularClassForm';
 import { useSelector } from 'react-redux';
+import { BACKEND_URL } from '../utils/urls';
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -72,7 +73,7 @@ function ActivityUpdate(props) {
     //--------------------------- Enregistrement en BDD -----------------------------
 
     if (!hasErrors) {
-      fetch('http://localhost:3000/registration/updateActivity', {
+      fetch(`${BACKEND_URL}/registration/updateActivity`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token: token, activityData: activityData, detailData: detailsArray })

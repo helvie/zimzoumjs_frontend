@@ -9,6 +9,7 @@ import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Header from '../SmallElements/Header';
 import { organismSortList } from '../../utils/dataObjects';
+import { BACKEND_URL } from '../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -215,7 +216,7 @@ function RegistrationPublicDataOrg() {
       formData.append('orgData', JSON.stringify(dataOfOrganism));
       formData.append('token', userToken);
 
-      fetch('http://localhost:3000/registration/organismRegistration', {
+      fetch(`${BACKEND_URL}/registration/organismRegistration`, {
         method: 'POST',
         body: formData
       })

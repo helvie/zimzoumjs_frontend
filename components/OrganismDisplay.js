@@ -8,6 +8,8 @@ import dynamic from 'next/dynamic';
 import OrgActivity from './OrganismActivity';
 import Header from './SmallElements/Header';
 
+import { BACKEND_URL } from '../utils/urls';
+
 const Map = dynamic(() => import('./SmallElements/Map'), { ssr: false });
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +34,7 @@ const OrganismDisplay = (props) => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/organisms/${props.orgNumber}`);
+        const response = await fetch(`${BACKEND_URL}/organisms/${props.orgNumber}`);
         const data = await response.json();
         setDivElements(data.organism);
         setShowMap(true);
@@ -45,8 +47,6 @@ const OrganismDisplay = (props) => {
     fetchData();
 
   }, [props.orgNumber]);
-
-  //oooo Initialisation de la map pour qu'elle ne s'affiche qu'après chargement oooo
 
 
   //ooooooooooooooooooo Initialisation des activités de l'organisme oooooooooooooooo

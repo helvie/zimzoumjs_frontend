@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import { updateCreatedOrganism, updateOrganismRegularClass } from '../../reducers/user';
 import { logout } from '../../reducers/user';
+import { BACKEND_URL } from '../../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -26,7 +27,7 @@ function Burger() {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/organisms/createdOrganism`, {
+        const response = await fetch(`${BACKEND_URL}/organisms/createdOrganism`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token: token }),

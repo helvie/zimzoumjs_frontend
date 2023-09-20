@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 
 import Header from './SmallElements/Header';
 import OrganismsListOneOrg from '../components/OrganismsListOneOrg';
+import { BACKEND_URL } from '../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -20,7 +21,7 @@ function OrganismList() {
   //oooooooooooooo Récupération des données de tous les organismes ooooooooooooooooo
 
   useEffect(() => {
-    fetch('http://localhost:3000/organisms/allOrganisms')
+    fetch(`${BACKEND_URL}/organisms/allOrganisms`)
       .then(response => response.json())
       .then(data => {
         setDivElements(data.data);

@@ -14,6 +14,7 @@ import ModalPDF from '../SmallElements/ModalPDF';
 import Header from '../SmallElements/Header';
 import ActivityBeforeUpdate from './ActivityBeforeUpdate';
 import ActivityUpdate from './ActivityUpdate';
+import { BACKEND_URL } from '../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -65,7 +66,7 @@ const OrganismUpdate = () => {
 
     if (e.type === "click" || e.type === "keyup" || e.type === "switch") {
       try {
-        const response = await fetch(`http://localhost:3000/organisms/updateField`, {
+        const response = await fetch(`${BACKEND_URL}/organisms/updateField`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token: token, field: field, value: divElements[field] }),
@@ -269,7 +270,7 @@ const OrganismUpdate = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/organisms/organismDisplayForUpdate`, {
+        const response = await fetch(`${BACKEND_URL}/organisms/organismDisplayForUpdate`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token: token }),
@@ -360,7 +361,7 @@ const OrganismUpdate = () => {
     formData.append('token', token)
 
     try {
-      const response = await fetch(`http://localhost:3000/registration/imageRegistration`, {
+      const response = await fetch(`${BACKEND_URL}/registration/imageRegistration`, {
         method: 'POST',
         body: formData
       });
@@ -404,7 +405,7 @@ const OrganismUpdate = () => {
     formData.append('token', token)
 
     try {
-      const response = await fetch(`http://localhost:3000/registration/docRegistration`, {
+      const response = await fetch(`${BACKEND_URL}/registration/docRegistration`, {
         method: 'POST',
         body: formData
       });
