@@ -238,6 +238,9 @@
   flex flex-row 
   justify-between 
   text-black;
+}
+
+.orgActivityContainer {
   min-height: 300px;
   border-top-width: 4px;
   border-right-width: 4px;
@@ -320,6 +323,7 @@
   p-4 
   rounded-lg 
   cursor-pointer
+  pb-28
 }
 
 
