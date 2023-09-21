@@ -71,7 +71,7 @@
     box-shadow: 5px 5px 105px rgba(0,0,0,.4);
     cursor: pointer;
     top: 0px;
-    left: 5px;
+    right: 5px;
     background: #fff;
     transition: all 1s;
     border-width:6px;

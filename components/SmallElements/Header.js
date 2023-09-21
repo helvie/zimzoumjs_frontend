@@ -11,7 +11,6 @@ const Header = () => {
       <div className={stylesHeader.headerImg}></div>
       <div className={stylesHeader.headerLogo}></div>
       <div className={stylesHeader.footerImg}></div>
-
       <Burger />
     </div>
   )

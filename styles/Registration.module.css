@@ -68,12 +68,12 @@
 
 
 .detailActivityForm .inputRegistration {
-    background-color: #AEB861;
+    background-color: #AEB861 !important;;
 }
 
 
 .detailActivityForm select {
-    background-color: #AEB861;
+    background-color: #AEB861 !important;;
 }
 
 
