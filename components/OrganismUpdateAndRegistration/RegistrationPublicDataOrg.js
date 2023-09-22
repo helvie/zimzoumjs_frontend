@@ -61,6 +61,7 @@ function RegistrationPublicDataOrg() {
 
     setLocation({
       route: city.properties.name,
+      route2: "",
       postalCode: city.properties.postcode,
       city: city.properties.city,
       longitude: city.geometry.coordinates[0],
@@ -77,7 +78,6 @@ function RegistrationPublicDataOrg() {
 
   //oooooooooooooooooo Stockage de l'image téléchargée dans l'état ooooooooooooooooooooo
 
-  // Fonction pour gérer l'événement de sélection du fichier
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
     setPhoto(file);
@@ -94,7 +94,6 @@ function RegistrationPublicDataOrg() {
 
   //oooooooooooooooooooooo Réinitialisation des erreurs ooooooooooooooooooooooooooooo
 
-  // Effet pour réinitialiser les erreurs lorsque les champs sont modifiés
   useEffect(() => {
     setErrors({});
   }, [orgName, phonePublic, emailPublic, website, description]);
@@ -172,66 +171,134 @@ function RegistrationPublicDataOrg() {
 
   };
 
-  //oooooooooooooooooooooooooooo Mise à vide des champs ooooooooooooooooooooooooooo
 
-  const resetForm = () => {
-    setOrganismSort('');
-    setOrgName('');
-    setLocation({});
-    setEmailPublic('');
-    setPhonePublic('');
-    setWebsite('');
-    setDoc('');
-    setPhoto('');
-    setDescription('');
-    setOrgVisible(false);
-    setErrors({});
-  };
 
   //ooooooo Enregistrement en BDD des données privées et publiques de l'organisme oooooo
 
-  const registrationData = () => {
-    return new Promise((resolve, reject) => {
+  // const registrationData = () => {
+  //   return new Promise((resolve, reject) => {
+  //     const dataOfOrganism = {
+  //       respRole: orgData.respRole,
+  //       respCivility: orgData.respCivility,
+  //       respName: orgData.respName,
+  //       respNameDisplay: orgData.respNameDisplay,
+  //       phonePrivate: orgData.phonePrivate,
+  //       emailPrivate: orgData.emailPrivate,
+  //       organismSort: organismSort,
+  //       orgName: orgName,
+  //       location: {
+  //         longitude: location.longitude,
+  //         latitude: location.latitude,
+  //         route: location.route,
+  //         route2: location.route2,
+  //         postalCode: location.postalCode,
+  //         city: location.city
+  //       },
+  //       emailPublic: emailPublic,
+  //       phonePublic: phonePublic,
+  //       website: website,
+  //       doc: '',
+  //       image: '',
+  //       description: description,
+  //       orgVisible: orgVisible,
+  //       rgpd: false,
+  //       valid: false,
+  //       createDate: new Date(),
+  //       updateDate: new Date(),
+  //       sentMail: 0,
+  //       orgMain: false
+  //     };
+
+  //     const formData = {
+  //       orgData:dataOfOrganism,
+  //       token:userToken
+
+  //     }
+
+  //     // const formData = new FormData();
+  //     // // formData.append('photo', photo);
+  //     // // formData.append('doc', doc);
+  //     // formData.append('orgData', JSON.stringify(dataOfOrganism));
+  //     // formData.append('token', JSON.stringify(userToken));
+
+  //     fetch(`${BACKEND_URL}/registration/organismRegistration`, {
+  //       method: 'POST',
+  //       body: formData
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         resolve();
+  //         if(data.success){
+  //         // router.push('/registrationRegularClass');
+  //       }
+  //       })
+  //       .catch((error) => {
+  //         console.error('Registration failed:', error);
+  //         reject(error);
+  //       });
+  //   });
+  // };
+
+  const registrationData = async () => {
+    try {
       const dataOfOrganism = {
-        organismSort: organismSort,
-        orgName: orgName,
-        location: location,
-        emailPublic: emailPublic,
-        phonePublic: phonePublic,
-        website: website,
-        description: description,
-        orgVisible: orgVisible,
+        respRole: orgData.respRole,
         respCivility: orgData.respCivility,
         respName: orgData.respName,
         respNameDisplay: orgData.respNameDisplay,
         phonePrivate: orgData.phonePrivate,
         emailPrivate: orgData.emailPrivate,
+        organismSort: organismSort,
+        orgName: orgName,
+        location: {
+          longitude: location.longitude,
+          latitude: location.latitude,
+          route: location.route,
+          route2: location.route2,
+          postalCode: location.postalCode,
+          city: location.city
+        },
+        emailPublic: emailPublic,
+        phonePublic: phonePublic,
+        website: website,
+        doc: '',
         image: '',
-        doc: ''
+        description: description,
+        orgVisible: orgVisible,
+        rgpd: false,
+        valid: false,
+        createDate: new Date(),
+        updateDate: new Date(),
+        sentMail: 0,
+        orgMain: false,
+        regularClasses: []
       };
+  
+    const formData = {
+      orgData: dataOfOrganism,
+      token: userToken
+    };
 
-      const formData = new FormData();
-      formData.append('photo', photo);
-      formData.append('doc', doc);
-      formData.append('orgData', JSON.stringify(dataOfOrganism));
-      formData.append('token', userToken);
-
-      fetch(`${BACKEND_URL}/registration/organismRegistration`, {
-        method: 'POST',
-        body: formData
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          resolve();
-          router.push('/registrationRegularClass');
-        })
-        .catch((error) => {
-          console.error('Registration failed:', error);
-          reject(error);
-        });
+    const response = await fetch(`${BACKEND_URL}/registration/organismRegistration`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
     });
-  };
 
+    const data = await response.json();
+
+    if (data.success) {
+      // Vous pouvez rediriger ici si nécessaire
+    } else {
+      throw new Error('Registration failed');
+    }
+  } catch (error) {
+    console.error('Registration failed:', error);
+    throw error; // Lancez l'erreur pour la gérer à un niveau supérieur si nécessaire
+  }
+};
   ////////////////////////////////////////////////////////////////////////////////
 
   return (
@@ -446,3 +513,19 @@ function RegistrationPublicDataOrg() {
 }
 
 export default RegistrationPublicDataOrg;
+
+  //oooooooooooooooooooooooooooo Mise à vide des champs ooooooooooooooooooooooooooo
+
+  // const resetForm = () => {
+  //   setOrganismSort('');
+  //   setOrgName('');
+  //   setLocation({});
+  //   setEmailPublic('');
+  //   setPhonePublic('');
+  //   setWebsite('');
+  //   setDoc('');
+  //   setPhoto('');
+  //   setDescription('');
+  //   setOrgVisible(false);
+  //   setErrors({});
+  // };
