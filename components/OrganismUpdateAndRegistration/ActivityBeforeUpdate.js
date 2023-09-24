@@ -20,7 +20,7 @@ function ActivityBeforeUpdate(props) {
     endAge,
     activity,
     description,
-    regularClassesDetails,
+    regularclassesdetails,
     visible,
     _id,
   } = props.data;
@@ -28,7 +28,7 @@ function ActivityBeforeUpdate(props) {
   //ooooooooooooooooooooooo Récupération des données d'activité oooooooooooooooooooooo
 
   useEffect(() => {
-    const newDetails = data.regularClassesDetails.map((regularClassDetail, i) => {
+    const newDetails = data.regularclassesdetails.map((regularclassdetail, i) => {
       const {
         availability,
         availabilityDate,
@@ -41,7 +41,7 @@ function ActivityBeforeUpdate(props) {
         endHours,
         grade,
         animator
-      } = regularClassDetail;
+      } = regularclassdetail;
 
       return {
         id: i,
@@ -62,7 +62,7 @@ function ActivityBeforeUpdate(props) {
     });
 
     setDetailsArray(newDetails);
-  }, [data.regularClassesDetails]);
+  }, [data.regularclassesdetails]);
 
   //oooooooooooooooooooooooo Mise en édition de données ooooooooooooooooooooooooo
 

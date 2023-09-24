@@ -7,7 +7,7 @@ import { availabilityList, daysList, gradeList } from '../../utils/dataObjects';
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function RegularClassDetailForm(props) {
+function RegularclassdetailForm(props) {
 
   const errors = props.errors;
 
@@ -180,5 +180,5 @@ function RegularClassDetailForm(props) {
   );
 }
 
-export default RegularClassDetailForm;
+export default RegularclassdetailForm;
 

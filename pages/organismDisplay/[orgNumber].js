@@ -6,7 +6,10 @@ import { useRouter } from 'next/router';
 function OrganismDisplayPage() {
 
     const router = useRouter();
+
     const { orgNumber } = router.query;
+
+    console.log(orgNumber)
     
 ////////////////////////////////////////////////////////////////////////////////
  

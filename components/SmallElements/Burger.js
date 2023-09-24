@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import stylesBurger from '../../styles/Burger.module.css';
 import { useRouter } from 'next/router';
 
-import { updateCreatedOrganism, updateOrganismRegularClass } from '../../reducers/user';
+import { updateCreatedOrganism, updateOrganismRegularclass } from '../../reducers/user';
 import { logout } from '../../reducers/user';
 import { BACKEND_URL } from '../../utils/urls';
 
@@ -17,7 +17,7 @@ function Burger() {
   const mail = useSelector((state) => state.user.mail);
  
   const createdOrganism = useSelector((state) => state.user.createdOrganism);
-  const organismRegularClass = useSelector((state) => state.user.organismRegularClass);
+  const organismRegularclass = useSelector((state) => state.user.organismRegularclass);
   const [menuActive, setMenuActive] = useState(false);
   const router = useRouter();
 
@@ -34,8 +34,8 @@ function Burger() {
         });
         const data = await response.json();
         data.organism ? dispatch(updateCreatedOrganism(true)) : dispatch(updateCreatedOrganism(false));
-        console.log("result rg + "+data.regularClass)
-        data.regularClass ? dispatch(updateOrganismRegularClass(true)) : dispatch(updateOrganismRegularClass(false));
+        console.log("result rg + "+data.regularclass)
+        data.regularclass ? dispatch(updateOrganismRegularclass(true)) : dispatch(updateOrganismRegularclass(false));
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -98,10 +98,10 @@ function Burger() {
           )}
           {token && createdOrganism ? (
             <li>
-              <a onClick={() => handlePageClick('/registrationRegularClass')}>Ajout d'une activité</a>
+              <a onClick={() => handlePageClick('/registrationRegularclass')}>Ajout d'une activité</a>
             </li>
           ) : null}
-          {token && createdOrganism && organismRegularClass ? (
+          {token && createdOrganism && organismRegularclass ? (
             <li>
               <a onClick={() => handlePageClick('/organismUpdate')}>Modification organisme</a>
             </li>

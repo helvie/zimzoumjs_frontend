@@ -3,8 +3,10 @@ import styles from '../styles/Home.module.css'
 ////////////////////////////////////////////////////////////////////////////////
 
 function OrgActivityDetail(props) {
+  console.log(props)
 
   const {
+    day,
     startHours,
     startMinutes,
     endHours,
@@ -21,7 +23,7 @@ function OrgActivityDetail(props) {
 
         return (
             <div className={styles.orgActivityText}>
-              <p>{props.day} de {formatTime(startHours)}:{formatTime(startMinutes)} à {formatTime(endHours)}:{formatTime(endMinutes)}  - de {detailStartAge} à {detailEndAge} ans</p>
+              <p>{day} de {formatTime(startHours)}:{formatTime(startMinutes)} à {formatTime(endHours)}:{formatTime(endMinutes)}  - de {detailStartAge} à {detailEndAge} ans</p>
             </div>
           );
 }

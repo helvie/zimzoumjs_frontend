@@ -19,15 +19,23 @@ export const organismDataSlice = createSlice({
 			if (action.payload.respCivility) {
 				state.respCivility = action.payload.respCivility;
 			}
+
+			if (action.payload.respRole) {
+				state.respRole = action.payload.respRole;
+			}
+
 			if (action.payload.respName) {
 				state.respName = action.payload.respName;
 			}
+			
 			if (action.payload.respNameDisplay) {
 				state.respNameDisplay = action.payload.respNameDisplay;
 			}
+
 			if (action.payload.phonePrivate) {
 				state.phonePrivate = action.payload.phonePrivate;
 			}
+
 			if (action.payload.emailPrivate) {
 				state.emailPrivate = action.payload.emailPrivate;
 			}

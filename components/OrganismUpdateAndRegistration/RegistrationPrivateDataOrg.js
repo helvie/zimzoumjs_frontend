@@ -17,7 +17,7 @@ function RegistrationPrivateDataOrg() {
   const [respRole, setRespRole] = useState('');
   const [respCivility, setRespCivility] = useState('');
   const [respName, setRespName] = useState('');
-  const [respNameDisplay, setRespNameDisplay] = useState(0);
+  const [respNameDisplay, setRespNameDisplay] = useState(false);
   const [phonePrivate, setPhonePrivate] = useState('');
   const [emailPrivate, setEmailPrivate] = useState('');
   const [errors, setErrors] = useState({}); // State pour les erreurs
@@ -166,7 +166,7 @@ function RegistrationPrivateDataOrg() {
               {errors.respName && <p className={stylesRegistration.error}>{errors.respName}</p>}
             </div>
 
-            {/* --------------------- Menu déroulant  ------------------- */}
+            {/* --------------------- Menu déroulant rôle  ------------------- */}
 
             <div className={stylesRegistration.inputRegistrationContainer}>
 

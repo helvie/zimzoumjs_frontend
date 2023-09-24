@@ -171,134 +171,70 @@ function RegistrationPublicDataOrg() {
 
   };
 
-
-
-  //ooooooo Enregistrement en BDD des données privées et publiques de l'organisme oooooo
-
-  // const registrationData = () => {
-  //   return new Promise((resolve, reject) => {
-  //     const dataOfOrganism = {
-  //       respRole: orgData.respRole,
-  //       respCivility: orgData.respCivility,
-  //       respName: orgData.respName,
-  //       respNameDisplay: orgData.respNameDisplay,
-  //       phonePrivate: orgData.phonePrivate,
-  //       emailPrivate: orgData.emailPrivate,
-  //       organismSort: organismSort,
-  //       orgName: orgName,
-  //       location: {
-  //         longitude: location.longitude,
-  //         latitude: location.latitude,
-  //         route: location.route,
-  //         route2: location.route2,
-  //         postalCode: location.postalCode,
-  //         city: location.city
-  //       },
-  //       emailPublic: emailPublic,
-  //       phonePublic: phonePublic,
-  //       website: website,
-  //       doc: '',
-  //       image: '',
-  //       description: description,
-  //       orgVisible: orgVisible,
-  //       rgpd: false,
-  //       valid: false,
-  //       createDate: new Date(),
-  //       updateDate: new Date(),
-  //       sentMail: 0,
-  //       orgMain: false
-  //     };
-
-  //     const formData = {
-  //       orgData:dataOfOrganism,
-  //       token:userToken
-
-  //     }
-
-  //     // const formData = new FormData();
-  //     // // formData.append('photo', photo);
-  //     // // formData.append('doc', doc);
-  //     // formData.append('orgData', JSON.stringify(dataOfOrganism));
-  //     // formData.append('token', JSON.stringify(userToken));
-
-  //     fetch(`${BACKEND_URL}/registration/organismRegistration`, {
-  //       method: 'POST',
-  //       body: formData
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         resolve();
-  //         if(data.success){
-  //         // router.push('/registrationRegularClass');
-  //       }
-  //       })
-  //       .catch((error) => {
-  //         console.error('Registration failed:', error);
-  //         reject(error);
-  //       });
-  //   });
-  // };
-
   const registrationData = async () => {
-    try {
-      const dataOfOrganism = {
-        respRole: orgData.respRole,
-        respCivility: orgData.respCivility,
-        respName: orgData.respName,
-        respNameDisplay: orgData.respNameDisplay,
-        phonePrivate: orgData.phonePrivate,
-        emailPrivate: orgData.emailPrivate,
-        organismSort: organismSort,
-        orgName: orgName,
-        location: {
-          longitude: location.longitude,
-          latitude: location.latitude,
-          route: location.route,
-          route2: location.route2,
-          postalCode: location.postalCode,
-          city: location.city
-        },
-        emailPublic: emailPublic,
-        phonePublic: phonePublic,
-        website: website,
-        doc: '',
-        image: '',
-        description: description,
-        orgVisible: orgVisible,
-        rgpd: false,
-        valid: false,
-        createDate: new Date(),
-        updateDate: new Date(),
-        sentMail: 0,
-        orgMain: false,
-        regularClasses: []
-      };
-  
-    const formData = {
-      orgData: dataOfOrganism,
+
+
+    const dataToSend = {
+      respRole: orgData.respRole,
+      respCivility: orgData.respCivility,
+      respName: orgData.respName,
+      respNameDisplay: orgData.respNameDisplay,
+      phonePrivate: orgData.phonePrivate,
+      emailPrivate: orgData.emailPrivate,
+      organismSort: organismSort,
+      orgName: orgName,
+      longitude: location.longitude,
+      latitude: location.latitude,
+      route: location.route,
+      route2: location.route2,
+      postalCode: location.postalCode,
+      city: location.city,
+      emailPublic: emailPublic,
+      phonePublic: phonePublic,
+      website: website,
+      doc: '',
+      image: '',
+      description: description,
+      orgVisible: orgVisible,
+      rgpd: false,
+      valid: false,
+      createDate: new Date(),
+      updateDate: new Date(),
+      sentMail: 0,
+      orgMain: false,
       token: userToken
     };
 
-    const response = await fetch(`${BACKEND_URL}/registration/organismRegistration`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
+    const formData = new FormData();
+    formData.append('photo', photo);
+    formData.append('doc', doc);
+    formData.append('dataToSend', JSON.stringify(dataToSend))
 
-    const data = await response.json();
 
-    if (data.success) {
-      // Vous pouvez rediriger ici si nécessaire
-    } else {
-      throw new Error('Registration failed');
+    try {
+      const response = await fetch(`${BACKEND_URL}/registration/organismRegistration`, {
+        method: 'POST',
+        // headers: { 'Content-Type': 'application/json' },
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        console.log("Enregistrement réussi");
+        router.push('/registrationRegularclass');
+        return true;
+      } else {
+        console.error("Échec de l'enregistrement");
+        return false;
+      }
+    } catch (error) {
+      console.error('Une erreur s\'est produite:', error);
+      return false;
     }
-  } catch (error) {
-    console.error('Registration failed:', error);
-    throw error; // Lancez l'erreur pour la gérer à un niveau supérieur si nécessaire
   }
-};
+
+
   ////////////////////////////////////////////////////////////////////////////////
 
   return (
@@ -514,18 +450,18 @@ function RegistrationPublicDataOrg() {
 
 export default RegistrationPublicDataOrg;
 
-  //oooooooooooooooooooooooooooo Mise à vide des champs ooooooooooooooooooooooooooo
+//oooooooooooooooooooooooooooo Mise à vide des champs ooooooooooooooooooooooooooo
 
-  // const resetForm = () => {
-  //   setOrganismSort('');
-  //   setOrgName('');
-  //   setLocation({});
-  //   setEmailPublic('');
-  //   setPhonePublic('');
-  //   setWebsite('');
-  //   setDoc('');
-  //   setPhoto('');
-  //   setDescription('');
-  //   setOrgVisible(false);
-  //   setErrors({});
-  // };
+// const resetForm = () => {
+//   setOrganismSort('');
+//   setOrgName('');
+//   setLocation({});
+//   setEmailPublic('');
+//   setPhonePublic('');
+//   setWebsite('');
+//   setDoc('');
+//   setPhoto('');
+//   setDescription('');
+//   setOrgVisible(false);
+//   setErrors({});
+// };

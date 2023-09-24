@@ -6,7 +6,7 @@ const initialState = {
 	token: "",
 	mail: "",
 	createdOrganism: "",
-	organismRegularClass: ""
+	organismRegularclass: ""
 };
 
 export const userSlice = createSlice({
@@ -18,8 +18,8 @@ export const userSlice = createSlice({
 			state.createdOrganism = action.payload;
 		},
 
-		updateOrganismRegularClass : (state, action) => {
-			state.organismRegularClass = action.payload;
+		updateOrganismRegularclass : (state, action) => {
+			state.organismRegularclass = action.payload;
 		},
 
 		login: (state, action) => {
@@ -34,6 +34,6 @@ export const userSlice = createSlice({
 	},
 });
 
-export const {login, logout, updateCreatedOrganism, updateOrganismRegularClass} = userSlice.actions;
+export const {login, logout, updateCreatedOrganism, updateOrganismRegularclass} = userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,9 +1,9 @@
 import styles from '../../styles/Home.module.css'
 import { useState, useEffect } from 'react';
-import RegularClassDetailForm from './RegularClassDetailForm';
+import RegularclassdetailForm from './RegularclassdetailForm';
 import stylesRegistration from '../../styles/Registration.module.css';
 import moment from 'moment';
-import RegularClassForm from './RegularClassForm';
+import RegularclassForm from './RegularclassForm';
 import { useSelector } from 'react-redux';
 import { BACKEND_URL } from '../../utils/urls';
 
@@ -83,7 +83,7 @@ function ActivityUpdate(props) {
           if (data.result) {
             setActivityData(data.updatedActivity)
             props.updateActivityParent();
-            setIsEditingActivity("");
+            props.updateIsEditingActivity();
           } else {
             console.error("L'enregistrement a échoué");
           }
@@ -135,7 +135,7 @@ function ActivityUpdate(props) {
   //oooooooooo sert à gérer les ajouts et suppressions de créneaux ooooooooooooooooo
 
   useEffect(() => {
-    const newDetails = activityData.regularClassesDetails.map((regularClassDetail, i) => {
+    const newDetails = activityData.regularclassesdetails.map((regularclassdetail, i) => {
       const {
         _id,
         availability,
@@ -149,7 +149,7 @@ function ActivityUpdate(props) {
         endHours,
         grade,
         animator
-      } = regularClassDetail;
+      } = regularclassdetail;
 
       return {
         id: i,
@@ -171,13 +171,13 @@ function ActivityUpdate(props) {
     });
 
     setDetailsArray(newDetails);
-  }, [activityData.regularClassesDetails]);
+  }, [activityData.regularclassesdetails]);
 
   //ooooooooooooooooooooooooo Affichage créneaux d'activités oooooooooooooooooooooooo
 
   const details = detailsArray.map((data, i) => {
     return (
-      <RegularClassDetailForm
+      <RegularclassdetailForm
         key={i}
         data={data.data}
         onFieldChange={(fieldName, fieldValue) => handleDetailDataChange(data.id, fieldName, fieldValue)}
@@ -195,7 +195,7 @@ function ActivityUpdate(props) {
         {/* -------------------- Formulaire partie activité ------------------- */}
 
         <div className={stylesRegistration.activityForm}>
-          <RegularClassForm
+          <RegularclassForm
             activity={activityData.activity}
             category={activityData.category}
             startAge={activityData.startAge}

@@ -5,13 +5,13 @@ import stylesRegistration from '../../styles/Registration.module.css';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 
-import RegularClassForm from './RegularClassForm';
-import RegularClassDetailForm from './RegularClassDetailForm';
+import RegularclassForm from './RegularclassForm';
+import RegularclassdetailForm from './RegularclassdetailForm';
 import { BACKEND_URL } from '../../utils/urls';
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function RegistrationRegularClass() {
+function RegistrationRegularclass() {
 
   const currentDate = moment().format('YYYY-MM-DD');
 
@@ -76,9 +76,9 @@ function RegistrationRegularClass() {
 
         token: token,
 
-        regularClass: activityData,
+        regularclass: activityData,
 
-        regularClassesDetails: details
+        regularclassesdetails: details
       };
 
       fetch(`${BACKEND_URL}/registration/activityRegistration`, {
@@ -174,7 +174,7 @@ function RegistrationRegularClass() {
 
       <div className={stylesRegistration.activityForm}>
 
-        <RegularClassForm 
+        <RegularclassForm 
         updateActivityField={updateActivityField}
         errors={errors}/>
 
@@ -183,7 +183,7 @@ function RegistrationRegularClass() {
 
         {details.map((detail) => (
           <div key={detail.id}>
-            <RegularClassDetailForm
+            <RegularclassdetailForm
               data={detail.data}
               onFieldChange={(fieldName, fieldValue) => handleDetailDataChange(detail.id, fieldName, fieldValue)}
               errors={errors[detail.id]}
@@ -225,4 +225,4 @@ function RegistrationRegularClass() {
 
 }
 
-export default RegistrationRegularClass;
+export default RegistrationRegularclass;

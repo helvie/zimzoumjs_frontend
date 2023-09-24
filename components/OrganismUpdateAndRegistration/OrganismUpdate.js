@@ -30,6 +30,11 @@ const OrganismUpdate = () => {
   const [isEditingActivity, setIsEditingActivity] = useState();
   const [forceUpdate, setForceUpdate] = useState(null);
 
+
+    const updateIsEditingActivity = () => {
+    setIsEditingActivity("");
+  };
+
   //ooooooooo Prise en compte modification créneau pour actualisation données ooooooooo
 
   const updateActivityParent = () => {
@@ -425,7 +430,7 @@ const OrganismUpdate = () => {
 
   //ooooooooooooooooo Initialisation de l'affichage des activités ooooooooooooooooooo
 
-  const activities = divElements.regularClasses && divElements.regularClasses.map((data, i) => (
+  const activities = divElements.regularclasses && divElements.regularclasses.map((data, i) => (
     <div className={styles.orgDataUpdate} style={{ marginTop: "0px" }} key={i}>
       {isEditingActivity === data._id ? (
         <>
@@ -436,6 +441,7 @@ const OrganismUpdate = () => {
             setIsEditingActivity={setIsEditingActivity}
             forceUpdate={forceUpdate}
             updateActivityParent={updateActivityParent}
+            updateIsEditingActivity={updateIsEditingActivity}
           />
         </>
       ) : (

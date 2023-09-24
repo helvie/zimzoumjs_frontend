@@ -1,11 +1,11 @@
-import RegistrationRegularClass from '../components/OrganismUpdateAndRegistration/RegistrationRegularClass';
+import RegistrationRegularclass from '../components/OrganismUpdateAndRegistration/RegistrationRegularclass';
 import Header from '../components/SmallElements/Header';
 import stylesGeneral from '../styles/General.module.css';
 import stylesRegistration from '../styles/Registration.module.css';
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function RegistrationRegularClassPage() {
+function RegistrationRegularclassPage() {
 
     return (
 
@@ -15,7 +15,7 @@ function RegistrationRegularClassPage() {
           <div className={stylesRegistration.formBackground}>
             <h1 className={stylesRegistration.formTitle}>Ajouter une activité</h1>
 
-        <div><RegistrationRegularClass activityUpdate={false}/></div>
+        <div><RegistrationRegularclass activityUpdate={false}/></div>
 
         </div>
       </div>
@@ -23,5 +23,5 @@ function RegistrationRegularClassPage() {
     )
   }
   
-  export default RegistrationRegularClassPage;
+  export default RegistrationRegularclassPage;
   

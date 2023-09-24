@@ -9,6 +9,7 @@ import OrgActivity from './OrganismActivity';
 import Header from './SmallElements/Header';
 
 import { BACKEND_URL } from '../utils/urls';
+import { respRoleList } from '../utils/dataObjects';
 
 const Map = dynamic(() => import('./SmallElements/Map'), { ssr: false });
 
@@ -32,10 +33,12 @@ const OrganismDisplay = (props) => {
 
   useEffect(() => {
 
+
     const fetchData = async () => {
       try {
         const response = await fetch(`${BACKEND_URL}/organisms/${props.orgNumber}`);
         const data = await response.json();
+        console.log("retour : "+data)
         setDivElements(data.organism);
         setShowMap(true);
 
@@ -51,7 +54,9 @@ const OrganismDisplay = (props) => {
 
   //ooooooooooooooooooo Initialisation des activités de l'organisme oooooooooooooooo
 
-  const orgActivities = divElements?.regularClasses?.map((data, i) => {
+  const orgActivities = divElements?.regularclasses?.map((data, i) => {
+
+    // console.log(data)
 
 
     const activityClass = screenWidth < 768 ? "transparent" : i % 2 === 0 ? "black" : "transparent";
@@ -59,7 +64,7 @@ const OrganismDisplay = (props) => {
     data.style = { backgroundColor: allColors[numberOfBackground] };
     numberOfBackground = numberOfBackground === allColors.length - 1 ? 0 : numberOfBackground + 1;
 
-    return <OrgActivity key={i} style={data.style} classActivity={activityClass} backgroundColor={allColors[numberOfBackground]} backgroundArrowColor={backgroundArrowColor} color={color} activity={data.activity} description={data.description} detail={data.regularClassesDetails} />;
+    return <OrgActivity key={i} style={data.style} classActivity={activityClass} backgroundColor={allColors[numberOfBackground]} backgroundArrowColor={backgroundArrowColor} color={color} activity={data.activity} description={data.description} detail={data.regularclassesdetails} />;
   });
 
 
@@ -82,7 +87,7 @@ const OrganismDisplay = (props) => {
               <p className={styles.orgDataAddress}>{divElements.location.route} – {divElements.location.postalCode} {divElements.location.city}</p>
               <p className={styles.orgDataText}>{divElements.emailPublic} - {divElements.phonePublic}</p>
               <p className={styles.orgDataText}>{divElements.website}</p>
-              <p className={styles.orgDataText}>{divElements.respRole} : {divElements.respCivility} {divElements.respName}</p>
+              <p className={styles.orgDataText}>{respRoleList[divElements.respRole]} : {divElements.respCivility} {divElements.respName}</p>
             </div>
 
           </div>
@@ -98,20 +103,15 @@ const OrganismDisplay = (props) => {
               </div>
             }
 
-
-            {/* <div className={styles.orgRightData}>
-            </div> */}
-
-
-
-
           </div>
+
+          <div className={styles.orgActivitiesContainer}>
+            {orgActivities}
+          </div>
+
         </>
       )}
 
-      <div className={styles.orgActivitiesContainer}>
-        {orgActivities}
-      </div>
     </main>
   );
 }

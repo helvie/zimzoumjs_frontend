@@ -8,7 +8,7 @@ import { categoryList } from '../../utils/dataObjects';
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function RegularClassForm(props) {
+function RegularclassForm(props) {
 
   const handleInputChange = (fieldName, value) => {
     props.updateActivityField(fieldName, value);
@@ -141,5 +141,5 @@ function RegularClassForm(props) {
   )
 }
 
-export default RegularClassForm;
+export default RegularclassForm;
 
