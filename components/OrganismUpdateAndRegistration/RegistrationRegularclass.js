@@ -20,12 +20,12 @@ function RegistrationRegularclass() {
   const [details, setDetails] = useState([]);
   const [errors, setErrors] = useState({});
   const [activityData, setActivityData] = useState({
-    category:"",
-    startAge:"",
-    endAge:"",
-    activity:"",
-    description:"",
-    visible:false,
+    category: "",
+    startAge: "",
+    endAge: "",
+    activity: "",
+    description: "",
+    visible: false,
     valid: true,
   });
 
@@ -42,7 +42,7 @@ function RegistrationRegularclass() {
   };
 
   const handleAddDetail = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     setDetails([...details, { id: details.length + 1, data: {} }]);
     setErrors({});
   };
@@ -50,7 +50,14 @@ function RegistrationRegularclass() {
   //ooooooooooooooo Suppression du dernier créneau d'activité affiché ooooooooooooooooo
 
   const handleRemoveDetail = () => {
-    setDetails((prevState) => prevState.slice(0, -1));
+    // création copie de la liste details
+    const updatedDetails = Array.from(details);
+
+    // suppression du dernier élément de la liste copiée
+    updatedDetails.pop();
+
+    // mise à jour l'état details avec la nouvelle liste
+    setDetails(updatedDetails);
     setErrors({});
   };
 
@@ -114,7 +121,7 @@ function RegistrationRegularclass() {
 
     if (activityData.startAge >= activityData.endAge) {
       validationErrors.age = `L'âge mini supérieur à âge maxi`;
-    
+
     }
 
     const validateText = (description) => {
@@ -133,13 +140,13 @@ function RegistrationRegularclass() {
     } else if (!validateText(activityData.activity)) {
       validationErrors.description = "Le champ activité ne peut pas contenir les caractères spéciaux '& \\ + * = # % ~ | [ ] { }'";
     }
-    
+
 
 
 
     details.forEach((detail) => {
       const detailErrors = {};
-      console.log("ages "+detail.data.detailStartAge+" "+detail.data.detailEndAge)
+      console.log("ages " + detail.data.detailStartAge + " " + detail.data.detailEndAge)
 
       if (detail.data.detailStartAge >= detail.data.detailEndAge) {
         detailErrors.detailEndAge = "L'âge maximum doit être supérieur à l'âge minimum";
@@ -157,10 +164,10 @@ function RegistrationRegularclass() {
 
     });
 
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        ...validationErrors,
-      }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      ...validationErrors,
+    }));
 
     registrationData();
 
@@ -174,9 +181,9 @@ function RegistrationRegularclass() {
 
       <div className={stylesRegistration.activityForm}>
 
-        <RegularclassForm 
-        updateActivityField={updateActivityField}
-        errors={errors}/>
+        <RegularclassForm
+          updateActivityField={updateActivityField}
+          errors={errors} />
 
 
         {/* ------------------------- CRENEAUX ACTIVITE ------------------------------ */}
@@ -202,7 +209,11 @@ function RegistrationRegularclass() {
             </button>
 
             {details.length > 0 &&
-              <button onClick={handleRemoveDetail}
+              <button
+                onClick={(e) => {
+                  e.preventDefault(); 
+                  handleRemoveDetail();
+                }}
                 className={stylesRegistration.buttonRemoveAdd}>
                 Supprimer le dernier créneau
               </button>}
