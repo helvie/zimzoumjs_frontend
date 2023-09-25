@@ -209,6 +209,7 @@ function RegistrationRegularclass() {
             </button>
 
             {details.length > 0 &&
+
               <button
                 onClick={(e) => {
                   e.preventDefault(); 
