@@ -153,7 +153,7 @@
 
 
 .mapContainer {
-  height: 400px;
+  height: 100%;
   z-index: 1;
 }
 
@@ -409,6 +409,7 @@
 
 .orgMap {
   @apply w-full;
+  height:300px;
 }
 
 
@@ -516,6 +517,12 @@
   .leftActivity {
     border-right:none;
   }
+
+  .orgActivityContainer {
+    height:60vh;
+    
+  }
+
 }
 
 
