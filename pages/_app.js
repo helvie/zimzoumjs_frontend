@@ -15,6 +15,9 @@ import { persistStore, persistReducer } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage';
 
+import { Analytics } from '@vercel/analytics/react';
+
+
 const reducers = combineReducers({ screen, organismData, user })
 const persistConfig = { key: 'ZIMZOUMJS', storage };
 
@@ -45,6 +48,7 @@ function App({ Component, pageProps }) {
         </Head>
         <ThemeProvider theme={theme}>
           <Component {...pageProps} />
+          <Analytics />
         </ThemeProvider>
       </PersistGate>
 
