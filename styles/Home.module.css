@@ -16,42 +16,6 @@
 }
 
 
-.activityFooter {
-  @apply 
-  flex 
-  flex-row 
-  justify-end 
-  items-center 
-  mt-4 
-  mb-4
-}
-
-
-.arrow {
-  @apply 
-  text-3xl 
-  cursor-pointer
-}
-
-
-.arrowContainer {
-  @apply 
-  flex 
-  justify-center 
-  items-center
-  h-10 mr-4
-  rounded-xl
-}
-
-
-.arrowsContainer {
-  @apply 
-  w-1/6 
-  flex 
-  flex-col 
-  items-end 
-  justify-center
-}
 
 
 .changeDropDownMenu {
@@ -152,26 +116,8 @@
 }
 
 
-.mapContainer {
-  height: 100%;
-  z-index: 1;
-}
 
 
-.nbOfPages {
-  @apply text-right;
-}
-
-
-.orgData {
-  @apply 
-  flex 
-  flex-row 
-  justify-evenly 
-  items-center 
-  p-8;
-  background-color: #efc22b;
-}
 
 
 .orgDataUpdate {
@@ -194,20 +140,6 @@
 }
 
 
-.orgDescription {
-  @apply 
-  flex 
-  flex-col 
-  justify-evenly 
-  items-center 
-  pl-8 
-  pr-8 
-  pb-8 
-  mt-4
-  mb-8
-  leading-7;
-  background-color: #efc22b;
-}
 
 
 .orgDescriptionUpdate {
@@ -224,50 +156,11 @@
 }
 
 
-.orgActivitiesContainer {
-  @apply 
-  flex 
-  flex-wrap
-}
-
-
-.orgActivityContainer {
-  @apply 
-  w-3/6 
-  max-md:w-full 
-  flex flex-row 
-  justify-between 
-  text-black
-  h-80
-  border-t-4 
-  border-r-4 
-  border-black 
-  border-solid;
-}
 
 
 
 
-.orgActivityDescription {
-  @apply 
-  text-black 
-  leading-8 
-  p-8 
-  w-full 
-  flex 
-  flex-col 
-  justify-between;
-}
 
-
-.orgActivityDetailContainer {
-  @apply 
-  p-8 
-  w-full 
-  flex 
-  flex-col 
-  justify-between
-}
 
 
 .orgActivityDetailUpdateContainer {
@@ -286,15 +179,6 @@
 }
 
 
-.orgActivityTitleText {
-  @apply 
-  flex 
-  justify-center 
-  items-center 
-  w-full 
-  text-2xl 
-  cursor-pointer;
-}
 
 
 .orgActivityUpdateContainer {
@@ -339,19 +223,6 @@
 }
 
 
-.orgDataAddress {
-  @apply 
-  font-bold 
-  mb-1 
-  text-white
-}
-
-
-.orgDataText {
-  @apply 
-  text-base 
-  text-yellow-900
-}
 
 
 .orgDataTextUpdate {
@@ -365,15 +236,6 @@
 }
 
 
-.orgDataTitle {
-  @apply 
-  text-2xl 
-  max-md:text-xl 
-  max-sm:text-lg 
-  font-bold 
-  mb-4 
-  text-black
-}
 
 
 .orgDataTitleUpdate {
@@ -394,23 +256,7 @@
 }
 
 
-.orgImg2 {
-  max-height:100%;
-}
 
-
-.orgLeftData {
-  @apply 
-  flex 
-  flex-col 
-  items-start
-}
-
-
-.orgMap {
-  @apply w-full;
-  height:300px;
-}
 
 
 .orgRightData {
@@ -436,95 +282,9 @@
 }
 
 
-.yellowBackground {
-  background-color: #efc22b;
-}  
 
-@media (min-width: 767px) {
 
-  .orgMapAndImg {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-  }
-  
-  .orgMap {
-    @apply
-    flex-1 
-    border-t-4 
-    border-r-4
-    border-black
-  }
-  
-  .orgImgContainer {
-    flex: 0 0 40%;
-    max-width: 40%;
-  }
 
-}
-
-  @media (max-width: 767px) {
-
-  .orgMapAndImg {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  
-  .orgMap {
-    @apply
-    border-t-4 
-    border-r-transparent
-    border-black;
-    width:100%;
-    height:300px;
-  }
-  
-  .orgImgContainer {
-    @apply
-    w-full
-    mb-10    
-  }
-
-  
-  .orgData {
-    @apply 
-    flex 
-    flex-col
-    items-center
-  }
-
-  .orgRightData {
-    @apply
-    flex
-    flex-col
-    items-center
-    /* bg-lime-500 */
-    /* p-12
-    m-12 */
-  }
-
-  .orgLeftData {
-    @apply
-    flex
-    flex-col
-    items-center
-    /* bg-lime-500 */
-    /* p-12
-    m-12 */
-  }
-
-  .leftActivity {
-    border-right:none;
-  }
-
-  .orgActivityContainer {
-    height:60vh;
-    
-  }
-
-}
 
 
 .loadingContainer {
@@ -549,3 +309,273 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+
+/* Récupérés */
+
+.orgData {
+  @apply 
+  flex 
+  flex-row 
+  justify-evenly 
+  items-center 
+  p-8;
+  background-color: #efc22b;
+}
+
+
+.orgDescription {
+  @apply 
+  flex 
+  flex-col 
+  justify-evenly 
+  items-center 
+  pl-8 
+  pr-8 
+  pb-8 
+  mt-4
+  mb-8
+  leading-7;
+  background-color: #efc22b;
+}
+
+.orgActivitiesContainer {
+  @apply 
+  flex 
+  flex-wrap
+}
+
+
+.orgDataAddress {
+  @apply 
+  font-bold 
+  mb-1 
+  text-white
+}
+
+
+.orgDataText {
+  @apply 
+  text-base 
+  text-yellow-900
+}
+
+
+.orgDataTitle {
+  @apply 
+  text-2xl 
+  max-md:text-xl 
+  max-sm:text-lg 
+  font-bold 
+  mb-4 
+  text-black
+}
+
+.orgImg2 {
+  max-height:100%;
+}
+
+
+.orgLeftData {
+  @apply 
+  flex 
+  flex-col 
+  items-start
+}
+
+
+.orgMap {
+  @apply w-full;
+  height:300px;
+}
+
+
+
+.orgActivityContainer {
+  @apply 
+  w-3/6 
+  max-md:w-full 
+  flex flex-row 
+  justify-between 
+  text-black
+  h-80
+  border-t-4 
+  border-r-4 
+  border-black 
+  border-solid;
+}
+
+
+.orgActivityTitleText {
+  @apply 
+  flex 
+  justify-center 
+  items-center 
+  w-full 
+  text-2xl 
+  cursor-pointer;
+}
+
+
+
+.orgActivityDescription {
+  @apply 
+  text-black 
+  leading-8 
+  p-8 
+  w-full 
+  flex 
+  flex-col 
+  justify-between;
+}
+
+
+.orgActivityDetailContainer {
+  @apply 
+  p-8 
+  w-full 
+  flex 
+  flex-col 
+  justify-between
+}
+
+
+.activityFooter {
+  @apply 
+  flex 
+  flex-row 
+  justify-end 
+  items-center 
+  mt-4 
+  mb-4
+}
+
+
+
+.arrow {
+  @apply 
+  text-3xl 
+  cursor-pointer
+}
+
+
+.arrowContainer {
+  @apply 
+  flex 
+  justify-center 
+  items-center
+  h-10 mr-4
+  rounded-xl
+}
+
+
+.nbOfPages {
+  @apply text-right;
+}
+
+.yellowBackground {
+  background-color: #efc22b;
+}  
+
+.mapContainer {
+  height: 100%;
+  z-index: 1;
+}
+/* 
+.arrowsContainer {
+  @apply 
+  w-1/6 
+  flex 
+  flex-col 
+  items-end 
+  justify-center
+} */
+
+
+    @media (min-width: 767px) {
+
+      .orgMapAndImg {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
+      
+      .orgMap {
+        @apply
+        flex-1 
+        border-t-4 
+        border-r-4
+        border-black
+      }
+      
+      .orgImgContainer {
+        flex: 0 0 40%;
+        max-width: 40%;
+      }
+
+    }
+
+
+    @media (max-width: 767px) {
+
+      .orgMapAndImg {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      
+      .orgMap {
+        @apply
+        border-t-4 
+        border-r-transparent
+        border-black;
+        width:100%;
+        height:300px;
+      }
+      
+      .orgImgContainer {
+        @apply
+        w-full
+        mb-10    
+      }
+
+      
+      .orgData {
+        @apply 
+        flex 
+        flex-col
+        items-center
+      }
+
+      .orgRightData {
+        @apply
+        flex
+        flex-col
+        items-center
+        /* bg-lime-500 */
+        /* p-12
+        m-12 */
+      }
+
+      .orgLeftData {
+        @apply
+        flex
+        flex-col
+        items-center
+        /* bg-lime-500 */
+        /* p-12
+        m-12 */
+      }
+
+      .leftActivity {
+        border-right:none;
+      }
+
+      .orgActivityContainer {
+        height:60vh;
+        
+      }
+
+    }

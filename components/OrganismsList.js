@@ -15,7 +15,7 @@ const Map = dynamic(() => import('./SmallElements/Map'), { ssr: false });
 
 function OrganismList() {
 
-  const allColors = ["#efc22b","#72A3D2", "#FA9255", "#F06761", "#AEB861", "#E699A6", "#ffffff"];
+  const allColors = ["#efc22b", "#72A3D2", "#FA9255", "#F06761", "#AEB861", "#E699A6", "#ffffff"];
   let numberOfBackground = 0; // Utilisez "let" au lieu de "const" pour permettre la mise à jour
 
   const [divElements, setDivElements] = useState([]);
@@ -35,9 +35,10 @@ function OrganismList() {
   // Initialisation de l'affichage des organismes
 
   const organisms = divElements.map((data, i) => {
-     numberOfBackground = numberOfBackground === allColors.length ? 0 : numberOfBackground + 1;
-
-    return <OrganismsListOneOrg key={i} orgName={data.orgName} route={data.location.route}
+    numberOfBackground = numberOfBackground === allColors.length ? 0 : numberOfBackground + 1;
+    return <OrganismsListOneOrg
+      key={i} orgName={data.orgName}
+      route={data.location.route}
       postalCode={data.location.postalCode} city={data.location.city}
       organismNumber={data.orgNumber} backgroundColor={allColors[numberOfBackground]} />;
 

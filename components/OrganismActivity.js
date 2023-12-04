@@ -11,34 +11,6 @@ function OrgActivity(props) {
 
   let classes = "";
 
-  // console.log(props)
-
-  const [startX, setStartX] = useState(null);
-  const [endX, setEndX] = useState(null);
-
-  const handleTouchStart = (e) => {
-    setStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    setEndX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (startX && endX) {
-      const deltaX = startX - endX;
-      if (deltaX > 50) {
-        // Swipe vers la gauche, change de section ici
-        props.incrementActivityItem();
-      } else if (deltaX < -50) {
-        // Swipe vers la droite, change de section ici
-        props.decreaseActivityItem();
-      }
-    }
-    // Réinitialise les valeurs de départ et d'arrêt
-    setStartX(null);
-    setEndX(null);
-  };
   const [activityArrayItem, setActivityArrayItem] = useState(0);
   const [activityScreen, setActivityScreen] = useState(0);
 
@@ -67,8 +39,6 @@ function OrgActivity(props) {
   //oooooooooooooooooo Affichage des créneaux d'activités suivants  oooooooooooooooooo
 
   const incrementActivityItem = () => {
-    // console.log("activity item "+activityArrayItem)
-    // console.log("detailLength "+props.detail.length)
 
     activityArrayItem + 4 < props.detail.length
       ? setActivityArrayItem(activityArrayItem + 4)
@@ -102,9 +72,6 @@ function OrgActivity(props) {
     <div
       className={`${styles.orgActivityContainer} ${props.classActivity}`}
       style={props.style}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
     >
 
       {activityScreen === 0 ? (
